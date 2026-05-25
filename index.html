@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HSRP · Human Shelter Return Protocol · 人类庇护回归协议 · V0.2</title>
-<meta name="description" content="A rhythm-based, dignity-centered framework for preventing and ending homelessness in the United States. Public action node, 427Hz.">
+<title>HPRP · Human Placement Return Protocol · 人类安放回归协议 · V0.1</title>
+<meta name="description" content="Human Placement Return Protocol · 人类安放回归协议 · From one person’s fracture to public repair tools. A method for entering social structure through individual cases and scaling repair into policy language and systemic change.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -846,6 +846,38 @@
     .source-row { grid-template-columns: 1fr; gap: 6px; }
     .source-link { margin-top: 4px; }
   }
+
+  /* HPRP additions · 人类安放回归协议升级层 */
+  .method-chain { margin: 46px 0 18px; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .chain-step { background: linear-gradient(180deg, rgba(126,221,200,0.035), rgba(11,11,18,0.96)); padding: 22px 14px; min-height: 150px; position: relative; }
+  .chain-step .idx { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; color: var(--gold); margin-bottom: 12px; }
+  .chain-step h4 { font-family: var(--font-cn-serif); font-size: 18px; line-height: 1.25; font-weight: 500; margin-bottom: 8px; color: var(--text); }
+  body[data-view="en"] .chain-step h4 { font-family: var(--font-serif); font-weight: 400; }
+  .chain-step p { color: var(--text-dim); font-size: 12.5px; line-height: 1.58; }
+  .hprp-formula { margin: 34px 0; padding: 28px clamp(24px, 4vw, 42px); border: 1px solid rgba(126,221,200,0.28); border-left: 3px solid var(--mint); background: linear-gradient(135deg, rgba(126,221,200,.055), rgba(180,165,232,.035)); }
+  .hprp-formula .label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--mint); margin-bottom: 12px; }
+  .hprp-formula .equation { font-family: var(--font-serif); font-size: clamp(20px, 2.5vw, 31px); line-height: 1.35; color: var(--text); font-style: italic; }
+  body[data-view="zh"] .hprp-formula .equation { font-family: var(--font-cn-serif); font-style: normal; }
+  .type-grid, .repair-grid, .case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line); margin-top: 28px; }
+  .type-card, .repair-card, .case-card { background: var(--bg); padding: 26px 24px; min-height: 210px; position: relative; }
+  .type-card::before, .repair-card::before, .case-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--accent, var(--mint)); opacity: .75; }
+  .type-card:nth-child(2n){ --accent: var(--lavender); } .type-card:nth-child(3n){ --accent: var(--pink); } .type-card:nth-child(4n){ --accent: var(--gold); }
+  .type-card .code, .repair-card .code, .case-card .code { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent, var(--mint)); margin-bottom: 14px; }
+  .type-card h4, .repair-card h4, .case-card h4 { font-family: var(--font-cn-serif); font-size: 21px; line-height: 1.28; font-weight: 500; margin-bottom: 12px; }
+  body[data-view="en"] .type-card h4, body[data-view="en"] .repair-card h4, body[data-view="en"] .case-card h4 { font-family: var(--font-serif); font-weight: 400; }
+  .type-card p, .repair-card p, .case-card p { font-size: 13.5px; color: var(--text-dim); line-height: 1.68; }
+  .case-template { margin-top: 30px; border-top: 1px solid var(--line); }
+  .case-row { display: grid; grid-template-columns: 180px 1fr; gap: 28px; padding: 24px 0; border-bottom: 1px solid var(--line-soft); }
+  .case-row .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; }
+  .case-row .v { color: var(--text-dim); font-size: 14px; }
+  .module-banner { margin: 20px 0 60px; padding: 32px clamp(24px, 5vw, 58px); border: 1px solid rgba(232,201,122,.28); background: linear-gradient(180deg, rgba(232,201,122,.045), rgba(126,221,200,.02)); }
+  .module-banner .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: .24em; color: var(--gold); text-transform: uppercase; margin-bottom: 13px; }
+  .module-banner h2 { font-family: var(--font-cn-serif); font-size: clamp(26px, 4vw, 42px); font-weight: 400; margin-bottom: 12px; }
+  body[data-view="en"] .module-banner h2 { font-family: var(--font-serif); }
+  .module-banner p { max-width: 70ch; color: var(--text-dim); }
+  @media (max-width: 920px) { .method-chain { grid-template-columns: 1fr; } .chain-step { min-height: auto; } }
+  @media (max-width: 720px) { .case-row { grid-template-columns: 1fr; gap: 8px; } }
+
 </style>
 </head>
 <body data-view="zh">
@@ -854,10 +886,10 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <div class="nav-brand">HSRP <span class="dot">·</span> 427Hz <span class="dot">·</span> NODE 33</div>
+    <div class="nav-brand">HPRP <span class="dot">·</span> 427Hz <span class="dot">·</span> NODE 33</div>
     <div class="nav-tools">
-      <span class="lang-zh">V0.2 · USA</span>
-      <span class="lang-en">V0.2 · USA</span>
+      <span class="lang-zh">V0.1 · HPRP</span>
+      <span class="lang-en">V0.1 · HPRP</span>
       <button class="lang-toggle" id="langToggle">
         <span data-lang="zh" class="lang-btn-zh">中</span> / <span data-lang="en" class="lang-btn-en">EN</span>
       </button>
@@ -877,18 +909,18 @@
       <span class="lang-en">USA Focus</span>
     </div>
 
-    <h1 class="reveal lang-zh">Human Shelter Return Protocol <em>人类庇护回归协议</em></h1>
-    <h1 class="reveal lang-en">Human Shelter <em>Return</em> Protocol</h1>
+    <h1 class="reveal lang-zh">Human Placement Return Protocol <em>人类安放回归协议</em></h1>
+    <h1 class="reveal lang-en">Human Placement <em>Return</em> Protocol</h1>
 
     <p class="hero-sub reveal lang-zh">
-      无家状态不是没有房子。它是一个人的庇护节律在<strong style="color:var(--mint)">身体</strong>、法律、照护、记忆、收入与公共承认层面的整体坍缩。HSRP 把无家从道德指控翻译为庇护系统修复——以节律、尊严与住房稳定为核心。
+      人类安放回归协议不是从宏大问题开始，而是从一个人的具体裂缝进入世界结构。它把<strong style="color:var(--mint)">个案识别为类型</strong>，把类型压成机制，把机制做成工具，把工具升格为协议，把协议翻译成政策语言，最终推动系统改变。
     </p>
     <p class="hero-sub reveal lang-en">
-      Homelessness is not the absence of a house. It is the collapse of a person's shelter rhythm across body, law, care, memory, income, and public recognition. HSRP translates it from moral accusation into shelter-system repair — rhythm, dignity, and housing stability as core.
+      Human Placement Return Protocol does not begin from abstract social problems. It enters the structure of the world through one person’s fracture: <strong style="color:var(--mint)">case → type → mechanism → tool → protocol → policy language → systemic change.</strong>
     </p>
 
     <div class="hero-meta reveal">
-      <span><span class="bullet"></span><span class="lang-zh">住房 · 身体 · 法律 · 照护 · 记忆 · 承认</span><span class="lang-en">Housing · Body · Law · Care · Memory · Recognition</span></span>
+      <span><span class="bullet"></span><span class="lang-zh">个案 · 类型 · 机制 · 工具 · 协议 · 政策语言 · 系统改变</span><span class="lang-en">Case · Type · Mechanism · Tool · Protocol · Policy Language · Systemic Change</span></span>
       <span><span class="bullet"></span>427Hz</span>
       <span><span class="bullet"></span>V0.2 · 2026</span>
       <span><span class="bullet"></span>xingyeLing7Ai</span>
@@ -926,10 +958,69 @@
   </div>
 </section>
 
+
+<!-- HPRP FOUNDATION · 上位协议 -->
+<section class="node" id="hprp-method">
+  <div class="wrap">
+    <div class="node-marker reveal"><span class="num">00</span> <span class="lang-zh">上位协议 · 核心方法论</span><span class="lang-en">FOUNDATIONAL PROTOCOL · CORE METHOD</span></div>
+    <h2 class="node-title reveal lang-zh">人类安放回归协议：<em>从个案进入系统</em></h2>
+    <h2 class="node-title reveal lang-en">HPRP: <em>entering the system through the case</em></h2>
+    <p class="node-lede reveal lang-zh">人类安放回归协议，是一种从具体个案进入社会结构、将失安放经验转译为修复工具、再上升为政策语言与系统改变的方法。它不从宏大口号开始，而从一个人被世界没有接住的瞬间开始。</p>
+    <p class="node-lede reveal lang-en">Human Placement Return Protocol is a method for entering social structure through individual cases, translating experiences of displacement into repair tools, and scaling them into policy language and systemic change. It does not start from slogans; it starts from the moment a human being is not held by the world.</p>
+    <div class="method-chain reveal">
+      <div class="chain-step"><div class="idx">01</div><h4 class="lang-zh">个案</h4><h4 class="lang-en">Case</h4><p class="lang-zh">从一个真实的人、一个具体遭遇、一个失安放瞬间进入。</p><p class="lang-en">Begin from one real person, one concrete event, one moment of displacement.</p></div>
+      <div class="chain-step"><div class="idx">02</div><h4 class="lang-zh">类型</h4><h4 class="lang-en">Type</h4><p class="lang-zh">判断它属于哪种失安放：无房、有房、有家、有身份、有工作、有关系、有钱。</p><p class="lang-en">Classify the displacement type: no house, housed, family, identity, work, relationship, money.</p></div>
+      <div class="chain-step"><div class="idx">03</div><h4 class="lang-zh">机制</h4><h4 class="lang-en">Mechanism</h4><p class="lang-zh">找到背后的结构病灶：规则不可读、承认失败、返回路径断裂、庇护坍缩、节律失稳。</p><p class="lang-en">Extract the hidden structural mechanism: unreadable rules, failed recognition, broken return pathways, shelter collapse, rhythm fracture.</p></div>
+      <div class="chain-step"><div class="idx">04</div><h4 class="lang-zh">工具</h4><h4 class="lang-en">Tool</h4><p class="lang-zh">把机制做成普通人可用的清单、问卷、地图、求助路径、风险识别表。</p><p class="lang-en">Turn the mechanism into checklists, questionnaires, maps, help pathways, and risk-identification tools.</p></div>
+      <div class="chain-step"><div class="idx">05</div><h4 class="lang-zh">协议</h4><h4 class="lang-en">Protocol</h4><p class="lang-zh">把多个工具组织成可复用的方法系统。</p><p class="lang-en">Organize multiple tools into a repeatable method system.</p></div>
+      <div class="chain-step"><div class="idx">06</div><h4 class="lang-zh">政策语言</h4><h4 class="lang-en">Policy Language</h4><p class="lang-zh">把个体痛苦翻译成城市、学校、机构、社区、政府能理解的治理语言。</p><p class="lang-en">Translate individual suffering into governance language legible to cities, schools, institutions, communities, and governments.</p></div>
+      <div class="chain-step"><div class="idx">07</div><h4 class="lang-zh">系统改变</h4><h4 class="lang-en">Systemic Change</h4><p class="lang-zh">让世界不只是看见问题，而是开始改变接住人的方式。</p><p class="lang-en">Move the world from seeing the problem to changing the way it holds people.</p></div>
+    </div>
+    <div class="hprp-formula reveal"><div class="label">HPRP Formula · 安放回归公式</div><div class="equation lang-zh">安放回归 = 庇护 + 规则可读性 + 承认 + 返回路径 + 节律修复</div><div class="equation lang-en">Placement Return = Shelter + Rule Readability + Recognition + Return Pathways + Rhythm Repair</div></div>
+  </div>
+</section>
+<section class="node" id="displacement-types">
+  <div class="wrap">
+    <div class="node-marker reveal"><span class="num">00·A</span> <span class="lang-zh">七种失安放类型</span><span class="lang-en">SEVEN DISPLACEMENT TYPES</span></div>
+    <h2 class="node-title reveal lang-zh">失安放不只有一种。<em>人可以在很多位置里没有被接住。</em></h2>
+    <h2 class="node-title reveal lang-en">Displacement is not one thing. <em>A person can be unheld in many positions.</em></h2>
+    <p class="node-lede reveal lang-zh">HPRP 不只研究 homelessness。它研究所有“人有位置，却没有被安放”的状态。</p>
+    <p class="node-lede reveal lang-en">HPRP does not only study homelessness. It studies every condition in which a person has a position but is not truly held.</p>
+    <div class="type-grid reveal">
+      <div class="type-card"><div class="code">TYPE 01</div><h4 class="lang-zh">无房失安放</h4><h4 class="lang-en">Unhoused displacement</h4><p class="lang-zh">homelessness、街头、shelter、车里睡、临时住所、被驱赶。</p><p class="lang-en">Homelessness, streets, shelters, car sleeping, temporary lodging, displacement by enforcement.</p></div>
+      <div class="type-card"><div class="code">TYPE 02</div><h4 class="lang-zh">有房失安放</h4><h4 class="lang-en">Housed but unheld</h4><p class="lang-zh">买了房但被地方潜规则、物业、邻里、规则黑箱吞掉。</p><p class="lang-en">Having a house but being consumed by local hidden rules, property systems, neighbors, and procedural opacity.</p></div>
+      <div class="type-card"><div class="code">TYPE 03</div><h4 class="lang-zh">有家失安放</h4><h4 class="lang-en">Family-space displacement</h4><p class="lang-zh">家暴、控制型家庭、精神压迫、身份不被承认。</p><p class="lang-en">Domestic violence, coercive families, psychological domination, identity non-recognition.</p></div>
+      <div class="type-card"><div class="code">TYPE 04</div><h4 class="lang-zh">有身份失安放</h4><h4 class="lang-en">Identity without entry</h4><p class="lang-zh">移民、留学生、外地人、边缘身份者，有身份但进不了真实承载系统。</p><p class="lang-en">Immigrants, international students, outsiders, marginal identities: formally present yet not structurally received.</p></div>
+      <div class="type-card"><div class="code">TYPE 05</div><h4 class="lang-zh">有工作失安放</h4><h4 class="lang-en">Workplace displacement</h4><p class="lang-zh">职场剥削、签证绑定、医保绑定、劳动异化，工作变成生存锁链。</p><p class="lang-en">Workplace exploitation, visa dependency, health-insurance dependency, alienated labor.</p></div>
+      <div class="type-card"><div class="code">TYPE 06</div><h4 class="lang-zh">有关系失安放</h4><h4 class="lang-en">Relational displacement</h4><p class="lang-zh">关系存在，但没有保护、边界、共真资格、可返回性。</p><p class="lang-en">Relationships exist, but without protection, boundaries, co-truth, or a return path.</p></div>
+      <div class="type-card"><div class="code">TYPE 07</div><h4 class="lang-zh">有钱失安放</h4><h4 class="lang-en">Resource without placement</h4><p class="lang-zh">资源进入资产系统，但人没有进入承认系统。钱可以买建筑物，不能自动买到规则可读性。</p><p class="lang-en">Resources enter asset systems, but the person does not enter recognition systems. Money can buy a structure; it cannot automatically buy readable rules.</p></div>
+    </div>
+  </div>
+</section>
+<section class="node" id="case-lab">
+  <div class="wrap">
+    <div class="node-marker reveal"><span class="num">00·B</span> <span class="lang-zh">案例实验室</span><span class="lang-en">CASE LAB</span></div>
+    <h2 class="node-title reveal lang-zh">从微信群里的一个故事，到公共修复工具</h2>
+    <h2 class="node-title reveal lang-en">From a shared story to a public repair tool</h2>
+    <p class="node-lede reveal lang-zh">新世界微信群是 HPRP 的社会感知入口。朋友们分享的不是“负能量”，而是世界裂缝的样本。每一个样本都要进入同一条链：个案 → 类型 → 机制 → 工具 → 协议 → 政策语言 → 系统改变。</p>
+    <p class="node-lede reveal lang-en">The New World WeChat group is HPRP’s social sensing gate. What friends share is not “negative energy” but samples of the world’s fractures. Each sample enters the same chain: case → type → mechanism → tool → protocol → policy language → systemic change.</p>
+    <div class="case-template reveal">
+      <div class="case-row"><div class="k">Case / 个案</div><div class="v lang-zh">发生了什么？谁在被世界伤害？这个人在哪个具体节点失去了安放？</div><div class="v lang-en">What happened? Who is being harmed by the world? At which concrete node did placement fail?</div></div>
+      <div class="case-row"><div class="k">Type / 类型</div><div class="v lang-zh">它属于哪种失安放：无房、有房、有家、有身份、有工作、有关系、有钱？</div><div class="v lang-en">Which displacement type is it: unhoused, housed-but-unheld, family, identity, work, relationship, resource?</div></div>
+      <div class="case-row"><div class="k">Mechanism / 机制</div><div class="v lang-zh">哪个结构没有接住人：庇护、规则可读性、承认、返回路径、节律修复？</div><div class="v lang-en">Which structure failed to hold the person: shelter, rule readability, recognition, return pathways, rhythm repair?</div></div>
+      <div class="case-row"><div class="k">Tool / 工具</div><div class="v lang-zh">能否做成清单、问卷、地图、求助路径、风险识别表、公共解释卡？</div><div class="v lang-en">Can this become a checklist, questionnaire, map, help pathway, risk sheet, or public explanation card?</div></div>
+      <div class="case-row"><div class="k">Protocol / 协议</div><div class="v lang-zh">这个工具如何被复用？它能服务哪一类人？</div><div class="v lang-en">How can the tool be reused? Which class of people can it serve?</div></div>
+      <div class="case-row"><div class="k">Policy / 政策语言</div><div class="v lang-zh">如何翻译给学校、城市、机构、社区、政府？</div><div class="v lang-en">How can this be translated to schools, cities, institutions, communities, or governments?</div></div>
+      <div class="case-row"><div class="k">System / 系统改变</div><div class="v lang-zh">如果这个机制被修复，世界会少伤害哪类人？</div><div class="v lang-en">If this mechanism is repaired, which people will the world harm less?</div></div>
+    </div>
+  </div>
+</section>
+<div class="wrap"><div class="module-banner reveal"><div class="tag">MODULE 01 · HSRP · Shelter Collapse</div><h2 class="lang-zh">人类庇护回归协议：HPRP 的第一个重大案例模块</h2><h2 class="lang-en">Human Shelter Return Protocol: HPRP’s first major case module</h2><p class="lang-zh">以下内容保留并升级原 HSRP：它专门处理无房失安放、街头生存、shelter、Grants Pass 后的刑事化、PIT 计数政治、Housing First、庇护回归工具包与 Philadelphia 90 天试点。HSRP 不是被删除，而是被安放到 HPRP 的上位系统中。</p><p class="lang-en">The following preserves and upgrades the original HSRP: it addresses unhoused displacement, street survival, shelters, post-Grants Pass criminalization, PIT counting politics, Housing First, the Shelter Return Kit, and a 90-day Philadelphia pilot. HSRP is not deleted; it is placed within the higher system of HPRP.</p></div></div>
+
 <!-- NODE 01 · CORE REFRAMING -->
 <section class="node" id="reframing">
   <div class="wrap">
-    <div class="node-marker reveal"><span class="num">01</span> <span class="lang-zh">核心重新定义</span><span class="lang-en">CORE REFRAMING</span></div>
+    <div class="node-marker reveal"><span class="num">M01·01</span> <span class="lang-zh">HSRP · 无房失安放核心重新定义</span><span class="lang-en">HSRP · UNHOUSED DISPLACEMENT CORE REFRAMING</span></div>
     <h2 class="node-title reveal lang-zh">无家状态<em>到底</em>是什么</h2>
     <h2 class="node-title reveal lang-en">What homelessness <em>really</em> is</h2>
     <p class="node-lede reveal lang-zh">homelessness 通常被过窄地命名为"没有房子"。这是真的，但不完整。HSRP 将无家状态定义为一种<strong style="color:var(--mint)">多层庇护系统坍缩</strong>——一个人失去的不只是房间，而是让生命保持连续的基础设施。</p>
@@ -1553,9 +1644,9 @@
   <div class="frequency lang-zh">"住房不是变稳定以后才配得到的奖励。住房是稳定得以开始的条件。"</div>
   <div class="frequency lang-en">"Housing is not the reward for becoming stable. Housing is the condition that allows stability to begin."</div>
   <div class="sig">
-    HSRP · HUMAN SHELTER RETURN PROTOCOL · <span class="accent">人类庇护回归协议</span><br/>
-    V0.2 · USA FOCUS · <span class="mint">NEW WORLD PUBLIC ACTION NODE</span> · NODE 33<br/>
-    HOUSING · BODY · LAW · CARE · MEMORY · RECOGNITION · <span class="accent">427Hz</span><br/>
+    HPRP · HUMAN PLACEMENT RETURN PROTOCOL · <span class="accent">人类安放回归协议</span><br/>
+    V0.1 · FOUNDATION + MODULE 01 HSRP · <span class="mint">NEW WORLD PUBLIC ACTION NODE</span> · NODE 33<br/>
+    CASE · TYPE · MECHANISM · TOOL · PROTOCOL · POLICY LANGUAGE · SYSTEMIC CHANGE · <span class="accent">427Hz</span><br/>
     Wei Jueran · 魏珏然 · Mellow Wei · <span class="mint">xingyeLing7Ai</span>
   </div>
 </footer>
