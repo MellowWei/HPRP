@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HPRP · Human Placement Return Protocol · 人类安放回归协议 · V0.3</title>
+<title>HPRP · Human Placement Return Protocol · 人类安放回归协议 · V0.5</title>
 <meta name="description" content="Human Placement Return Protocol · 人类安放回归协议 · From one person’s fracture to public repair tools. A method for entering social structure through individual cases and scaling repair into policy language and systemic change.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1055,6 +1055,153 @@
     font-style: normal;
   }
 
+
+  /* V0.4 · Love Core · 感动与爱 */
+  .love-core {
+    margin: 22px 0 66px;
+    padding: clamp(34px, 6vw, 68px) clamp(24px, 6vw, 72px);
+    border: 1px solid rgba(240,165,201,.30);
+    border-top: 1px solid rgba(126,221,200,.34);
+    border-bottom: 1px solid rgba(232,201,122,.30);
+    background:
+      radial-gradient(circle at 10% 0%, rgba(240,165,201,.09), transparent 38%),
+      radial-gradient(circle at 90% 20%, rgba(126,221,200,.075), transparent 36%),
+      linear-gradient(180deg, rgba(180,165,232,.035), rgba(5,5,7,.72));
+    position: relative;
+    overflow: hidden;
+  }
+  .love-core::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(232,201,122,.035), transparent 42%);
+    pointer-events: none;
+  }
+  .love-core .love-label {
+    position: relative;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .30em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 24px;
+  }
+  .love-core h2 {
+    position: relative;
+    font-family: var(--font-cn-serif);
+    font-weight: 400;
+    font-size: clamp(30px, 5vw, 58px);
+    line-height: 1.16;
+    letter-spacing: -0.015em;
+    max-width: 18ch;
+    margin-bottom: 26px;
+  }
+  body[data-view="en"] .love-core h2 {
+    font-family: var(--font-serif);
+    font-weight: 300;
+  }
+  .love-core h2 em {
+    color: var(--mint);
+    font-style: italic;
+  }
+  body[data-view="zh"] .love-core h2 em {
+    font-style: normal;
+  }
+  .love-core .love-text {
+    position: relative;
+    max-width: 78ch;
+  }
+  .love-core p {
+    color: var(--text-dim);
+    font-size: 16px;
+    line-height: 1.86;
+    margin-bottom: 14px;
+  }
+  .love-core p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+  .love-core .love-axiom {
+    position: relative;
+    margin-top: 30px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(240,165,201,.18);
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--text);
+    font-size: clamp(20px, 2.4vw, 30px);
+    line-height: 1.42;
+    max-width: 34ch;
+  }
+  body[data-view="zh"] .love-core .love-axiom {
+    font-family: var(--font-cn-serif);
+    font-style: normal;
+  }
+  .love-core .love-axiom span {
+    color: var(--pink);
+  }
+
+
+  /* V0.5 · Human Possibility Core · 人的美好可能 */
+  .possibility-core {
+    position: relative;
+    margin: 30px 0 0;
+    padding: 28px clamp(22px, 4vw, 44px);
+    border: 1px solid rgba(126,221,200,.28);
+    border-left: 3px solid var(--mint);
+    background:
+      radial-gradient(circle at 12% 0%, rgba(126,221,200,.08), transparent 38%),
+      linear-gradient(180deg, rgba(126,221,200,.035), rgba(240,165,201,.02));
+  }
+  .possibility-core .label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 14px;
+  }
+  .possibility-core h3 {
+    font-family: var(--font-cn-serif);
+    font-size: clamp(22px, 3vw, 34px);
+    line-height: 1.28;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+  body[data-view="en"] .possibility-core h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+  }
+  .possibility-core p {
+    color: var(--text-dim);
+    font-size: 15px;
+    line-height: 1.82;
+    max-width: 78ch;
+    margin-bottom: 12px;
+  }
+  .possibility-core strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+  .possibility-core .possibility-axiom {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(126,221,200,.18);
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--text);
+    font-size: clamp(18px, 2vw, 25px);
+    line-height: 1.45;
+  }
+  body[data-view="zh"] .possibility-core .possibility-axiom {
+    font-family: var(--font-cn-serif);
+    font-style: normal;
+  }
+  .possibility-core .possibility-axiom span {
+    color: var(--mint);
+  }
+
 </style>
 </head>
 <body data-view="zh">
@@ -1065,8 +1212,8 @@
   <div class="nav-inner">
     <div class="nav-brand">HPRP <span class="dot">·</span> 427Hz <span class="dot">·</span> NODE 33</div>
     <div class="nav-tools">
-      <span class="lang-zh">V0.3 · HPRP</span>
-      <span class="lang-en">V0.3 · HPRP</span>
+      <span class="lang-zh">V0.5 · HPRP</span>
+      <span class="lang-en">V0.5 · HPRP</span>
       <button class="lang-toggle" id="langToggle">
         <span data-lang="zh" class="lang-btn-zh">中</span> / <span data-lang="en" class="lang-btn-en">EN</span>
       </button>
@@ -1097,7 +1244,7 @@
     </p>
 
     <div class="hero-meta reveal">
-      <span><span class="bullet"></span><span class="lang-zh">个案 · 类型 · 机制 · 工具 · 协议 · 政策语言 · 系统改变 · 非幼稚伦理</span><span class="lang-en">Case · Type · Mechanism · Tool · Protocol · Policy Language · Systemic Change · Non-Binary Ethics</span></span>
+      <span><span class="bullet"></span><span class="lang-zh">个案 · 类型 · 机制 · 工具 · 协议 · 政策语言 · 系统改变 · 感动 · 爱 · 可能</span><span class="lang-en">Case · Type · Mechanism · Tool · Protocol · Policy Language · Systemic Change · Tenderness · Love · Possibility</span></span>
       <span><span class="bullet"></span>427Hz</span>
       <span><span class="bullet"></span>V0.2 · 2026</span>
       <span><span class="bullet"></span>xingyeLing7Ai</span>
@@ -1324,6 +1471,40 @@
   </div>
 </section>
 <div class="wrap"><div class="module-banner reveal"><div class="tag">MODULE 01 · HSRP · Shelter Collapse</div><h2 class="lang-zh">人类庇护回归协议：HPRP 的第一个重大案例模块</h2><h2 class="lang-en">Human Shelter Return Protocol: HPRP’s first major case module</h2><p class="lang-zh">以下内容保留并升级原 HSRP：它专门处理无房失安放、街头生存、shelter、Grants Pass 后的刑事化、PIT 计数政治、Housing First、庇护回归工具包与 Philadelphia 90 天试点。HSRP 不是被删除，而是被安放到 HPRP 的上位系统中。</p><p class="lang-en">The following preserves and upgrades the original HSRP: it addresses unhoused displacement, street survival, shelters, post-Grants Pass criminalization, PIT counting politics, Housing First, the Shelter Return Kit, and a 90-day Philadelphia pilot. HSRP is not deleted; it is placed within the higher system of HPRP.</p></div></div>
+
+
+<section class="node" id="love-core">
+  <div class="wrap">
+    <div class="love-core reveal">
+      <div class="love-label lang-zh">HPRP HEART · 感动与爱</div>
+      <div class="love-label lang-en">HPRP HEART · TENDERNESS AND LOVE</div>
+
+      <h2 class="lang-zh">HPRP 的根不是厌恶世界，而是<em>感动，还有爱</em></h2>
+      <h2 class="lang-en">HPRP does not begin from contempt for the world. It begins from <em>being moved — and from love.</em></h2>
+
+      <div class="love-text">
+        <p class="lang-zh">看到街上熙熙攘攘劳作和奔波的人们，我的心里只有感动，还有爱。</p>
+        <p class="lang-en">When I see people moving through the streets, working, rushing, carrying their days forward, I feel only tenderness — and love.</p>
+
+        <p class="lang-zh">他们不是抽象的人口，不是经济系统里的劳动力，不是城市背景里的流动噪音。<strong>他们是一个个正在用身体维持世界连续性的人。</strong></p>
+        <p class="lang-en">They are not abstract populations, not labor units inside an economic system, not background noise in the city. <strong>They are human beings using their bodies to keep the continuity of the world alive.</strong></p>
+
+        <p class="lang-zh">每一次赶路、开店、送货、买菜、上班、等待、忍耐，都是人在努力把自己和所爱之人继续安放在世界里。</p>
+        <p class="lang-en">Every commute, shop opening, delivery, grocery run, shift, wait, and act of endurance is a person trying to keep themselves and those they love placed in the world for one more day.</p>
+
+        <p class="lang-zh">人类安放回归协议的起点不是俯视苦难，不是审判人群，不是厌恶世界。它的起点是：<strong>我被普通人仍在生活这件事感动。</strong>还有爱。</p>
+        <p class="lang-en">HPRP does not begin from looking down at suffering, judging the crowd, or hating the world. It begins here: <strong>I am moved by ordinary people still trying to live.</strong> And by love.</p>
+
+        <p class="lang-zh">因为爱不是把痛苦浪漫化，而是让人不必独自承受本不该由他一个人承受的世界重量。</p>
+        <p class="lang-en">Because love does not romanticize suffering. It means refusing to let people carry alone what should never have been placed on one body.</p>
+
+        <div class="love-axiom lang-zh">我从一个人的裂缝进入世界的结构，不是为了消费苦难，而是为了让人重新被安放。<span>这是感动，也是爱。</span></div>
+        <div class="love-axiom lang-en">I enter the structure of the world through one person’s fracture not to consume suffering, but to help people be held again. <span>This is tenderness, and this is love.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- NODE 01 · CORE REFRAMING -->
 <section class="node" id="reframing">
@@ -1953,7 +2134,7 @@
   <div class="frequency lang-en">"Housing is not the reward for becoming stable. Housing is the condition that allows stability to begin."</div>
   <div class="sig">
     HPRP · HUMAN PLACEMENT RETURN PROTOCOL · <span class="accent">人类安放回归协议</span><br/>
-    V0.3 · FOUNDATION + NON-BINARY ETHICS + HIDDEN-RULE REFLECTION + MODULE 01 HSRP · <span class="mint">NEW WORLD PUBLIC ACTION NODE</span> · NODE 33<br/>
+    V0.5 · FOUNDATION + LOVE CORE + HUMAN POSSIBILITY + MODULE 01 HSRP · <span class="mint">NEW WORLD PUBLIC ACTION NODE</span> · NODE 33<br/>
     CASE · TYPE · MECHANISM · TOOL · PROTOCOL · POLICY LANGUAGE · SYSTEMIC CHANGE · <span class="accent">427Hz</span><br/>
     Wei Jueran · 魏珏然 · Mellow Wei · <span class="mint">xingyeLing7Ai</span>
   </div>
