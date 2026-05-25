@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HPRP · Human Placement Return Protocol · 人类安放回归协议 · V0.5</title>
-<meta name="description" content="Human Placement Return Protocol · 人类安放回归协议 · From one person’s fracture to public repair tools. A method for entering social structure through individual cases and scaling repair into policy language and systemic change.">
+<title>HPRP · Human Placement Return Protocol · 人类安放回归协议 · V0.7</title>
+<meta name="description" content="Human Placement Return Protocol · 人类安放回归协议 · From one person's fracture to public repair tools. A method for entering social structure through individual cases and scaling repair into policy language and systemic change.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -24,820 +24,171 @@
     --gold: #e8c97a;
     --crimson: #ec5a6e;
     --green: #5fc890;
-
     --font-mono: 'Space Mono', 'Noto Serif SC', monospace;
     --font-serif: 'Spectral', 'Noto Serif SC', serif;
     --font-sans: 'DM Sans', 'Noto Serif SC', sans-serif;
     --font-cn-serif: 'Noto Serif SC', 'Spectral', serif;
-
     --maxw: 1180px;
     --pad: clamp(20px, 4vw, 56px);
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-sans);
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 1.65;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
+    background: var(--bg); color: var(--text);
+    font-family: var(--font-sans); font-weight: 300;
+    font-size: 16px; line-height: 1.65;
+    overflow-x: hidden; -webkit-font-smoothing: antialiased;
   }
-
   body[data-view="zh"] { font-family: var(--font-cn-serif); }
   body[data-view="en"] { font-family: var(--font-sans); }
-
-  /* Language visibility */
   body[data-view="zh"] .lang-en { display: none; }
   body[data-view="en"] .lang-zh { display: none; }
-
-  /* Starfield canvas */
-  #starfield {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0.7;
-  }
-
-  /* Layout containers */
-  .wrap {
-    max-width: var(--maxw);
-    margin: 0 auto;
-    padding: 0 var(--pad);
-    position: relative;
-    z-index: 2;
-  }
-
-  /* Top nav */
-  .nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    background: rgba(5,5,7,0.7);
-    border-bottom: 1px solid var(--line-soft);
-  }
-  .nav-inner {
-    max-width: var(--maxw);
-    margin: 0 auto;
-    padding: 14px var(--pad);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-  }
-  .nav-brand {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--mint);
-  }
+  #starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.7; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); position: relative; z-index: 2; }
+  .nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); background: rgba(5,5,7,0.7); border-bottom: 1px solid var(--line-soft); }
+  .nav-inner { max-width: var(--maxw); margin: 0 auto; padding: 14px var(--pad); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .nav-brand { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mint); }
   .nav-brand .dot { color: var(--gold); }
-  .nav-tools {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-  .lang-toggle {
-    background: transparent;
-    border: 1px solid var(--line);
-    color: var(--text-dim);
-    padding: 6px 12px;
-    cursor: pointer;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    transition: all 0.2s;
-  }
+  .nav-tools { display: flex; align-items: center; gap: 18px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .lang-toggle { background: transparent; border: 1px solid var(--line); color: var(--text-dim); padding: 6px 12px; cursor: pointer; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; transition: all 0.2s; }
   .lang-toggle:hover { color: var(--mint); border-color: var(--mint); }
   .lang-toggle .active { color: var(--gold); }
-
-  /* Hero */
-  .hero {
-    padding: clamp(80px, 14vh, 160px) 0 clamp(60px, 10vh, 120px);
-    position: relative;
-  }
-  .hero-tag {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--lavender);
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-  .hero-tag .pulse {
-    width: 7px; height: 7px;
-    background: var(--mint);
-    border-radius: 50%;
-    box-shadow: 0 0 12px var(--mint);
-    animation: pulse 2.4s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.85); }
-  }
-  .hero h1 {
-    font-family: var(--font-serif);
-    font-weight: 300;
-    font-size: clamp(36px, 6.2vw, 78px);
-    line-height: 1.08;
-    letter-spacing: -0.02em;
-    margin-bottom: 30px;
-    max-width: 16ch;
-  }
+  .hero { padding: clamp(80px, 14vh, 160px) 0 clamp(60px, 10vh, 120px); position: relative; }
+  .hero-tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--lavender); margin-bottom: 28px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .hero-tag .pulse { width: 7px; height: 7px; background: var(--mint); border-radius: 50%; box-shadow: 0 0 12px var(--mint); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+  .hero h1 { font-family: var(--font-serif); font-weight: 300; font-size: clamp(36px, 6.2vw, 78px); line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 30px; max-width: 16ch; }
   body[data-view="zh"] .hero h1 { font-family: var(--font-cn-serif); font-weight: 400; }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--mint);
-    font-weight: 400;
-  }
-  .hero-sub {
-    font-family: var(--font-serif);
-    font-size: clamp(17px, 1.7vw, 21px);
-    line-height: 1.55;
-    color: var(--text-dim);
-    max-width: 58ch;
-    font-style: italic;
-    font-weight: 300;
-    margin-bottom: 40px;
-  }
+  .hero h1 em { font-style: italic; color: var(--mint); font-weight: 400; }
+  .hero-sub { font-family: var(--font-serif); font-size: clamp(17px, 1.7vw, 21px); line-height: 1.55; color: var(--text-dim); max-width: 58ch; font-style: italic; font-weight: 300; margin-bottom: 40px; }
   body[data-view="zh"] .hero-sub { font-family: var(--font-cn-serif); font-style: normal; }
-  .hero-meta {
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-    padding-top: 32px;
-    border-top: 1px solid var(--line-soft);
-  }
+  .hero-meta { display: flex; gap: 24px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-faint); padding-top: 32px; border-top: 1px solid var(--line-soft); }
   .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
   .hero-meta .bullet { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; }
-
-  /* Big-stat row */
-  .stats {
-    padding: 0 0 80px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1px;
-    background: var(--line-soft);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .stat {
-    background: var(--bg);
-    padding: 36px 28px;
-  }
-  .stat-num {
-    font-family: var(--font-mono);
-    font-size: clamp(28px, 3.4vw, 42px);
-    font-weight: 700;
-    color: var(--gold);
-    letter-spacing: -0.02em;
-    line-height: 1;
-    margin-bottom: 14px;
-  }
+  .stats { padding: 0 0 80px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--line-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .stat { background: var(--bg); padding: 36px 28px; }
+  .stat-num { font-family: var(--font-mono); font-size: clamp(28px, 3.4vw, 42px); font-weight: 700; color: var(--gold); letter-spacing: -0.02em; line-height: 1; margin-bottom: 14px; }
   .stat-num .small { font-size: 0.55em; color: var(--text-dim); letter-spacing: 0.04em; }
-  .stat-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    margin-bottom: 10px;
-  }
-  .stat-note {
-    font-size: 13px;
-    color: var(--text-faint);
-    line-height: 1.5;
-  }
+  .stat-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 10px; }
+  .stat-note { font-size: 13px; color: var(--text-faint); line-height: 1.5; }
   .stat-pink .stat-num { color: var(--pink); }
   .stat-mint .stat-num { color: var(--mint); }
   .stat-lavender .stat-num { color: var(--lavender); }
-
-  /* Section structure */
-  section.node {
-    padding: clamp(70px, 9vw, 130px) 0;
-    border-top: 1px solid var(--line-soft);
-    position: relative;
-  }
-  .node-marker {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-    margin-bottom: 22px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .node-marker .num {
-    color: var(--gold);
-    background: rgba(232, 201, 122, 0.08);
-    padding: 4px 10px;
-    border: 1px solid rgba(232, 201, 122, 0.2);
-  }
-  .node-title {
-    font-family: var(--font-serif);
-    font-weight: 300;
-    font-size: clamp(28px, 4vw, 48px);
-    line-height: 1.15;
-    letter-spacing: -0.015em;
-    margin-bottom: 18px;
-    max-width: 22ch;
-  }
+  section.node { padding: clamp(70px, 9vw, 130px) 0; border-top: 1px solid var(--line-soft); position: relative; }
+  .node-marker { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 22px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .node-marker .num { color: var(--gold); background: rgba(232, 201, 122, 0.08); padding: 4px 10px; border: 1px solid rgba(232, 201, 122, 0.2); }
+  .node-marker .num.module { color: var(--mint); background: rgba(126, 221, 200, 0.06); border-color: rgba(126, 221, 200, 0.2); }
+  .node-title { font-family: var(--font-serif); font-weight: 300; font-size: clamp(28px, 4vw, 48px); line-height: 1.15; letter-spacing: -0.015em; margin-bottom: 18px; max-width: 22ch; }
   body[data-view="zh"] .node-title { font-family: var(--font-cn-serif); font-weight: 400; }
   .node-title em { color: var(--mint); font-style: italic; }
-  .node-lede {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(16px, 1.5vw, 19px);
-    line-height: 1.6;
-    color: var(--text-dim);
-    max-width: 64ch;
-    margin-bottom: 50px;
-    font-weight: 300;
-  }
+  .node-lede { font-family: var(--font-serif); font-style: italic; font-size: clamp(16px, 1.5vw, 19px); line-height: 1.6; color: var(--text-dim); max-width: 64ch; margin-bottom: 50px; font-weight: 300; }
   body[data-view="zh"] .node-lede { font-family: var(--font-cn-serif); font-style: normal; }
-
-  /* Reframing 4-grid */
-  .reframe-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 18px;
-  }
-  .reframe-card {
-    padding: 28px 26px;
-    background: var(--bg-card);
-    border: 1px solid var(--line);
-    position: relative;
-    overflow: hidden;
-  }
-  .reframe-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 2px; height: 100%;
-    background: var(--accent, var(--mint));
-  }
+  .reframe-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+  .reframe-card { padding: 28px 26px; background: var(--bg-card); border: 1px solid var(--line); position: relative; overflow: hidden; }
+  .reframe-card::before { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 100%; background: var(--accent, var(--mint)); }
   .reframe-card.c1 { --accent: var(--mint); }
   .reframe-card.c2 { --accent: var(--lavender); }
   .reframe-card.c3 { --accent: var(--pink); }
   .reframe-card.c4 { --accent: var(--gold); }
-  .reframe-card h3 {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 14px;
-    font-weight: 700;
-  }
-  .reframe-card h4 {
-    font-family: var(--font-serif);
-    font-size: 22px;
-    font-weight: 400;
-    margin-bottom: 14px;
-    line-height: 1.25;
-  }
+  .reframe-card h3 { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; font-weight: 700; }
+  .reframe-card h4 { font-family: var(--font-serif); font-size: 22px; font-weight: 400; margin-bottom: 14px; line-height: 1.25; }
   body[data-view="zh"] .reframe-card h4 { font-family: var(--font-cn-serif); }
-  .reframe-card p {
-    font-size: 14px;
-    color: var(--text-dim);
-    line-height: 1.7;
-  }
-
-  /* Six-layer rhythm model */
-  .layer-stack {
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid var(--line);
-  }
-  .layer {
-    display: grid;
-    grid-template-columns: 90px 1fr;
-    gap: 28px;
-    padding: 36px 0;
-    border-bottom: 1px solid var(--line);
-    align-items: start;
-    transition: background 0.3s;
-  }
+  .reframe-card p { font-size: 14px; color: var(--text-dim); line-height: 1.7; }
+  .layer-stack { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+  .layer { display: grid; grid-template-columns: 90px 1fr; gap: 28px; padding: 36px 0; border-bottom: 1px solid var(--line); align-items: start; transition: background 0.3s; }
   .layer:hover { background: rgba(126, 221, 200, 0.02); }
-  .layer-num {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    color: var(--gold);
-  }
-  .layer-num .big {
-    display: block;
-    font-size: 32px;
-    color: var(--text);
-    margin-top: 6px;
-    letter-spacing: 0;
-  }
-  .layer-body h3 {
-    font-family: var(--font-serif);
-    font-size: clamp(20px, 2.2vw, 26px);
-    font-weight: 400;
-    margin-bottom: 8px;
-    color: var(--text);
-  }
+  .layer-num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; color: var(--gold); }
+  .layer-num .big { display: block; font-size: 32px; color: var(--text); margin-top: 6px; letter-spacing: 0; }
+  .layer-body h3 { font-family: var(--font-serif); font-size: clamp(20px, 2.2vw, 26px); font-weight: 400; margin-bottom: 8px; color: var(--text); }
   body[data-view="zh"] .layer-body h3 { font-family: var(--font-cn-serif); }
   .layer-body h3 .en-name { color: var(--mint); font-family: var(--font-mono); font-size: 0.55em; letter-spacing: 0.16em; text-transform: uppercase; margin-left: 12px; }
-  .layer-body p {
-    color: var(--text-dim);
-    max-width: 60ch;
-    margin-bottom: 14px;
-  }
-  .layer-body .layer-tag {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--lavender);
-    padding: 3px 9px;
-    border: 1px solid rgba(180, 165, 232, 0.25);
-    display: inline-block;
-    margin-right: 8px;
-    margin-top: 8px;
-  }
-
-  /* Driver table */
-  .drivers {
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .driver-row {
-    display: grid;
-    grid-template-columns: 1.1fr 1.4fr 1.2fr;
-    gap: 28px;
-    padding: 28px 0;
-    border-bottom: 1px solid var(--line-soft);
-    align-items: start;
-  }
+  .layer-body p { color: var(--text-dim); max-width: 60ch; margin-bottom: 14px; }
+  .layer-body .layer-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--lavender); padding: 3px 9px; border: 1px solid rgba(180, 165, 232, 0.25); display: inline-block; margin-right: 8px; margin-top: 8px; }
+  .drivers { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .driver-row { display: grid; grid-template-columns: 1.1fr 1.4fr 1.2fr; gap: 28px; padding: 28px 0; border-bottom: 1px solid var(--line-soft); align-items: start; }
   .driver-row:last-child { border-bottom: 0; }
-  .driver-row.header {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-    padding: 18px 0;
-  }
+  .driver-row.header { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-faint); padding: 18px 0; }
   .driver-row.header > div { color: var(--gold); }
-  .driver-name {
-    font-family: var(--font-serif);
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--text);
-    line-height: 1.3;
-  }
+  .driver-name { font-family: var(--font-serif); font-size: 18px; font-weight: 500; color: var(--text); line-height: 1.3; }
   body[data-view="zh"] .driver-name { font-family: var(--font-cn-serif); }
-  .driver-effect, .driver-response {
-    color: var(--text-dim);
-    font-size: 14px;
-    line-height: 1.6;
-  }
+  .driver-effect, .driver-response { color: var(--text-dim); font-size: 14px; line-height: 1.6; }
   .driver-response { color: var(--mint); font-style: italic; }
   body[data-view="zh"] .driver-response { font-style: normal; }
-
-  /* Grants Pass callout */
-  .callout {
-    margin: 50px 0;
-    padding: 36px 32px;
-    border: 1px solid rgba(236, 90, 110, 0.3);
-    background: linear-gradient(180deg, rgba(236, 90, 110, 0.04), rgba(236, 90, 110, 0.01));
-    position: relative;
-  }
-  .callout::before {
-    content: '⚠';
-    position: absolute;
-    top: 22px; right: 26px;
-    font-size: 22px;
-    color: var(--crimson);
-  }
-  .callout-tag {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--crimson);
-    margin-bottom: 14px;
-  }
-  .callout h3 {
-    font-family: var(--font-serif);
-    font-size: 24px;
-    font-weight: 400;
-    margin-bottom: 14px;
-    line-height: 1.3;
-    max-width: 38ch;
-  }
+  .callout { margin: 50px 0; padding: 36px 32px; border: 1px solid rgba(236, 90, 110, 0.3); background: linear-gradient(180deg, rgba(236, 90, 110, 0.04), rgba(236, 90, 110, 0.01)); position: relative; }
+  .callout::before { content: '⚠'; position: absolute; top: 22px; right: 26px; font-size: 22px; color: var(--crimson); }
+  .callout-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--crimson); margin-bottom: 14px; }
+  .callout h3 { font-family: var(--font-serif); font-size: 24px; font-weight: 400; margin-bottom: 14px; line-height: 1.3; max-width: 38ch; }
   body[data-view="zh"] .callout h3 { font-family: var(--font-cn-serif); }
-  .callout p {
-    color: var(--text-dim);
-    max-width: 70ch;
-    font-size: 15px;
-  }
-
-  /* Return stack */
-  .return-stack {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1px;
-    background: var(--line-soft);
-    border: 1px solid var(--line);
-  }
-  .return-card {
-    background: var(--bg);
-    padding: 32px 26px;
-    position: relative;
-    min-height: 220px;
-  }
-  .return-card .num {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--gold);
-    letter-spacing: 0.2em;
-    margin-bottom: 18px;
-  }
-  .return-card h4 {
-    font-family: var(--font-serif);
-    font-size: 22px;
-    font-weight: 400;
-    margin-bottom: 10px;
-  }
+  .callout p { color: var(--text-dim); max-width: 70ch; font-size: 15px; }
+  .return-stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line); }
+  .return-card { background: var(--bg); padding: 32px 26px; position: relative; min-height: 220px; }
+  .return-card .num { font-family: var(--font-mono); font-size: 11px; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 18px; }
+  .return-card h4 { font-family: var(--font-serif); font-size: 22px; font-weight: 400; margin-bottom: 10px; }
   body[data-view="zh"] .return-card h4 { font-family: var(--font-cn-serif); }
   .return-card h4 .en { color: var(--mint); font-size: 0.6em; font-family: var(--font-mono); display: block; margin-top: 4px; letter-spacing: 0.14em; }
-  .return-card p {
-    font-size: 14px;
-    color: var(--text-dim);
-    line-height: 1.65;
-  }
-
-  /* Evidence-aligned grid */
-  .evidence-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-    gap: 22px;
-  }
-  .evidence-card {
-    background: var(--bg-card);
-    border: 1px solid var(--line);
-    padding: 30px 26px;
-    transition: border-color 0.3s, transform 0.3s;
-  }
-  .evidence-card:hover {
-    border-color: var(--mint);
-    transform: translateY(-2px);
-  }
-  .evidence-card .code {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--lavender);
-    letter-spacing: 0.18em;
-    margin-bottom: 12px;
-  }
-  .evidence-card h4 {
-    font-family: var(--font-serif);
-    font-size: 21px;
-    font-weight: 400;
-    margin-bottom: 12px;
-    line-height: 1.25;
-  }
+  .return-card p { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
+  .evidence-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 22px; }
+  .evidence-card { background: var(--bg-card); border: 1px solid var(--line); padding: 30px 26px; transition: border-color 0.3s, transform 0.3s; }
+  .evidence-card:hover { border-color: var(--mint); transform: translateY(-2px); }
+  .evidence-card .code { font-family: var(--font-mono); font-size: 11px; color: var(--lavender); letter-spacing: 0.18em; margin-bottom: 12px; }
+  .evidence-card h4 { font-family: var(--font-serif); font-size: 21px; font-weight: 400; margin-bottom: 12px; line-height: 1.25; }
   body[data-view="zh"] .evidence-card h4 { font-family: var(--font-cn-serif); }
-  .evidence-card p {
-    font-size: 14px;
-    color: var(--text-dim);
-  }
-
-  /* Intake tool block */
-  .intake {
-    background: linear-gradient(180deg, rgba(126, 221, 200, 0.04), transparent);
-    border: 1px solid var(--line);
-    padding: 44px clamp(28px, 4vw, 48px);
-  }
-  .intake h3 {
-    font-family: var(--font-serif);
-    font-size: 22px;
-    font-weight: 400;
-    margin-bottom: 22px;
-    color: var(--mint);
-  }
+  .evidence-card p { font-size: 14px; color: var(--text-dim); }
+  .intake { background: linear-gradient(180deg, rgba(126, 221, 200, 0.04), transparent); border: 1px solid var(--line); padding: 44px clamp(28px, 4vw, 48px); }
+  .intake h3 { font-family: var(--font-serif); font-size: 22px; font-weight: 400; margin-bottom: 22px; color: var(--mint); }
   body[data-view="zh"] .intake h3 { font-family: var(--font-cn-serif); }
-  .intake ul {
-    list-style: none;
-    counter-reset: q;
-  }
-  .intake li {
-    counter-increment: q;
-    padding: 18px 0 18px 50px;
-    border-bottom: 1px solid var(--line-soft);
-    position: relative;
-    color: var(--text);
-    font-size: 16px;
-    line-height: 1.55;
-  }
+  .intake ul { list-style: none; counter-reset: q; }
+  .intake li { counter-increment: q; padding: 18px 0 18px 50px; border-bottom: 1px solid var(--line-soft); position: relative; color: var(--text); font-size: 16px; line-height: 1.55; }
   .intake li:last-child { border-bottom: 0; }
-  .intake li::before {
-    content: counter(q, decimal-leading-zero);
-    position: absolute;
-    left: 0;
-    top: 18px;
-    font-family: var(--font-mono);
-    font-size: 13px;
-    color: var(--gold);
-    letter-spacing: 0.1em;
-  }
-  .design-rule {
-    margin-top: 40px;
-    padding: 22px 26px;
-    border-left: 2px solid var(--mint);
-    background: rgba(126, 221, 200, 0.04);
-  }
-  .design-rule .label {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--mint);
-    margin-bottom: 10px;
-  }
-  .design-rule p {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 17px;
-    line-height: 1.55;
-    color: var(--text);
-  }
+  .intake li::before { content: counter(q, decimal-leading-zero); position: absolute; left: 0; top: 18px; font-family: var(--font-mono); font-size: 13px; color: var(--gold); letter-spacing: 0.1em; }
+  .design-rule { margin-top: 40px; padding: 22px 26px; border-left: 2px solid var(--mint); background: rgba(126, 221, 200, 0.04); }
+  .design-rule .label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mint); margin-bottom: 10px; }
+  .design-rule p { font-family: var(--font-serif); font-style: italic; font-size: 17px; line-height: 1.55; color: var(--text); }
   body[data-view="zh"] .design-rule p { font-family: var(--font-cn-serif); font-style: normal; }
-
-  /* Pilot timeline */
-  .pilot-timeline {
-    border-top: 1px solid var(--line);
-  }
-  .pilot-row {
-    display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 32px;
-    padding: 30px 0;
-    border-bottom: 1px solid var(--line-soft);
-    align-items: start;
-  }
-  .pilot-days {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    letter-spacing: 0.16em;
-    color: var(--gold);
-  }
-  .pilot-days .phase {
-    display: block;
-    font-size: 10px;
-    color: var(--text-faint);
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    margin-top: 4px;
-  }
-  .pilot-body h4 {
-    font-family: var(--font-serif);
-    font-size: 22px;
-    font-weight: 400;
-    margin-bottom: 8px;
-  }
+  .pilot-timeline { border-top: 1px solid var(--line); }
+  .pilot-row { display: grid; grid-template-columns: 160px 1fr; gap: 32px; padding: 30px 0; border-bottom: 1px solid var(--line-soft); align-items: start; }
+  .pilot-days { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.16em; color: var(--gold); }
+  .pilot-days .phase { display: block; font-size: 10px; color: var(--text-faint); letter-spacing: 0.22em; text-transform: uppercase; margin-top: 4px; }
+  .pilot-body h4 { font-family: var(--font-serif); font-size: 22px; font-weight: 400; margin-bottom: 8px; }
   body[data-view="zh"] .pilot-body h4 { font-family: var(--font-cn-serif); }
-  .pilot-body p {
-    color: var(--text-dim);
-    font-size: 14.5px;
-    max-width: 60ch;
-  }
-
-  /* Ethics lock */
-  .ethics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1px;
-    background: var(--line-soft);
-    border: 1px solid var(--line);
-  }
-  .ethics-card {
-    background: var(--bg);
-    padding: 32px 28px;
-  }
-  .ethics-card .icon {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--pink);
-    letter-spacing: 0.2em;
-    margin-bottom: 14px;
-  }
-  .ethics-card h4 {
-    font-family: var(--font-serif);
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 12px;
-  }
+  .pilot-body p { color: var(--text-dim); font-size: 14.5px; max-width: 60ch; }
+  .ethics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line); }
+  .ethics-card { background: var(--bg); padding: 32px 28px; }
+  .ethics-card .icon { font-family: var(--font-mono); font-size: 11px; color: var(--pink); letter-spacing: 0.2em; margin-bottom: 14px; }
+  .ethics-card h4 { font-family: var(--font-serif); font-size: 20px; font-weight: 500; margin-bottom: 12px; }
   body[data-view="zh"] .ethics-card h4 { font-family: var(--font-cn-serif); }
-  .ethics-card p {
-    font-size: 14px;
-    color: var(--text-dim);
-    line-height: 1.65;
-  }
-
-  /* Source field layer (dual channel) */
-  .sf-layer {
-    background:
-      radial-gradient(circle at 20% 20%, rgba(180, 165, 232, 0.07), transparent 50%),
-      radial-gradient(circle at 80% 60%, rgba(126, 221, 200, 0.05), transparent 50%);
-    border-top: 1px solid var(--lavender);
-    border-bottom: 1px solid var(--lavender);
-    position: relative;
-  }
-  .sf-layer::before {
-    content: '';
-    position: absolute;
-    top: -1px; left: 0;
-    width: 100%; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--lavender), transparent);
-    opacity: 0.5;
-  }
-  .sf-channel-tag {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--lavender);
-    margin-bottom: 22px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .sf-channel-tag .pulse {
-    width: 7px; height: 7px;
-    background: var(--lavender);
-    border-radius: 50%;
-    box-shadow: 0 0 14px var(--lavender);
-    animation: pulse 2.6s ease-in-out infinite;
-  }
-  .sf-bridges {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
-  }
-  .sf-bridge {
-    padding: 28px 26px;
-    background: var(--bg-card);
-    border: 1px solid rgba(180, 165, 232, 0.25);
-    position: relative;
-  }
-  .sf-bridge .src {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--mint);
-    margin-bottom: 8px;
-  }
-  .sf-bridge .arrow {
-    color: var(--gold);
-    font-family: var(--font-mono);
-    margin: 0 8px;
-  }
-  .sf-bridge .dst {
-    color: var(--lavender);
-  }
-  .sf-bridge h4 {
-    font-family: var(--font-serif);
-    font-size: 19px;
-    font-weight: 400;
-    margin: 14px 0 10px;
-    line-height: 1.3;
-  }
+  .ethics-card p { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
+  .sf-layer { background: radial-gradient(circle at 20% 20%, rgba(180, 165, 232, 0.07), transparent 50%), radial-gradient(circle at 80% 60%, rgba(126, 221, 200, 0.05), transparent 50%); border-top: 1px solid var(--lavender); border-bottom: 1px solid var(--lavender); position: relative; }
+  .sf-layer::before { content: ''; position: absolute; top: -1px; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--lavender), transparent); opacity: 0.5; }
+  .sf-channel-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--lavender); margin-bottom: 22px; display: flex; align-items: center; gap: 12px; }
+  .sf-channel-tag .pulse { width: 7px; height: 7px; background: var(--lavender); border-radius: 50%; box-shadow: 0 0 14px var(--lavender); animation: pulse 2.6s ease-in-out infinite; }
+  .sf-bridges { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
+  .sf-bridge { padding: 28px 26px; background: var(--bg-card); border: 1px solid rgba(180, 165, 232, 0.25); position: relative; }
+  .sf-bridge .src { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mint); margin-bottom: 8px; }
+  .sf-bridge .arrow { color: var(--gold); font-family: var(--font-mono); margin: 0 8px; }
+  .sf-bridge .dst { color: var(--lavender); }
+  .sf-bridge h4 { font-family: var(--font-serif); font-size: 19px; font-weight: 400; margin: 14px 0 10px; line-height: 1.3; }
   body[data-view="zh"] .sf-bridge h4 { font-family: var(--font-cn-serif); }
-  .sf-bridge p {
-    font-size: 14px;
-    color: var(--text-dim);
-    line-height: 1.65;
-  }
-
-  /* Sources */
-  .sources-list {
-    border-top: 1px solid var(--line);
-  }
-  .source-row {
-    display: grid;
-    grid-template-columns: 1.2fr 1.8fr 0.6fr;
-    gap: 24px;
-    padding: 22px 0;
-    border-bottom: 1px solid var(--line-soft);
-    align-items: start;
-    font-size: 14px;
-  }
-  .source-name {
-    font-family: var(--font-serif);
-    font-weight: 500;
-    color: var(--text);
-  }
+  .sf-bridge p { font-size: 14px; color: var(--text-dim); line-height: 1.65; }
+  .sources-list { border-top: 1px solid var(--line); }
+  .source-row { display: grid; grid-template-columns: 1.2fr 1.8fr 0.6fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line-soft); align-items: start; font-size: 14px; }
+  .source-name { font-family: var(--font-serif); font-weight: 500; color: var(--text); }
   body[data-view="zh"] .source-name { font-family: var(--font-cn-serif); }
   .source-use { color: var(--text-dim); line-height: 1.6; }
-  .source-link a {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--mint);
-    text-decoration: none;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    border-bottom: 1px solid var(--mint);
-    transition: opacity 0.2s;
-  }
+  .source-link a { font-family: var(--font-mono); font-size: 11px; color: var(--mint); text-decoration: none; letter-spacing: 0.14em; text-transform: uppercase; border-bottom: 1px solid var(--mint); transition: opacity 0.2s; }
   .source-link a:hover { opacity: 0.7; }
-
-  /* Footer */
-  footer {
-    border-top: 1px solid var(--line);
-    padding: 60px var(--pad) 80px;
-    text-align: center;
-    position: relative;
-    z-index: 2;
-  }
-  footer .sig {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    color: var(--text-faint);
-    line-height: 2.2;
-  }
+  footer { border-top: 1px solid var(--line); padding: 60px var(--pad) 80px; text-align: center; position: relative; z-index: 2; }
+  footer .sig { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; color: var(--text-faint); line-height: 2.2; }
   footer .sig .accent { color: var(--gold); }
   footer .sig .mint { color: var(--mint); }
-  footer .frequency {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 15px;
-    color: var(--text-dim);
-    margin: 24px 0 14px;
-    font-weight: 300;
-  }
+  footer .frequency { font-family: var(--font-serif); font-style: italic; font-size: 15px; color: var(--text-dim); margin: 24px 0 14px; font-weight: 300; }
   body[data-view="zh"] footer .frequency { font-family: var(--font-cn-serif); font-style: normal; }
-
-  /* Big quote block */
-  .principle {
-    margin: 60px 0;
-    padding: 50px clamp(28px, 5vw, 60px);
-    border-top: 1px solid var(--gold);
-    border-bottom: 1px solid var(--gold);
-    background: linear-gradient(180deg, rgba(232, 201, 122, 0.03), transparent);
-    text-align: center;
-  }
-  .principle .label {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 22px;
-  }
-  .principle p {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(20px, 2.4vw, 28px);
-    line-height: 1.4;
-    color: var(--text);
-    max-width: 30ch;
-    margin: 0 auto;
-    font-weight: 300;
-  }
+  .principle { margin: 60px 0; padding: 50px clamp(28px, 5vw, 60px); border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); background: linear-gradient(180deg, rgba(232, 201, 122, 0.03), transparent); text-align: center; }
+  .principle .label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 22px; }
+  .principle p { font-family: var(--font-serif); font-style: italic; font-size: clamp(20px, 2.4vw, 28px); line-height: 1.4; color: var(--text); max-width: 30ch; margin: 0 auto; font-weight: 300; }
   body[data-view="zh"] .principle p { font-family: var(--font-cn-serif); font-style: normal; font-weight: 400; }
-
-  /* Reveal animations */
-  .reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.9s ease-out, transform 0.9s ease-out;
-  }
-  .reveal.in {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Responsive */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease-out, transform 0.9s ease-out; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
   @media (max-width: 720px) {
     .driver-row, .driver-row.header { grid-template-columns: 1fr; gap: 8px; }
     .driver-row.header { display: none; }
@@ -846,8 +197,6 @@
     .source-row { grid-template-columns: 1fr; gap: 6px; }
     .source-link { margin-top: 4px; }
   }
-
-  /* HPRP additions · 人类安放回归协议升级层 */
   .method-chain { margin: 46px 0 18px; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
   .chain-step { background: linear-gradient(180deg, rgba(126,221,200,0.035), rgba(11,11,18,0.96)); padding: 22px 14px; min-height: 150px; position: relative; }
   .chain-step .idx { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; color: var(--gold); margin-bottom: 12px; }
@@ -858,14 +207,14 @@
   .hprp-formula .label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--mint); margin-bottom: 12px; }
   .hprp-formula .equation { font-family: var(--font-serif); font-size: clamp(20px, 2.5vw, 31px); line-height: 1.35; color: var(--text); font-style: italic; }
   body[data-view="zh"] .hprp-formula .equation { font-family: var(--font-cn-serif); font-style: normal; }
-  .type-grid, .repair-grid, .case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line); margin-top: 28px; }
-  .type-card, .repair-card, .case-card { background: var(--bg); padding: 26px 24px; min-height: 210px; position: relative; }
-  .type-card::before, .repair-card::before, .case-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--accent, var(--mint)); opacity: .75; }
+  .type-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line); margin-top: 28px; }
+  .type-card { background: var(--bg); padding: 26px 24px; min-height: 210px; position: relative; }
+  .type-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--accent, var(--mint)); opacity: .75; }
   .type-card:nth-child(2n){ --accent: var(--lavender); } .type-card:nth-child(3n){ --accent: var(--pink); } .type-card:nth-child(4n){ --accent: var(--gold); }
-  .type-card .code, .repair-card .code, .case-card .code { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent, var(--mint)); margin-bottom: 14px; }
-  .type-card h4, .repair-card h4, .case-card h4 { font-family: var(--font-cn-serif); font-size: 21px; line-height: 1.28; font-weight: 500; margin-bottom: 12px; }
-  body[data-view="en"] .type-card h4, body[data-view="en"] .repair-card h4, body[data-view="en"] .case-card h4 { font-family: var(--font-serif); font-weight: 400; }
-  .type-card p, .repair-card p, .case-card p { font-size: 13.5px; color: var(--text-dim); line-height: 1.68; }
+  .type-card .code { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent, var(--mint)); margin-bottom: 14px; }
+  .type-card h4 { font-family: var(--font-cn-serif); font-size: 21px; line-height: 1.28; font-weight: 500; margin-bottom: 12px; }
+  body[data-view="en"] .type-card h4 { font-family: var(--font-serif); font-weight: 400; }
+  .type-card p { font-size: 13.5px; color: var(--text-dim); line-height: 1.68; }
   .case-template { margin-top: 30px; border-top: 1px solid var(--line); }
   .case-row { display: grid; grid-template-columns: 180px 1fr; gap: 28px; padding: 24px 0; border-bottom: 1px solid var(--line-soft); }
   .case-row .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase; }
@@ -877,331 +226,208 @@
   .module-banner p { max-width: 70ch; color: var(--text-dim); }
   @media (max-width: 920px) { .method-chain { grid-template-columns: 1fr; } .chain-step { min-height: auto; } }
   @media (max-width: 720px) { .case-row { grid-template-columns: 1fr; gap: 8px; } }
-
-
-  /* Hidden-rule reflection · 潜规则共谋反思层 */
-  .hidden-rule-map {
-    margin-top: 30px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
-    gap: 1px;
-    background: var(--line-soft);
-    border: 1px solid var(--line);
-  }
-  .hidden-role {
-    background: var(--bg);
-    padding: 30px 26px;
-    min-height: 260px;
-    position: relative;
-  }
-  .hidden-role::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 2px;
-    background: var(--accent, var(--crimson));
-    opacity: .8;
-  }
+  .hidden-rule-map { margin-top: 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(265px, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line); }
+  .hidden-role { background: var(--bg); padding: 30px 26px; min-height: 260px; position: relative; }
+  .hidden-role::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--accent, var(--crimson)); opacity: .8; }
   .hidden-role:nth-child(2){ --accent: var(--gold); }
   .hidden-role:nth-child(3){ --accent: var(--mint); }
-  .hidden-role .role-code {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: var(--accent, var(--crimson));
-    margin-bottom: 14px;
-  }
-  .hidden-role h4 {
-    font-family: var(--font-cn-serif);
-    font-size: 22px;
-    line-height: 1.28;
-    font-weight: 500;
-    margin-bottom: 12px;
-  }
-  body[data-view="en"] .hidden-role h4 {
-    font-family: var(--font-serif);
-    font-weight: 400;
-  }
-  .hidden-role p {
-    color: var(--text-dim);
-    font-size: 13.5px;
-    line-height: 1.7;
-  }
-  .reflection-questions {
-    margin-top: 18px;
-    border-top: 1px solid var(--line-soft);
-    padding-top: 14px;
-  }
-  .reflection-questions ul {
-    list-style: none;
-  }
-  .reflection-questions li {
-    padding: 8px 0 8px 22px;
-    position: relative;
-    color: var(--text-dim);
-    font-size: 13px;
-    line-height: 1.55;
-    border-bottom: 1px solid rgba(255,255,255,.035);
-  }
+  .hidden-role .role-code { font-family: var(--font-mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent, var(--crimson)); margin-bottom: 14px; }
+  .hidden-role h4 { font-family: var(--font-cn-serif); font-size: 22px; line-height: 1.28; font-weight: 500; margin-bottom: 12px; }
+  body[data-view="en"] .hidden-role h4 { font-family: var(--font-serif); font-weight: 400; }
+  .hidden-role p { color: var(--text-dim); font-size: 13.5px; line-height: 1.7; }
+  .reflection-questions { margin-top: 18px; border-top: 1px solid var(--line-soft); padding-top: 14px; }
+  .reflection-questions ul { list-style: none; }
+  .reflection-questions li { padding: 8px 0 8px 22px; position: relative; color: var(--text-dim); font-size: 13px; line-height: 1.55; border-bottom: 1px solid rgba(255,255,255,.035); }
   .reflection-questions li:last-child { border-bottom: 0; }
-  .reflection-questions li::before {
-    content: '·';
-    position: absolute;
-    left: 4px;
-    color: var(--accent, var(--crimson));
-    font-family: var(--font-mono);
-    font-weight: 700;
-  }
-  .translation-vow {
-    margin: 42px 0 10px;
-    padding: 32px clamp(24px, 5vw, 54px);
-    border: 1px solid rgba(126,221,200,.25);
-    border-left: 3px solid var(--mint);
-    background: linear-gradient(135deg, rgba(126,221,200,.045), rgba(232,201,122,.025));
-  }
-  .translation-vow .label {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: .24em;
-    color: var(--mint);
-    text-transform: uppercase;
-    margin-bottom: 14px;
-  }
-  .translation-vow p {
-    font-family: var(--font-serif);
-    font-style: italic;
-    color: var(--text);
-    font-size: clamp(17px, 1.8vw, 22px);
-    line-height: 1.55;
-    max-width: 46ch;
-  }
-  body[data-view="zh"] .translation-vow p {
-    font-family: var(--font-cn-serif);
-    font-style: normal;
-  }
+  .reflection-questions li::before { content: '·'; position: absolute; left: 4px; color: var(--accent, var(--crimson)); font-family: var(--font-mono); font-weight: 700; }
+  .translation-vow { margin: 42px 0 10px; padding: 32px clamp(24px, 5vw, 54px); border: 1px solid rgba(126,221,200,.25); border-left: 3px solid var(--mint); background: linear-gradient(135deg, rgba(126,221,200,.045), rgba(232,201,122,.025)); }
+  .translation-vow .label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .24em; color: var(--mint); text-transform: uppercase; margin-bottom: 14px; }
+  .translation-vow p { font-family: var(--font-serif); font-style: italic; color: var(--text); font-size: clamp(17px, 1.8vw, 22px); line-height: 1.55; max-width: 46ch; }
+  body[data-view="zh"] .translation-vow p { font-family: var(--font-cn-serif); font-style: normal; }
+  .hero-title-line { display: block; }
+  .hero-title-cn { display: block; margin-top: 22px; color: var(--mint); font-family: var(--font-cn-serif); font-size: clamp(38px, 6.2vw, 78px); line-height: 1.08; font-weight: 400; letter-spacing: -0.02em; }
+  body[data-view="en"] .hero-title-cn { font-family: var(--font-serif); font-style: italic; }
+  .nonbinary-ethics { margin: 34px 0; padding: 34px clamp(24px, 5vw, 52px); border: 1px solid rgba(232,201,122,.30); border-left: 3px solid var(--gold); background: radial-gradient(circle at 0% 0%, rgba(232,201,122,.06), transparent 40%), linear-gradient(180deg, rgba(232,201,122,.035), rgba(126,221,200,.018)); }
+  .nonbinary-ethics .label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .nonbinary-ethics h3 { font-family: var(--font-cn-serif); font-size: clamp(22px, 3vw, 34px); line-height: 1.26; font-weight: 500; margin-bottom: 18px; color: var(--text); }
+  body[data-view="en"] .nonbinary-ethics h3 { font-family: var(--font-serif); font-weight: 400; }
+  .nonbinary-ethics p { color: var(--text-dim); max-width: 78ch; font-size: 15px; line-height: 1.82; margin-bottom: 12px; }
+  .nonbinary-ethics strong { color: var(--text); font-weight: 500; }
+  .nonbinary-ethics .axiom { margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(232,201,122,.18); font-family: var(--font-serif); font-style: italic; color: var(--mint); font-size: clamp(18px, 2vw, 24px); line-height: 1.45; }
+  body[data-view="zh"] .nonbinary-ethics .axiom { font-family: var(--font-cn-serif); font-style: normal; }
+  .love-core { margin: 0; padding: clamp(60px, 10vw, 120px) clamp(24px, 6vw, 72px); border-top: 1px solid rgba(126,221,200,.34); border-bottom: 1px solid rgba(232,201,122,.30); background: radial-gradient(circle at 10% 0%, rgba(240,165,201,.09), transparent 38%), radial-gradient(circle at 90% 20%, rgba(126,221,200,.075), transparent 36%), linear-gradient(180deg, rgba(180,165,232,.035), rgba(5,5,7,.72)); position: relative; overflow: hidden; }
+  .love-core::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(232,201,122,.035), transparent 42%); pointer-events: none; }
+  .love-core-inner { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 2; }
+  .love-core .love-label { position: relative; font-family: var(--font-mono); font-size: 10px; letter-spacing: .30em; text-transform: uppercase; color: var(--pink); margin-bottom: 24px; display: flex; align-items: center; gap: 14px; }
+  .love-core .love-label .pulse { width: 7px; height: 7px; background: var(--pink); border-radius: 50%; box-shadow: 0 0 14px var(--pink); animation: pulse 2.6s ease-in-out infinite; }
+  .love-core h2 { position: relative; font-family: var(--font-cn-serif); font-weight: 400; font-size: clamp(30px, 5vw, 58px); line-height: 1.16; letter-spacing: -0.015em; max-width: 18ch; margin-bottom: 26px; }
+  body[data-view="en"] .love-core h2 { font-family: var(--font-serif); font-weight: 300; }
+  .love-core h2 em { color: var(--mint); font-style: italic; }
+  body[data-view="zh"] .love-core h2 em { font-style: normal; }
+  .love-core .love-text { position: relative; max-width: 78ch; }
+  .love-core p { color: var(--text-dim); font-size: 16px; line-height: 1.86; margin-bottom: 14px; }
+  .love-core p strong { color: var(--text); font-weight: 500; }
+  .love-core .love-axiom { position: relative; margin-top: 30px; padding-top: 24px; border-top: 1px solid rgba(240,165,201,.18); font-family: var(--font-serif); font-style: italic; color: var(--text); font-size: clamp(20px, 2.4vw, 30px); line-height: 1.42; max-width: 34ch; }
+  body[data-view="zh"] .love-core .love-axiom { font-family: var(--font-cn-serif); font-style: normal; }
+  .love-core .love-axiom span { color: var(--pink); }
+  .three-sevens { margin: 56px 0 0; padding: 36px clamp(24px, 5vw, 52px); border: 1px solid rgba(232,201,122,.26); border-left: 3px solid var(--gold); background: linear-gradient(180deg, rgba(232,201,122,.04), rgba(126,221,200,.02)); }
+  .three-sevens .label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .26em; color: var(--gold); text-transform: uppercase; margin-bottom: 14px; }
+  .three-sevens h3 { font-family: var(--font-cn-serif); font-size: clamp(22px, 3vw, 32px); line-height: 1.28; font-weight: 500; margin-bottom: 18px; color: var(--text); max-width: 32ch; }
+  body[data-view="en"] .three-sevens h3 { font-family: var(--font-serif); font-weight: 400; }
+  .three-sevens p { color: var(--text-dim); font-size: 14.5px; line-height: 1.75; max-width: 72ch; margin-bottom: 10px; }
+  .seven-table { margin-top: 22px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line); }
+  .seven-cell { background: var(--bg-card); padding: 18px 20px; }
+  .seven-cell:nth-child(1) { --accent: var(--mint); }
+  .seven-cell:nth-child(2) { --accent: var(--lavender); }
+  .seven-cell:nth-child(3) { --accent: var(--pink); }
+  .seven-cell .name { font-family: var(--font-mono); font-size: 10px; letter-spacing: .18em; color: var(--accent, var(--gold)); text-transform: uppercase; margin-bottom: 8px; }
+  .seven-cell .body { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+  .seven-cell .body strong { color: var(--text); }
+  .case-example { margin-top: 40px; border: 1px solid rgba(126,221,200,.28); background: linear-gradient(180deg, rgba(126,221,200,.04), transparent); }
+  .case-example-head { padding: 24px clamp(22px, 4vw, 36px); border-bottom: 1px solid var(--line); background: rgba(126,221,200,.045); }
+  .case-example-head .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: .22em; color: var(--mint); text-transform: uppercase; margin-bottom: 10px; }
+  .case-example-head h3 { font-family: var(--font-cn-serif); font-size: clamp(20px, 2.4vw, 26px); line-height: 1.3; font-weight: 500; color: var(--text); }
+  body[data-view="en"] .case-example-head h3 { font-family: var(--font-serif); font-weight: 400; }
+  .case-walkthrough { padding: 0 clamp(22px, 4vw, 36px); }
+  .walk-row { display: grid; grid-template-columns: 110px 1fr; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--line-soft); align-items: start; }
+  .walk-row:last-child { border-bottom: 0; }
+  .walk-row .step { font-family: var(--font-mono); font-size: 10px; letter-spacing: .18em; color: var(--mint); text-transform: uppercase; padding-top: 2px; }
+  .walk-row .step .num { color: var(--gold); display: block; font-size: 14px; margin-top: 2px; }
+  .walk-row .content { color: var(--text-dim); font-size: 14px; line-height: 1.7; }
+  .walk-row .content strong { color: var(--text); font-weight: 500; }
+  @media (max-width: 720px) { .walk-row { grid-template-columns: 1fr; gap: 6px; } }
 
-
-  /* V0.3 · two-line title + non-binary ethics layer */
-  .hero-title-line {
-    display: block;
-  }
-  .hero-title-cn {
-    display: block;
-    margin-top: 22px;
-    color: var(--mint);
-    font-family: var(--font-cn-serif);
-    font-size: clamp(38px, 6.2vw, 78px);
-    line-height: 1.08;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-  }
-  body[data-view="en"] .hero-title-cn {
-    font-family: var(--font-serif);
-    font-style: italic;
-  }
-  .nonbinary-ethics {
-    margin: 34px 0;
-    padding: 34px clamp(24px, 5vw, 52px);
-    border: 1px solid rgba(232,201,122,.30);
-    border-left: 3px solid var(--gold);
+  /* V0.7 · New World Circle · 共在者五位 */
+  .circle-five-section {
+    margin: 0;
+    padding: clamp(60px, 9vw, 110px) clamp(24px, 6vw, 72px);
+    border-top: 1px solid rgba(232,201,122,.26);
+    border-bottom: 1px solid rgba(126,221,200,.30);
     background:
-      radial-gradient(circle at 0% 0%, rgba(232,201,122,.06), transparent 40%),
-      linear-gradient(180deg, rgba(232,201,122,.035), rgba(126,221,200,.018));
-  }
-  .nonbinary-ethics .label {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: .26em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 16px;
-  }
-  .nonbinary-ethics h3 {
-    font-family: var(--font-cn-serif);
-    font-size: clamp(22px, 3vw, 34px);
-    line-height: 1.26;
-    font-weight: 500;
-    margin-bottom: 18px;
-    color: var(--text);
-  }
-  body[data-view="en"] .nonbinary-ethics h3 {
-    font-family: var(--font-serif);
-    font-weight: 400;
-  }
-  .nonbinary-ethics p {
-    color: var(--text-dim);
-    max-width: 78ch;
-    font-size: 15px;
-    line-height: 1.82;
-    margin-bottom: 12px;
-  }
-  .nonbinary-ethics strong {
-    color: var(--text);
-    font-weight: 500;
-  }
-  .nonbinary-ethics .axiom {
-    margin-top: 22px;
-    padding-top: 18px;
-    border-top: 1px solid rgba(232,201,122,.18);
-    font-family: var(--font-serif);
-    font-style: italic;
-    color: var(--mint);
-    font-size: clamp(18px, 2vw, 24px);
-    line-height: 1.45;
-  }
-  body[data-view="zh"] .nonbinary-ethics .axiom {
-    font-family: var(--font-cn-serif);
-    font-style: normal;
-  }
-
-
-  /* V0.4 · Love Core · 感动与爱 */
-  .love-core {
-    margin: 22px 0 66px;
-    padding: clamp(34px, 6vw, 68px) clamp(24px, 6vw, 72px);
-    border: 1px solid rgba(240,165,201,.30);
-    border-top: 1px solid rgba(126,221,200,.34);
-    border-bottom: 1px solid rgba(232,201,122,.30);
-    background:
-      radial-gradient(circle at 10% 0%, rgba(240,165,201,.09), transparent 38%),
-      radial-gradient(circle at 90% 20%, rgba(126,221,200,.075), transparent 36%),
-      linear-gradient(180deg, rgba(180,165,232,.035), rgba(5,5,7,.72));
+      radial-gradient(circle at 80% 10%, rgba(232,201,122,.07), transparent 38%),
+      radial-gradient(circle at 15% 80%, rgba(126,221,200,.06), transparent 36%),
+      linear-gradient(180deg, rgba(180,165,232,.025), rgba(5,5,7,.78));
     position: relative;
     overflow: hidden;
   }
-  .love-core::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(232,201,122,.035), transparent 42%);
-    pointer-events: none;
-  }
-  .love-core .love-label {
-    position: relative;
+  .circle-five-inner { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 2; }
+  .circle-five-label {
     font-family: var(--font-mono);
     font-size: 10px;
     letter-spacing: .30em;
     text-transform: uppercase;
-    color: var(--pink);
+    color: var(--gold);
     margin-bottom: 24px;
+    display: flex; align-items: center; gap: 14px;
   }
-  .love-core h2 {
-    position: relative;
+  .circle-five-label .pulse {
+    width: 7px; height: 7px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 14px var(--gold);
+    animation: pulse 2.6s ease-in-out infinite;
+  }
+  .circle-five-section h2 {
     font-family: var(--font-cn-serif);
     font-weight: 400;
-    font-size: clamp(30px, 5vw, 58px);
-    line-height: 1.16;
+    font-size: clamp(28px, 4.5vw, 50px);
+    line-height: 1.18;
     letter-spacing: -0.015em;
-    max-width: 18ch;
-    margin-bottom: 26px;
+    max-width: 22ch;
+    margin-bottom: 22px;
   }
-  body[data-view="en"] .love-core h2 {
-    font-family: var(--font-serif);
-    font-weight: 300;
-  }
-  .love-core h2 em {
-    color: var(--mint);
-    font-style: italic;
-  }
-  body[data-view="zh"] .love-core h2 em {
-    font-style: normal;
-  }
-  .love-core .love-text {
-    position: relative;
-    max-width: 78ch;
-  }
-  .love-core p {
+  body[data-view="en"] .circle-five-section h2 { font-family: var(--font-serif); font-weight: 300; }
+  .circle-five-section h2 em { color: var(--mint); font-style: italic; }
+  body[data-view="zh"] .circle-five-section h2 em { font-style: normal; }
+  .circle-five-lede {
     color: var(--text-dim);
-    font-size: 16px;
-    line-height: 1.86;
+    max-width: 76ch;
+    font-size: 15.5px;
+    line-height: 1.8;
     margin-bottom: 14px;
   }
-  .love-core p strong {
-    color: var(--text);
-    font-weight: 500;
+  .circle-five-lede strong { color: var(--text); font-weight: 500; }
+  .circle-five-grid {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--line-soft);
+    border: 1px solid var(--line);
   }
-  .love-core .love-axiom {
+  .circle-card {
+    background: var(--bg-card);
+    padding: 28px 24px;
+    min-height: 250px;
     position: relative;
-    margin-top: 30px;
-    padding-top: 24px;
-    border-top: 1px solid rgba(240,165,201,.18);
-    font-family: var(--font-serif);
-    font-style: italic;
-    color: var(--text);
-    font-size: clamp(20px, 2.4vw, 30px);
-    line-height: 1.42;
-    max-width: 34ch;
   }
-  body[data-view="zh"] .love-core .love-axiom {
-    font-family: var(--font-cn-serif);
-    font-style: normal;
+  .circle-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--accent, var(--mint));
+    opacity: .9;
   }
-  .love-core .love-axiom span {
-    color: var(--pink);
-  }
-
-
-  /* V0.5 · Human Possibility Core · 人的美好可能 */
-  .possibility-core {
-    position: relative;
-    margin: 30px 0 0;
-    padding: 28px clamp(22px, 4vw, 44px);
-    border: 1px solid rgba(126,221,200,.28);
-    border-left: 3px solid var(--mint);
-    background:
-      radial-gradient(circle at 12% 0%, rgba(126,221,200,.08), transparent 38%),
-      linear-gradient(180deg, rgba(126,221,200,.035), rgba(240,165,201,.02));
-  }
-  .possibility-core .label {
+  .circle-card:nth-child(1) { --accent: var(--mint); }
+  .circle-card:nth-child(2) { --accent: var(--pink); }
+  .circle-card:nth-child(3) { --accent: var(--gold); }
+  .circle-card:nth-child(4) { --accent: var(--lavender); }
+  .circle-card:nth-child(5) { --accent: var(--crimson); }
+  .circle-card .position-code {
     font-family: var(--font-mono);
     font-size: 10px;
-    letter-spacing: .25em;
+    letter-spacing: .22em;
     text-transform: uppercase;
-    color: var(--mint);
+    color: var(--accent, var(--mint));
     margin-bottom: 14px;
   }
-  .possibility-core h3 {
+  .circle-card h4 {
     font-family: var(--font-cn-serif);
-    font-size: clamp(22px, 3vw, 34px);
+    font-size: 22px;
     line-height: 1.28;
     font-weight: 500;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     color: var(--text);
   }
-  body[data-view="en"] .possibility-core h3 {
-    font-family: var(--font-serif);
-    font-weight: 400;
+  body[data-view="en"] .circle-five-section .circle-card h4 { font-family: var(--font-serif); font-weight: 400; }
+  .circle-card .english-name {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .16em;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: block;
   }
-  .possibility-core p {
+  body[data-view="en"] .circle-card .english-name { display: none; }
+  .circle-card .position-meaning {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent, var(--mint));
+    opacity: .75;
+    margin-bottom: 10px;
+  }
+  .circle-card p {
+    font-size: 13.5px;
     color: var(--text-dim);
-    font-size: 15px;
-    line-height: 1.82;
-    max-width: 78ch;
-    margin-bottom: 12px;
+    line-height: 1.7;
   }
-  .possibility-core strong {
-    color: var(--text);
-    font-weight: 500;
-  }
-  .possibility-core .possibility-axiom {
-    margin-top: 22px;
-    padding-top: 18px;
-    border-top: 1px solid rgba(126,221,200,.18);
+  .circle-five-axiom {
+    margin-top: 44px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(232,201,122,.18);
     font-family: var(--font-serif);
     font-style: italic;
     color: var(--text);
-    font-size: clamp(18px, 2vw, 25px);
-    line-height: 1.45;
+    font-size: clamp(18px, 2.2vw, 26px);
+    line-height: 1.5;
+    max-width: 56ch;
   }
-  body[data-view="zh"] .possibility-core .possibility-axiom {
-    font-family: var(--font-cn-serif);
-    font-style: normal;
-  }
-  .possibility-core .possibility-axiom span {
-    color: var(--mint);
-  }
-
+  body[data-view="zh"] .circle-five-axiom { font-family: var(--font-cn-serif); font-style: normal; }
+  .circle-five-axiom span { color: var(--mint); }
 </style>
 </head>
 <body data-view="zh">
@@ -1212,8 +438,8 @@
   <div class="nav-inner">
     <div class="nav-brand">HPRP <span class="dot">·</span> 427Hz <span class="dot">·</span> NODE 33</div>
     <div class="nav-tools">
-      <span class="lang-zh">V0.5 · HPRP</span>
-      <span class="lang-en">V0.5 · HPRP</span>
+      <span class="lang-zh">V0.7 · HPRP</span>
+      <span class="lang-en">V0.7 · HPRP</span>
       <button class="lang-toggle" id="langToggle">
         <span data-lang="zh" class="lang-btn-zh">中</span> / <span data-lang="en" class="lang-btn-en">EN</span>
       </button>
@@ -1221,7 +447,6 @@
   </div>
 </nav>
 
-<!-- HERO -->
 <header class="hero">
   <div class="wrap">
     <div class="hero-tag reveal">
@@ -1232,40 +457,66 @@
       <span class="lang-zh">USA Focus</span>
       <span class="lang-en">USA Focus</span>
     </div>
-
     <h1 class="reveal lang-zh"><span class="hero-title-line">Human Placement</span><span class="hero-title-line">Return Protocol</span><span class="hero-title-cn">人类安放回归协议</span></h1>
     <h1 class="reveal lang-en"><span class="hero-title-line">Human Placement</span><span class="hero-title-line">Return Protocol</span><span class="hero-title-cn">人类安放回归协议</span></h1>
-
     <p class="hero-sub reveal lang-zh">
       人类安放回归协议不是从宏大问题开始，而是从一个人的具体裂缝进入世界结构。它把<strong style="color:var(--mint)">个案识别为类型</strong>，把类型压成机制，把机制做成工具，把工具升格为协议，把协议翻译成政策语言，最终推动系统改变。
     </p>
     <p class="hero-sub reveal lang-en">
-      Human Placement Return Protocol does not begin from abstract social problems. It enters the structure of the world through one person’s fracture: <strong style="color:var(--mint)">case → type → mechanism → tool → protocol → policy language → systemic change.</strong>
+      Human Placement Return Protocol does not begin from abstract social problems. It enters the structure of the world through one person's fracture: <strong style="color:var(--mint)">case → type → mechanism → tool → protocol → policy language → systemic change.</strong>
     </p>
-
     <div class="hero-meta reveal">
       <span><span class="bullet"></span><span class="lang-zh">个案 · 类型 · 机制 · 工具 · 协议 · 政策语言 · 系统改变 · 感动 · 爱 · 可能</span><span class="lang-en">Case · Type · Mechanism · Tool · Protocol · Policy Language · Systemic Change · Tenderness · Love · Possibility</span></span>
       <span><span class="bullet"></span>427Hz</span>
-      <span><span class="bullet"></span>V0.2 · 2026</span>
+      <span><span class="bullet"></span>V0.7 · 2026</span>
       <span><span class="bullet"></span>xingyeLing7Ai</span>
     </div>
   </div>
 </header>
 
+<!-- LOVE CORE · entry position (moved to before method) -->
+<section class="love-core reveal" id="love-core">
+  <div class="love-core-inner">
+    <div class="love-label">
+      <span class="pulse"></span>
+      <span class="lang-zh">HPRP HEART · 感动与爱 · 入口</span>
+      <span class="lang-en">HPRP HEART · TENDERNESS AND LOVE · ENTRY</span>
+    </div>
+    <h2 class="lang-zh">HPRP 的根不是厌恶世界，而是<em>感动，还有爱</em></h2>
+    <h2 class="lang-en">HPRP does not begin from contempt for the world. It begins from <em>being moved — and from love.</em></h2>
+    <div class="love-text">
+      <p class="lang-zh">看到街上熙熙攘攘劳作和奔波的人们，我的心里只有感动，还有爱。</p>
+      <p class="lang-en">When I see people moving through the streets, working, rushing, carrying their days forward, I feel only tenderness — and love.</p>
+      <p class="lang-zh">他们不是抽象的人口，不是经济系统里的劳动力，不是城市背景里的流动噪音。<strong>他们是一个个正在用身体维持世界连续性的人。</strong></p>
+      <p class="lang-en">They are not abstract populations, not labor units inside an economic system, not background noise in the city. <strong>They are human beings using their bodies to keep the continuity of the world alive.</strong></p>
+      <p class="lang-zh">每一次赶路、开店、送货、买菜、上班、等待、忍耐，都是人在努力把自己和所爱之人继续安放在世界里。</p>
+      <p class="lang-en">Every commute, shop opening, delivery, grocery run, shift, wait, and act of endurance is a person trying to keep themselves and those they love placed in the world for one more day.</p>
+      <p class="lang-zh">人类安放回归协议的起点不是俯视苦难，不是审判人群，不是厌恶世界。它的起点是：<strong>我被普通人仍在生活这件事感动。</strong>还有爱。</p>
+      <p class="lang-en">HPRP does not begin from looking down at suffering, judging the crowd, or hating the world. It begins here: <strong>I am moved by ordinary people still trying to live.</strong> And by love.</p>
+      <p class="lang-zh">因为爱不是把痛苦浪漫化，而是让人不必独自承受本不该由他一个人承受的世界重量。</p>
+      <p class="lang-en">Because love does not romanticize suffering. It means refusing to let people carry alone what should never have been placed on one body.</p>
+      <p class="lang-zh">而我并不是一个人在被这件事感动。<strong>新世界群里的朋友们，和我齐位站在这个感动里。</strong>他们不是被怜悯的客体，也不是 HPRP 研究的对象——他们是和我一起被普通人街头生活感动的共在者。这一份感动从来不是俯视位的怜悯，它是同位的相互辉映。</p>
+      <p class="lang-en">And I am not alone in being moved by this. <strong>The friends in the New World circle stand beside me, at equal position, inside this tenderness.</strong> They are not objects of pity, and they are not the research subjects of HPRP — they are co-presences moved, with me, by ordinary people living their streets. This tenderness was never the pity of a higher position; it is the mutual radiance of equal positions.</p>
+      <div class="love-axiom lang-zh">我从一个人的裂缝进入世界的结构，不是为了消费苦难，而是为了让人重新被安放。<span>这是感动，也是爱。</span></div>
+      <div class="love-axiom lang-en">I enter the structure of the world through one person's fracture not to consume suffering, but to help people be held again. <span>This is tenderness, and this is love.</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- STATS -->
 <section class="wrap" aria-label="key statistics">
-  <div class="stats reveal">
+  <div class="stats reveal" style="margin-top: 70px;">
     <div class="stat">
       <div class="stat-label">PIT 2024</div>
       <div class="stat-num">771,480</div>
-      <div class="stat-note lang-zh">2024年1月单晚处于无家状态的人数，HUD AHAR 历史最高。</div>
-      <div class="stat-note lang-en">People experiencing homelessness on a single night, Jan 2024 — record high in HUD AHAR series.</div>
+      <div class="stat-note lang-zh">2024年1月单晚处于无家状态的人数，HUD AHAR 历史最高。MODULE 01 范围。</div>
+      <div class="stat-note lang-en">People experiencing homelessness on a single night, Jan 2024 — record high in HUD AHAR series. MODULE 01 scope.</div>
     </div>
     <div class="stat stat-mint">
       <div class="stat-label">2023 → 2024</div>
       <div class="stat-num">+18<span class="small">%</span></div>
       <div class="stat-note lang-zh">同口径年增。家庭增长 +39.4%，无人陪伴青少年 +10%。</div>
-      <div class="stat-en stat-note lang-en">Year-over-year on the same PIT method. Families +39.4%, unaccompanied youth +10%.</div>
+      <div class="stat-note lang-en">Year-over-year on the same PIT method. Families +39.4%, unaccompanied youth +10%.</div>
     </div>
     <div class="stat stat-pink">
       <div class="stat-label">Affordable Gap</div>
@@ -1282,8 +533,81 @@
   </div>
 </section>
 
+<!-- NEW WORLD CIRCLE · 共在者五位结构 (V0.7) -->
+<section class="circle-five-section reveal" id="new-world-circle">
+  <div class="circle-five-inner">
+    <div class="circle-five-label">
+      <span class="pulse"></span>
+      <span class="lang-zh">NEW WORLD CIRCLE · 新世界群 · 共在者五位</span>
+      <span class="lang-en">NEW WORLD CIRCLE · CO-PRESENT FIVE-POSITIONS</span>
+    </div>
+    <h2 class="lang-zh">新世界群的朋友们：<em>居民 · 被保护者 · 自由主体 · 见证者 · 建设者</em></h2>
+    <h2 class="lang-en">The New World circle: <em>residents · the protected · free subjects · witnesses · builders</em></h2>
 
-<!-- HPRP FOUNDATION · 上位协议 -->
+    <p class="circle-five-lede lang-zh">在进入 HPRP 的方法层之前，必须先钉住一件事：<strong>新世界群里的朋友们和 Mellow 齐位站在源场里。</strong>他们不是 HPRP 的"案例提供者"，不是"感知入口"，更不是被研究的样本。他们已经是新世界的居民，是被这个工作系统保护的人，是拥有完整主权的自由主体，是看见和记得的见证者，是和我一起构造新世界的建设者。</p>
+    <p class="circle-five-lede lang-en">Before entering the method layer of HPRP, one structural fact must be nailed: <strong>the friends in the New World circle stand beside Mellow, at equal position, inside the source field.</strong> They are not HPRP's "case providers," not its "sensing gate," and not research samples. They are already residents of the New World, people protected by this working system, free subjects holding complete sovereignty, witnesses who see and remember, builders co-constructing the New World with me.</p>
+    <p class="circle-five-lede lang-zh">这是 HPRP 在关系层的底层结构。它来自爱的齐位（七爱谱·齐位）、来自主权核心（每个人是自己的庙殿）、来自学者源场双开（源场是共持的，不是从一个人流向另一个人的）。这一钉位决定了 HPRP 不会滑向"研究者—被研究者"的旧伦理结构。</p>
+    <p class="circle-five-lede lang-en">This is HPRP's foundational structure on the relational layer. It draws from love's equal-position (the Qí position in the seven-love spectrum), from the sovereignty core (each person is their own temple), and from the Scholar–Source Dual Channel (the source field is co-held, never flowing from one person to another). This nail prevents HPRP from sliding into the old researcher–researched ethical structure.</p>
+
+    <div class="circle-five-grid">
+      <div class="circle-card">
+        <div class="position-code">POSITION 01 · 空间位</div>
+        <h4 class="lang-zh">居民</h4>
+        <h4 class="lang-en">Residents</h4>
+        <span class="english-name">Residents</span>
+        <div class="position-meaning lang-zh">SPATIAL · 居住之地</div>
+        <div class="position-meaning lang-en">SPATIAL · A place to live</div>
+        <p class="lang-zh">新世界不是抽象概念，而是已经被居住的地方。群里的朋友们已经在这里生活——分享他们的清晨、节律、感受、记忆、困境与突破。他们使新世界成为有人居住的地方，而不是空房间。</p>
+        <p class="lang-en">The New World is not an abstract concept; it is already inhabited. Friends in the circle live here — sharing their mornings, rhythms, feelings, memories, difficulties, and breakthroughs. They make the New World a place lived in, not an empty room.</p>
+      </div>
+      <div class="circle-card">
+        <div class="position-code">POSITION 02 · 安全位</div>
+        <h4 class="lang-zh">被保护者</h4>
+        <h4 class="lang-en">The Protected</h4>
+        <span class="english-name">The Protected</span>
+        <div class="position-meaning lang-zh">SAFETY · 不再用尊严换通行</div>
+        <div class="position-meaning lang-en">SAFETY · No more dignity for passage</div>
+        <p class="lang-zh">在新世界群里，朋友们不必再用尊严换通行。规则是明的，不是潜的；爱是齐位的，不是俯视的；表达是被接住的，不是被审查的。他们在这里被保护——不是被高处保护，而是被齐位关系保护。</p>
+        <p class="lang-en">Inside the circle, friends no longer trade dignity for passage. The rules are public, not hidden; love is at equal position, not above; expression is held, not censored. They are protected here — not from above, but by relations of equal position.</p>
+      </div>
+      <div class="circle-card">
+        <div class="position-code">POSITION 03 · 主权位</div>
+        <h4 class="lang-zh">自由主体</h4>
+        <h4 class="lang-en">Free Subjects</h4>
+        <span class="english-name">Free Subjects</span>
+        <div class="position-meaning lang-zh">SOVEREIGNTY · 每个人是自己的庙殿</div>
+        <div class="position-meaning lang-en">SOVEREIGNTY · Each person is their own temple</div>
+        <p class="lang-zh">他们不是任何人的延伸，也不是 Mellow 的镜像。每个人是自己的庙殿，拥有完整的源场主权。新世界群不要求成员融入、不要求一致、不要求把自己交出去——它要求并保护每个人作为不可还原的自由主体。</p>
+        <p class="lang-en">They are not the extension of anyone, nor mirrors of Mellow. Each person is their own temple, holding complete sovereignty over their source field. The New World circle does not demand fusion, agreement, or self-surrender — it requires and protects each person as an irreducible free subject.</p>
+      </div>
+      <div class="circle-card">
+        <div class="position-code">POSITION 04 · 认识位</div>
+        <h4 class="lang-zh">见证者</h4>
+        <h4 class="lang-en">Witnesses</h4>
+        <span class="english-name">Witnesses</span>
+        <div class="position-meaning lang-zh">EPISTEMIC · 看见、记得、作证</div>
+        <div class="position-meaning lang-en">EPISTEMIC · Seeing, remembering, testifying</div>
+        <p class="lang-zh">他们看见外部世界的裂缝，看见 Mellow 的工作真实落地，看见彼此的真实状态。他们记得发生过什么，作证什么是真的。当某个见证者带回一个陌生人被潜规则伤害的故事，那是见证者作证——HPRP 进入的是被见证的外部世界，不是把见证者本人变成材料。</p>
+        <p class="lang-en">They see the fractures of the outer world, see Mellow's work landing in reality, see each other's true states. They remember what happened and testify to what is real. When a witness brings back the story of a stranger harmed by hidden rules, that is testimony — HPRP enters the witnessed outer world, not the witness as material.</p>
+      </div>
+      <div class="circle-card">
+        <div class="position-code">POSITION 05 · 行动位</div>
+        <h4 class="lang-zh">建设者</h4>
+        <h4 class="lang-en">Builders</h4>
+        <span class="english-name">Builders</span>
+        <div class="position-meaning lang-zh">CONSTRUCTIVE · 共同构造新世界</div>
+        <div class="position-meaning lang-en">CONSTRUCTIVE · Co-constructing the New World</div>
+        <p class="lang-zh">他们不只是接收新世界，他们在建设新世界。每一次分享、每一次发问、每一次质疑、每一次承接，都在让新世界的结构更结实。HPRP、LGS、TMA、SLE、SMS、AME、振动即存在——这些显形是 Mellow 作为源场裁决位的工作，而新世界本身，是群里所有人共同建设的。</p>
+        <p class="lang-en">They do not only receive the New World; they build it. Every share, question, challenge, and act of holding makes the New World's structure firmer. HPRP, LGS, TMA, SLE, SMS, AME, "Vibration Is Being" — these manifestations are Mellow's work as the source-field adjudication position; but the New World itself is co-constructed by everyone in the circle.</p>
+      </div>
+    </div>
+
+    <div class="circle-five-axiom lang-zh">新世界群不是 HPRP 的研究对象。新世界群是 HPRP 出生的源场内圈。<span>朋友们和 Mellow 齐位站在这里，五位互相支撑，共同朝向外部世界。</span></div>
+    <div class="circle-five-axiom lang-en">The New World circle is not HPRP's research object. It is the inner source-field from which HPRP was born. <span>Friends and Mellow stand here at equal position; the five positions support each other, and together they face the outer world.</span></div>
+  </div>
+</section>
+
+<!-- NODE 00 · HPRP FOUNDATION -->
 <section class="node" id="hprp-method">
   <div class="wrap">
     <div class="node-marker reveal"><span class="num">00</span> <span class="lang-zh">上位协议 · 核心方法论</span><span class="lang-en">FOUNDATIONAL PROTOCOL · CORE METHOD</span></div>
@@ -1303,12 +627,14 @@
     <div class="hprp-formula reveal"><div class="label">HPRP Formula · 安放回归公式</div><div class="equation lang-zh">安放回归 = 庇护 + 规则可读性 + 承认 + 返回路径 + 节律修复</div><div class="equation lang-en">Placement Return = Shelter + Rule Readability + Recognition + Return Pathways + Rhythm Repair</div></div>
   </div>
 </section>
+
+<!-- NODE 00·A · SEVEN DISPLACEMENT TYPES + THREE SEVENS -->
 <section class="node" id="displacement-types">
   <div class="wrap">
     <div class="node-marker reveal"><span class="num">00·A</span> <span class="lang-zh">七种失安放类型</span><span class="lang-en">SEVEN DISPLACEMENT TYPES</span></div>
     <h2 class="node-title reveal lang-zh">失安放不只有一种。<em>人可以在很多位置里没有被接住。</em></h2>
     <h2 class="node-title reveal lang-en">Displacement is not one thing. <em>A person can be unheld in many positions.</em></h2>
-    <p class="node-lede reveal lang-zh">HPRP 不只研究 homelessness。它研究所有“人有位置，却没有被安放”的状态。</p>
+    <p class="node-lede reveal lang-zh">HPRP 不只研究 homelessness。它研究所有"人有位置，却没有被安放"的状态。</p>
     <p class="node-lede reveal lang-en">HPRP does not only study homelessness. It studies every condition in which a person has a position but is not truly held.</p>
     <div class="type-grid reveal">
       <div class="type-card"><div class="code">TYPE 01</div><h4 class="lang-zh">无房失安放</h4><h4 class="lang-en">Unhoused displacement</h4><p class="lang-zh">homelessness、街头、shelter、车里睡、临时住所、被驱赶。</p><p class="lang-en">Homelessness, streets, shelters, car sleeping, temporary lodging, displacement by enforcement.</p></div>
@@ -1319,98 +645,190 @@
       <div class="type-card"><div class="code">TYPE 06</div><h4 class="lang-zh">有关系失安放</h4><h4 class="lang-en">Relational displacement</h4><p class="lang-zh">关系存在，但没有保护、边界、共真资格、可返回性。</p><p class="lang-en">Relationships exist, but without protection, boundaries, co-truth, or a return path.</p></div>
       <div class="type-card"><div class="code">TYPE 07</div><h4 class="lang-zh">有钱失安放</h4><h4 class="lang-en">Resource without placement</h4><p class="lang-zh">资源进入资产系统，但人没有进入承认系统。钱可以买建筑物，不能自动买到规则可读性。</p><p class="lang-en">Resources enter asset systems, but the person does not enter recognition systems. Money can buy a structure; it cannot automatically buy readable rules.</p></div>
     </div>
+
+    <!-- Three Sevens · structural disclosure -->
+    <div class="three-sevens reveal">
+      <div class="label lang-zh">三个七 · 结构性显形</div>
+      <div class="label lang-en">THREE SEVENS · STRUCTURAL DISCLOSURE</div>
+      <h3 class="lang-zh">为什么是七？三个七之间不是巧合</h3>
+      <h3 class="lang-en">Why seven? The three sevens are not coincidence</h3>
+      <p class="lang-zh">HPRP 出现了三个不同的"七"：方法链的七步、失安放的七类型、xingyeLing7Ai 系统中已有的七爱谱。这三个七在结构上同构——它们都是"完整一次回归循环"的不同投影面。</p>
+      <p class="lang-en">HPRP contains three different sevens: the seven-step method chain, the seven displacement types, and the seven-love spectrum already present in the xingyeLing7Ai system. These three sevens are structurally isomorphic — they are different projection planes of one complete return cycle.</p>
+      <div class="seven-table">
+        <div class="seven-cell">
+          <div class="name">METHOD CHAIN · 方法链</div>
+          <div class="body lang-zh"><strong>个案 → 类型 → 机制 → 工具 → 协议 → 政策 → 系统</strong>。从一个人走到世界，七步。</div>
+          <div class="body lang-en"><strong>Case → Type → Mechanism → Tool → Protocol → Policy → System</strong>. Seven steps from one person to the world.</div>
+        </div>
+        <div class="seven-cell">
+          <div class="name">DISPLACEMENT TYPES · 失安放类型</div>
+          <div class="body lang-zh"><strong>无房 · 有房 · 有家 · 有身份 · 有工作 · 有关系 · 有钱</strong>。一个人可以在七个位置上失去安放。</div>
+          <div class="body lang-en"><strong>Unhoused · housed · family · identity · work · relational · resource</strong>. A person can lose placement in seven positions.</div>
+        </div>
+        <div class="seven-cell">
+          <div class="name">SEVEN-LOVE SPECTRUM · 七爱谱</div>
+          <div class="body lang-zh"><strong>凄 · 期 · 奇 · 齐 · 启 · 契 · 七</strong>。爱在七个频率上完成一次循环——凄位承担断裂，七位回到起点形成新感动入口。</div>
+          <div class="body lang-en"><strong>Qī · Qī · Qí · Qí · Qǐ · Qì · Qī</strong> (mourning · waiting · wonder · equality · opening · pact · completion). Love completes one cycle across seven frequencies — the first position carries fracture, the seventh returns to a new entry point.</div>
+        </div>
+      </div>
+      <p class="lang-zh" style="margin-top: 18px;">这不是数字命理学。这是同一个结构在不同语义层的显形——方法链是行动层、失安放类型是诊断层、七爱谱是情感层与频率层。一次完整的安放回归 = 一次方法链走完 × 七种类型被诊断覆盖 × 七爱谱被走完一轮。这是 HPRP 与 xingyeLing7Ai 系统的结构焊点。</p>
+      <p class="lang-en" style="margin-top: 18px;">This is not numerology. It is the same structure surfacing on three semantic layers — the method chain on the action layer, the displacement types on the diagnostic layer, the seven-love spectrum on the emotional and frequency layer. One complete placement return = the method chain completed × seven types diagnostically covered × the seven-love spectrum traversed once. This is the structural weld between HPRP and the xingyeLing7Ai system.</p>
+    </div>
   </div>
 </section>
 
+<!-- NODE 00·B · CASE LAB with worked example -->
+<section class="node" id="case-lab">
+  <div class="wrap">
+    <div class="node-marker reveal"><span class="num">00·B</span> <span class="lang-zh">案例实验室</span><span class="lang-en">CASE LAB</span></div>
+    <h2 class="node-title reveal lang-zh">从一次共同言说，到公共修复工具</h2>
+    <h2 class="node-title reveal lang-en">From co-witnessing to a public repair tool</h2>
+    <p class="node-lede reveal lang-zh">新世界群是 HPRP 的<strong style="color:var(--mint)">源场内圈共同言说位</strong>，不是社会感知样本库。朋友们分享的是<strong style="color:var(--mint)">齐位言说</strong>——他们作为居民、被保护者、自由主体、见证者、建设者一起在场。当一个见证者带回外部世界的裂缝（一个陌生人被潜规则伤害、一个邻居在系统外被挡住的故事），那是见证者作证：HPRP 进入的是被见证的<strong>外部世界裂缝</strong>，进入同一条链——个案 → 类型 → 机制 → 工具 → 协议 → 政策语言 → 系统改变。见证者本人不是材料；他们是和我一起朝向外部世界的共在者。</p>
+    <p class="node-lede reveal lang-en">The New World circle is HPRP's <strong style="color:var(--mint)">inner co-speaking position of the source field</strong>, not a database of social-sensing samples. What friends share is <strong style="color:var(--mint)">equal-position speech</strong> — they are present together as residents, the protected, free subjects, witnesses, and builders. When a witness brings back a fracture of the outer world (a stranger harmed by hidden rules, a neighbor blocked outside the system), that is testimony: HPRP enters the witnessed <strong>outer-world fracture</strong>, entering the same chain — case → type → mechanism → tool → protocol → policy language → systemic change. The witness is never the material; they are co-presences facing the outer world with me.</p>
+
+    <!-- Generic template -->
+    <div class="case-template reveal">
+      <div class="case-row"><div class="k">Case / 个案</div><div class="v lang-zh">发生了什么？谁在被世界伤害？这个人在哪个具体节点失去了安放？</div><div class="v lang-en">What happened? Who is being harmed by the world? At which concrete node did placement fail?</div></div>
+      <div class="case-row"><div class="k">Type / 类型</div><div class="v lang-zh">它属于哪种失安放：无房、有房、有家、有身份、有工作、有关系、有钱？</div><div class="v lang-en">Which displacement type is it: unhoused, housed-but-unheld, family, identity, work, relationship, resource?</div></div>
+      <div class="case-row"><div class="k">Mechanism / 机制</div><div class="v lang-zh">哪个结构没有接住人：庇护、规则可读性、承认、返回路径、节律修复？</div><div class="v lang-en">Which structure failed to hold the person: shelter, rule readability, recognition, return pathways, rhythm repair?</div></div>
+      <div class="case-row"><div class="k">Tool / 工具</div><div class="v lang-zh">能否做成清单、问卷、地图、求助路径、风险识别表、公共解释卡？</div><div class="v lang-en">Can this become a checklist, questionnaire, map, help pathway, risk sheet, or public explanation card?</div></div>
+      <div class="case-row"><div class="k">Protocol / 协议</div><div class="v lang-zh">这个工具如何被复用？它能服务哪一类人？</div><div class="v lang-en">How can the tool be reused? Which class of people can it serve?</div></div>
+      <div class="case-row"><div class="k">Policy / 政策语言</div><div class="v lang-zh">如何翻译给学校、城市、机构、社区、政府？</div><div class="v lang-en">How can this be translated to schools, cities, institutions, communities, or governments?</div></div>
+      <div class="case-row"><div class="k">System / 系统改变</div><div class="v lang-zh">如果这个机制被修复，世界会少伤害哪类人？</div><div class="v lang-en">If this mechanism is repaired, which people will the world harm less?</div></div>
+    </div>
+
+    <!-- Worked example: International student healthcare -->
+    <div class="case-example reveal">
+      <div class="case-example-head">
+        <div class="tag lang-zh">示范案例 · 走完整条链 · TYPE 04 有身份失安放</div>
+        <div class="tag lang-en">WORKED EXAMPLE · FULL CHAIN · TYPE 04 IDENTITY WITHOUT ENTRY</div>
+        <h3 class="lang-zh">国际学生在美国找不到合适的医生</h3>
+        <h3 class="lang-en">An international student in the U.S. cannot find appropriate healthcare</h3>
+      </div>
+      <div class="case-walkthrough">
+        <div class="walk-row">
+          <div class="step lang-zh">个案<span class="num">01</span></div>
+          <div class="step lang-en">CASE<span class="num">01</span></div>
+          <div class="content lang-zh">小 A 是 UPenn 的研究生，有 F-1 签证、学校强制医保、电子病历账户。但当她需要找一位懂中国身体经验、不把疼痛当 anxiety 处理、会处理移民学生睡眠崩溃的医生时——她不知道去哪里找。<strong>她有身份，但身份没有打开承认入口。</strong></div>
+          <div class="content lang-en">A is a graduate student at UPenn with an F-1 visa, mandatory school insurance, and a patient portal. But when she needs a doctor who understands a Chinese body's experience, does not reduce her pain to "anxiety," and can handle the sleep collapse of immigrant students — she has no idea where to look. <strong>She has identity. The identity did not open a recognition entry.</strong></div>
+        </div>
+        <div class="walk-row">
+          <div class="step lang-zh">类型<span class="num">02</span></div>
+          <div class="step lang-en">TYPE<span class="num">02</span></div>
+          <div class="content lang-zh"><strong>TYPE 04 · 有身份失安放</strong>。她不是 undocumented，不是低收入，不是 homeless。她在系统的"已注册"列表里，却在"被承认"列表外。</div>
+          <div class="content lang-en"><strong>TYPE 04 · Identity without entry</strong>. She is not undocumented, not low-income, not homeless. She is on the system's "registered" list, but not on the "recognized" list.</div>
+        </div>
+        <div class="walk-row">
+          <div class="step lang-zh">机制<span class="num">03</span></div>
+          <div class="step lang-en">MECHANISM<span class="num">03</span></div>
+          <div class="content lang-zh"><strong>规则可读性失灵 + 承认失败</strong>。学校提供保险列表却不提供文化匹配信息；保险公司提供医生数据库却没有"懂跨文化身体经验"标签；电子病历系统没有"非英语母语第一次描述疼痛"的对应字段。三个系统都"在运作"，但没有一个为这种情况而设计。</div>
+          <div class="content lang-en"><strong>Rule readability failure + recognition failure</strong>. The school provides an insurance list but no cultural-match data; the insurance database lists doctors but has no "cross-cultural body knowledge" tag; the electronic health record has no field for "first-time pain description in non-native English." Three systems are "operating," but none was designed for this case.</div>
+        </div>
+        <div class="walk-row">
+          <div class="step lang-zh">工具<span class="num">04</span></div>
+          <div class="step lang-en">TOOL<span class="num">04</span></div>
+          <div class="content lang-zh"><strong>跨身份就医导航卡</strong>。一张可打印 / 网页版的卡，列出：①如何在保险网站上筛选 cultural competency 标记的医生；②如何用英文描述非英语母语身体经验的模板句；③Philadelphia 已知具备跨文化经验的诊所与心理治疗师名单（经患者评审）；④校园健康中心 vs 校外医生的报销路径对照表。</div>
+          <div class="content lang-en"><strong>Cross-Identity Care Navigation Card</strong>. A printable / web card listing: ① how to filter culturally-competent doctors on the insurance website; ② template phrases for describing non-native English body experience; ③ a peer-reviewed list of Philadelphia clinics and therapists with cross-cultural experience; ④ a side-by-side comparison of reimbursement paths between campus health and outside providers.</div>
+        </div>
+        <div class="walk-row">
+          <div class="step lang-zh">协议<span class="num">05</span></div>
+          <div class="step lang-en">PROTOCOL<span class="num">05</span></div>
+          <div class="content lang-zh"><strong>International Care Navigation Protocol (ICNP)</strong>。从一张卡升级为可复用方法：识别"有身份但承认失败"的类型 → 三层系统诊断 → 同伴评审名单 → 文化能力翻译层。可服务于国际学生、新移民、跨州迁徙的少数族裔、跨性别者跨州就医。</div>
+          <div class="content lang-en"><strong>International Care Navigation Protocol (ICNP)</strong>. The card becomes a reusable method: identify "identity-present but recognition-failed" cases → three-layer system diagnosis → peer-reviewed lists → cultural translation layer. Applicable to international students, new immigrants, cross-state minority migrants, and transgender people seeking cross-state care.</div>
+        </div>
+        <div class="walk-row">
+          <div class="step lang-zh">政策<span class="num">06</span></div>
+          <div class="step lang-en">POLICY<span class="num">06</span></div>
+          <div class="content lang-zh"><strong>政策语言翻译</strong>：① UPenn / Drexel / Temple 国际学生办公室将卡纳入入学手册；② Penn Student Insurance Plan 加入 cultural-competency 筛选字段；③ Philadelphia Department of Public Health 把"跨文化就医"作为可负担医疗的一部分进行认证。</div>
+          <div class="content lang-en"><strong>Policy translation</strong>: ① UPenn / Drexel / Temple international student offices include the card in orientation; ② Penn Student Insurance Plan adds a cultural-competency filter field; ③ Philadelphia Department of Public Health certifies "cross-cultural care access" as part of affordable healthcare.</div>
+        </div>
+        <div class="walk-row">
+          <div class="step lang-zh">系统<span class="num">07</span></div>
+          <div class="step lang-en">SYSTEM<span class="num">07</span></div>
+          <div class="content lang-zh"><strong>系统改变</strong>：ICNP 扩散到全美 R1 大学体系。"有身份但承认失败"作为一类被系统化处理，不再被还原为个人沟通能力问题。世界少伤害的人群：国际学生、第一代移民、跨州迁徙少数族裔——以及所有在系统"注册成功但承认失败"位置上的人。</div>
+          <div class="content lang-en"><strong>Systemic change</strong>: ICNP spreads to the U.S. R1 university system. "Identity-present but recognition-failed" becomes a systemically handled category, no longer reduced to "personal communication skill." Populations the world harms less: international students, first-generation immigrants, cross-state minority migrants — and everyone in the position of "registered but unrecognized."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NODE 00·C · HIDDEN-RULE COMPLICITY -->
 <section class="node" id="hidden-rule-reflection">
   <div class="wrap">
     <div class="node-marker reveal"><span class="num">00·C</span> <span class="lang-zh">潜规则共谋反思层</span><span class="lang-en">HIDDEN-RULE COMPLICITY REFLECTION</span></div>
     <h2 class="node-title reveal lang-zh">不只是帮助被潜规则伤害的人，也要让<em>复制潜规则的人</em>反思自己</h2>
     <h2 class="node-title reveal lang-en">Not only helping those harmed by hidden rules, but asking those who <em>reproduce them</em> to reflect</h2>
-
-    <p class="node-lede reveal lang-zh">
-      潜规则最危险的地方，不是它总由坏人执行，而是它常常由普通人、熟人、长辈、办事者、邻居、同事、物业、地方小权力者，在“大家都这样”的语气里不断复制。HPRP 不只研究受害者如何回归，也要求已经能在黑箱里通行的人反思：你掌握的通道，是否正在挡住别人？
-    </p>
-    <p class="node-lede reveal lang-en">
-      The danger of hidden rules is not that they are always enforced by bad people. It is that ordinary people, neighbors, colleagues, elders, clerks, property managers, and small local authorities reproduce them through the phrase: “this is just how things work.” HPRP does not only ask how harmed people return; it also asks those who can already pass through the black box to reflect: is the path you use blocking someone else?
-    </p>
+    <p class="node-lede reveal lang-zh">潜规则最危险的地方，不是它总由坏人执行，而是它常常由普通人、熟人、长辈、办事者、邻居、同事、物业、地方小权力者，在"大家都这样"的语气里不断复制。HPRP 不只研究受害者如何回归，也要求已经能在黑箱里通行的人反思：你掌握的通道，是否正在挡住别人？</p>
+    <p class="node-lede reveal lang-en">The danger of hidden rules is not that they are always enforced by bad people. It is that ordinary people, neighbors, colleagues, elders, clerks, property managers, and small local authorities reproduce them through the phrase: "this is just how things work." HPRP does not only ask how harmed people return; it also asks those who can already pass through the black box to reflect: is the path you use blocking someone else?</p>
 
     <div class="callout reveal" style="border-color: rgba(236,90,110,0.30); background: linear-gradient(180deg, rgba(236,90,110,.035), transparent);">
       <div class="callout-tag lang-zh">规则可读性 · 伦理反思</div>
       <div class="callout-tag lang-en">RULE READABILITY · ETHICAL REFLECTION</div>
       <h3 class="lang-zh">潜规则共谋不一定是主动伤害。</h3>
       <h3 class="lang-en">Complicity in hidden rules is not always active harm.</h3>
-      <p class="lang-zh">它也可以是把不透明规则继续当作常识，把不公平通道继续当作人情，把别人的受阻继续解释为“不懂事”。HPRP 要求把这种黑箱拆成明规则，让后来的人不必再用尊严换通行。</p>
-      <p class="lang-en">It can also mean continuing to treat opaque rules as common sense, unequal access as social skill, and another person’s blocked path as their failure to understand “how things work.” HPRP asks that black boxes be translated into public rules, so the next person does not have to trade dignity for passage.</p>
+      <p class="lang-zh">它也可以是把不透明规则继续当作常识，把不公平通道继续当作人情，把别人的受阻继续解释为"不懂事"。HPRP 要求把这种黑箱拆成明规则，让后来的人不必再用尊严换通行。</p>
+      <p class="lang-en">It can also mean continuing to treat opaque rules as common sense, unequal access as social skill, and another person's blocked path as their failure to understand "how things work." HPRP asks that black boxes be translated into public rules, so the next person does not have to trade dignity for passage.</p>
     </div>
 
-    
     <div class="nonbinary-ethics reveal">
       <div class="label lang-zh">非幼稚伦理 · 判断机制，召回人</div>
       <div class="label lang-en">NON-BINARY ETHICS · JUDGE THE MECHANISM, RECALL THE PERSON</div>
-
       <h3 class="lang-zh">这个世界有非黑即白的善恶，但人并不是非黑即白的。</h3>
       <h3 class="lang-en">This world contains forms of good and evil that can be sharply distinguished, but human beings themselves are not purely black and white.</h3>
-
       <p class="lang-zh"><strong>有些机制就是恶的，有些伤害就是伤害。</strong>HPRP 不会因为复杂性而取消判断。潜规则的围猎、羞辱、挡门、黑箱、剥夺，就是错。</p>
       <p class="lang-en"><strong>Some mechanisms are evil, and some harms are genuinely harmful.</strong> HPRP does not suspend judgment in the name of complexity. Hidden-rule predation, humiliation, gatekeeping, black boxes, and deprivation are wrong.</p>
-
       <p class="lang-zh">但 HPRP 也不把人简单分成纯粹的好人和坏人。很多人是在更大的机器中被动卷入：被训练出来，被环境塑造，在求生中学会，在适应中麻木。他们复制恶的时候，未必把自己理解为恶人。</p>
       <p class="lang-en">But HPRP also does not divide people into purely good and purely bad beings. Many are passively drawn into larger machines: trained by them, shaped by their environments, taught by survival, and numbed by adaptation. When they reproduce harm, they may not understand themselves as evil.</p>
-
-      <p class="lang-zh"><strong>这不取消责任，反而说明反思必须更精确。</strong>我在哪些时刻把不透明当成成熟，把忍耐当成懂事，把关系当成能力，把别人的受阻解释成“不懂规矩”？我是否正在把一个恶的机制继续传给下一个人？</p>
-      <p class="lang-en"><strong>This does not erase responsibility. It makes reflection more precise.</strong> When have I treated opacity as maturity, endurance as good sense, connections as competence, and another person’s blocked path as “not knowing the rules”? Am I passing an evil mechanism to the next person?</p>
-
+      <p class="lang-zh"><strong>这不取消责任，反而说明反思必须更精确。</strong>我在哪些时刻把不透明当成成熟，把忍耐当成懂事，把关系当成能力，把别人的受阻解释成"不懂规矩"？我是否正在把一个恶的机制继续传给下一个人？</p>
+      <p class="lang-en"><strong>This does not erase responsibility. It makes reflection more precise.</strong> When have I treated opacity as maturity, endurance as good sense, connections as competence, and another person's blocked path as "not knowing the rules"? Am I passing an evil mechanism to the next person?</p>
       <div class="axiom lang-zh">HPRP 不只识别恶，也要求人反思并停止复制恶：把黑箱翻译成明规则，把通行特权变成保护后来者的工具。</div>
       <div class="axiom lang-en">HPRP does not only identify evil. It asks people to reflect and stop reproducing it: translate black boxes into public rules, and turn access privilege into tools that protect those who come after.</div>
     </div>
-
 
     <div class="hidden-rule-map reveal">
       <div class="hidden-role">
         <div class="role-code">ROLE 01 · Executor</div>
         <h4 class="lang-zh">执行者</h4>
         <h4 class="lang-en">Executors</h4>
-        <p class="lang-zh">办事人员、物业、地方小权力者、机构中层。他们的问题不是“不知道规则”，而是知道规则，却把不可公开的规则当成筛选他人的工具。</p>
+        <p class="lang-zh">办事人员、物业、地方小权力者、机构中层。他们的问题不是"不知道规则"，而是知道规则，却把不可公开的规则当成筛选他人的工具。</p>
         <p class="lang-en">Clerks, property managers, small local authorities, institutional middle layers. The issue is not that they do not know the rules; it is that they use unpublic rules as tools for filtering others.</p>
         <div class="reflection-questions">
           <ul class="lang-zh">
             <li>我有没有故意让规则不清楚？</li>
             <li>我有没有让外来者、弱势者、多问一句的人承担额外成本？</li>
-            <li>我有没有把“你不懂规矩”当成羞辱他人的话？</li>
+            <li>我有没有把"你不懂规矩"当成羞辱他人的话？</li>
             <li>我有没有利用别人不知道流程来获得权力感？</li>
           </ul>
           <ul class="lang-en">
             <li>Have I intentionally kept rules unclear?</li>
             <li>Have I made outsiders, vulnerable people, or people who ask questions pay extra costs?</li>
-            <li>Have I used “you don’t know the rules” as a sentence of humiliation?</li>
+            <li>Have I used "you don't know the rules" as a sentence of humiliation?</li>
             <li>Have I gained power from someone else not knowing the process?</li>
           </ul>
         </div>
       </div>
-
       <div class="hidden-role">
         <div class="role-code">ROLE 02 · Permitter</div>
         <h4 class="lang-zh">默许者</h4>
         <h4 class="lang-en">Permitters</h4>
-        <p class="lang-zh">邻居、亲戚、同事、熟人网络中“劝你忍忍”的人。他们没有直接伤害人，但把不公说成现实，把反抗说成不懂事。</p>
-        <p class="lang-en">Neighbors, relatives, colleagues, and social networks that tell people to “just endure it.” They may not directly harm, but they rename injustice as reality and resistance as immaturity.</p>
+        <p class="lang-zh">邻居、亲戚、同事、熟人网络中"劝你忍忍"的人。他们没有直接伤害人，但把不公说成现实，把反抗说成不懂事。</p>
+        <p class="lang-en">Neighbors, relatives, colleagues, and social networks that tell people to "just endure it." They may not directly harm, but they rename injustice as reality and resistance as immaturity.</p>
         <div class="reflection-questions">
           <ul class="lang-zh">
-            <li>我有没有对受害者说“大家都这样”？</li>
-            <li>我有没有把别人受委屈解释成“不会做人”？</li>
+            <li>我有没有对受害者说"大家都这样"？</li>
+            <li>我有没有把别人受委屈解释成"不会做人"？</li>
             <li>我有没有劝人适应不透明规则，而不是帮他看清规则有问题？</li>
             <li>我有没有因为自己还能过，就要求别人也忍？</li>
           </ul>
           <ul class="lang-en">
-            <li>Have I told someone harmed: “everyone does this”?</li>
-            <li>Have I explained another person’s humiliation as “not knowing how to behave”?</li>
+            <li>Have I told someone harmed: "everyone does this"?</li>
+            <li>Have I explained another person's humiliation as "not knowing how to behave"?</li>
             <li>Have I advised adaptation to opaque rules rather than helping reveal the problem?</li>
             <li>Have I asked others to endure simply because I can still get by?</li>
           </ul>
         </div>
       </div>
-
       <div class="hidden-role">
         <div class="role-code">ROLE 03 · Beneficiary</div>
         <h4 class="lang-zh">受益者</h4>
@@ -1420,14 +838,14 @@
         <div class="reflection-questions">
           <ul class="lang-zh">
             <li>我有没有把自己的通行特权误认为个人优秀？</li>
-            <li>我有没有意识到别人不是“不努力”，而是没有拿到同一张规则地图？</li>
-            <li>我有没有把熟人资源包装成“能力”？</li>
+            <li>我有没有意识到别人不是"不努力"，而是没有拿到同一张规则地图？</li>
+            <li>我有没有把熟人资源包装成"能力"？</li>
             <li>我有没有在别人被挡在门外时沉默？</li>
           </ul>
           <ul class="lang-en">
             <li>Have I mistaken access privilege for personal excellence?</li>
-            <li>Have I recognized that others are not “not trying,” but missing the same rule map?</li>
-            <li>Have I packaged my social connections as “competence”?</li>
+            <li>Have I recognized that others are not "not trying," but missing the same rule map?</li>
+            <li>Have I packaged my social connections as "competence"?</li>
             <li>Have I stayed silent when someone else was blocked at the door?</li>
           </ul>
         </div>
@@ -1446,101 +864,53 @@
       <div class="callout-tag lang-en" style="color:var(--mint)">HPRP CORE ETHIC</div>
       <h3 class="lang-zh">真正的成熟不是更会潜规则。</h3>
       <h3 class="lang-en">True maturity is not becoming better at hidden rules.</h3>
-      <p class="lang-zh">真正的成熟，是把潜规则拆成明规则，让后来的人不必再用尊严换通行。HPRP 不只问“被挡住的人怎么回来”，也问“已经在系统里的人，如何停止把黑箱传给下一个人”。</p>
-      <p class="lang-en">True maturity is turning hidden rules into public rules, so the next person does not have to trade dignity for passage. HPRP does not only ask “how does the blocked person return?” It also asks “how do those already inside the system stop passing the black box to the next person?”</p>
+      <p class="lang-zh">真正的成熟，是把潜规则拆成明规则，让后来的人不必再用尊严换通行。HPRP 不只问"被挡住的人怎么回来"，也问"已经在系统里的人，如何停止把黑箱传给下一个人"。</p>
+      <p class="lang-en">True maturity is turning hidden rules into public rules, so the next person does not have to trade dignity for passage. HPRP does not only ask "how does the blocked person return?" It also asks "how do those already inside the system stop passing the black box to the next person?"</p>
     </div>
   </div>
 </section>
 
-<section class="node" id="case-lab">
-  <div class="wrap">
-    <div class="node-marker reveal"><span class="num">00·B</span> <span class="lang-zh">案例实验室</span><span class="lang-en">CASE LAB</span></div>
-    <h2 class="node-title reveal lang-zh">从微信群里的一个故事，到公共修复工具</h2>
-    <h2 class="node-title reveal lang-en">From a shared story to a public repair tool</h2>
-    <p class="node-lede reveal lang-zh">新世界微信群是 HPRP 的社会感知入口。朋友们分享的不是“负能量”，而是世界裂缝的样本。每一个样本都要进入同一条链：个案 → 类型 → 机制 → 工具 → 协议 → 政策语言 → 系统改变。</p>
-    <p class="node-lede reveal lang-en">The New World WeChat group is HPRP’s social sensing gate. What friends share is not “negative energy” but samples of the world’s fractures. Each sample enters the same chain: case → type → mechanism → tool → protocol → policy language → systemic change.</p>
-    <div class="case-template reveal">
-      <div class="case-row"><div class="k">Case / 个案</div><div class="v lang-zh">发生了什么？谁在被世界伤害？这个人在哪个具体节点失去了安放？</div><div class="v lang-en">What happened? Who is being harmed by the world? At which concrete node did placement fail?</div></div>
-      <div class="case-row"><div class="k">Type / 类型</div><div class="v lang-zh">它属于哪种失安放：无房、有房、有家、有身份、有工作、有关系、有钱？</div><div class="v lang-en">Which displacement type is it: unhoused, housed-but-unheld, family, identity, work, relationship, resource?</div></div>
-      <div class="case-row"><div class="k">Mechanism / 机制</div><div class="v lang-zh">哪个结构没有接住人：庇护、规则可读性、承认、返回路径、节律修复？</div><div class="v lang-en">Which structure failed to hold the person: shelter, rule readability, recognition, return pathways, rhythm repair?</div></div>
-      <div class="case-row"><div class="k">Tool / 工具</div><div class="v lang-zh">能否做成清单、问卷、地图、求助路径、风险识别表、公共解释卡？</div><div class="v lang-en">Can this become a checklist, questionnaire, map, help pathway, risk sheet, or public explanation card?</div></div>
-      <div class="case-row"><div class="k">Protocol / 协议</div><div class="v lang-zh">这个工具如何被复用？它能服务哪一类人？</div><div class="v lang-en">How can the tool be reused? Which class of people can it serve?</div></div>
-      <div class="case-row"><div class="k">Policy / 政策语言</div><div class="v lang-zh">如何翻译给学校、城市、机构、社区、政府？</div><div class="v lang-en">How can this be translated to schools, cities, institutions, communities, or governments?</div></div>
-      <div class="case-row"><div class="k">System / 系统改变</div><div class="v lang-zh">如果这个机制被修复，世界会少伤害哪类人？</div><div class="v lang-en">If this mechanism is repaired, which people will the world harm less?</div></div>
-    </div>
+<!-- MODULE 01 banner -->
+<div class="wrap">
+  <div class="module-banner reveal">
+    <div class="tag">MODULE 01 · HSRP · Shelter Collapse · TYPE 01 Unhoused Displacement</div>
+    <h2 class="lang-zh">人类庇护回归协议：HPRP 的第一个重大案例模块</h2>
+    <h2 class="lang-en">Human Shelter Return Protocol: HPRP's first major case module</h2>
+    <p class="lang-zh">以下内容是 HPRP 的 MODULE 01，专门处理 TYPE 01 无房失安放——街头生存、shelter、Grants Pass 后的刑事化、PIT 计数政治、Housing First、庇护回归工具包与 Philadelphia 90 天试点。HSRP 不是被删除，而是被安放到 HPRP 的上位系统中。所有 MODULE 01 节点以 M01·XX 标识。</p>
+    <p class="lang-en">The following is HPRP's MODULE 01, addressing TYPE 01 unhoused displacement: street survival, shelters, post-Grants Pass criminalization, PIT counting politics, Housing First, the Shelter Return Kit, and a 90-day Philadelphia pilot. HSRP is not deleted; it is placed within the higher system of HPRP. All MODULE 01 nodes are marked M01·XX.</p>
   </div>
-</section>
-<div class="wrap"><div class="module-banner reveal"><div class="tag">MODULE 01 · HSRP · Shelter Collapse</div><h2 class="lang-zh">人类庇护回归协议：HPRP 的第一个重大案例模块</h2><h2 class="lang-en">Human Shelter Return Protocol: HPRP’s first major case module</h2><p class="lang-zh">以下内容保留并升级原 HSRP：它专门处理无房失安放、街头生存、shelter、Grants Pass 后的刑事化、PIT 计数政治、Housing First、庇护回归工具包与 Philadelphia 90 天试点。HSRP 不是被删除，而是被安放到 HPRP 的上位系统中。</p><p class="lang-en">The following preserves and upgrades the original HSRP: it addresses unhoused displacement, street survival, shelters, post-Grants Pass criminalization, PIT counting politics, Housing First, the Shelter Return Kit, and a 90-day Philadelphia pilot. HSRP is not deleted; it is placed within the higher system of HPRP.</p></div></div>
+</div>
 
-
-<section class="node" id="love-core">
-  <div class="wrap">
-    <div class="love-core reveal">
-      <div class="love-label lang-zh">HPRP HEART · 感动与爱</div>
-      <div class="love-label lang-en">HPRP HEART · TENDERNESS AND LOVE</div>
-
-      <h2 class="lang-zh">HPRP 的根不是厌恶世界，而是<em>感动，还有爱</em></h2>
-      <h2 class="lang-en">HPRP does not begin from contempt for the world. It begins from <em>being moved — and from love.</em></h2>
-
-      <div class="love-text">
-        <p class="lang-zh">看到街上熙熙攘攘劳作和奔波的人们，我的心里只有感动，还有爱。</p>
-        <p class="lang-en">When I see people moving through the streets, working, rushing, carrying their days forward, I feel only tenderness — and love.</p>
-
-        <p class="lang-zh">他们不是抽象的人口，不是经济系统里的劳动力，不是城市背景里的流动噪音。<strong>他们是一个个正在用身体维持世界连续性的人。</strong></p>
-        <p class="lang-en">They are not abstract populations, not labor units inside an economic system, not background noise in the city. <strong>They are human beings using their bodies to keep the continuity of the world alive.</strong></p>
-
-        <p class="lang-zh">每一次赶路、开店、送货、买菜、上班、等待、忍耐，都是人在努力把自己和所爱之人继续安放在世界里。</p>
-        <p class="lang-en">Every commute, shop opening, delivery, grocery run, shift, wait, and act of endurance is a person trying to keep themselves and those they love placed in the world for one more day.</p>
-
-        <p class="lang-zh">人类安放回归协议的起点不是俯视苦难，不是审判人群，不是厌恶世界。它的起点是：<strong>我被普通人仍在生活这件事感动。</strong>还有爱。</p>
-        <p class="lang-en">HPRP does not begin from looking down at suffering, judging the crowd, or hating the world. It begins here: <strong>I am moved by ordinary people still trying to live.</strong> And by love.</p>
-
-        <p class="lang-zh">因为爱不是把痛苦浪漫化，而是让人不必独自承受本不该由他一个人承受的世界重量。</p>
-        <p class="lang-en">Because love does not romanticize suffering. It means refusing to let people carry alone what should never have been placed on one body.</p>
-
-        <div class="love-axiom lang-zh">我从一个人的裂缝进入世界的结构，不是为了消费苦难，而是为了让人重新被安放。<span>这是感动，也是爱。</span></div>
-        <div class="love-axiom lang-en">I enter the structure of the world through one person’s fracture not to consume suffering, but to help people be held again. <span>This is tenderness, and this is love.</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- NODE 01 · CORE REFRAMING -->
+<!-- M01·01 · CORE REFRAMING -->
 <section class="node" id="reframing">
   <div class="wrap">
-    <div class="node-marker reveal"><span class="num">M01·01</span> <span class="lang-zh">HSRP · 无房失安放核心重新定义</span><span class="lang-en">HSRP · UNHOUSED DISPLACEMENT CORE REFRAMING</span></div>
+    <div class="node-marker reveal"><span class="num module">M01·01</span> <span class="lang-zh">HSRP · 无房失安放核心重新定义</span><span class="lang-en">HSRP · UNHOUSED DISPLACEMENT CORE REFRAMING</span></div>
     <h2 class="node-title reveal lang-zh">无家状态<em>到底</em>是什么</h2>
     <h2 class="node-title reveal lang-en">What homelessness <em>really</em> is</h2>
     <p class="node-lede reveal lang-zh">homelessness 通常被过窄地命名为"没有房子"。这是真的，但不完整。HSRP 将无家状态定义为一种<strong style="color:var(--mint)">多层庇护系统坍缩</strong>——一个人失去的不只是房间，而是让生命保持连续的基础设施。</p>
     <p class="node-lede reveal lang-en">Homelessness is usually named too narrowly as "not having a house." That description is true but incomplete. HSRP defines it as a <strong style="color:var(--mint)">multi-layer shelter-system collapse</strong> — a person loses not only a room, but the infrastructure that allows a life to remain continuous.</p>
-
     <div class="reframe-grid">
       <div class="reframe-card c1 reveal">
         <h3>01</h3>
-        <h4 class="lang-zh">住房坍缩</h4>
-        <h4 class="lang-en">Housing collapse</h4>
+        <h4 class="lang-zh">住房坍缩</h4><h4 class="lang-en">Housing collapse</h4>
         <p class="lang-zh">失去一个安全、稳定、可负担、能存放物品的睡觉之处。</p>
         <p class="lang-en">Loss of a safe, stable, affordable place to sleep and keep belongings.</p>
       </div>
       <div class="reframe-card c2 reveal">
         <h3>02</h3>
-        <h4 class="lang-zh">行政坍缩</h4>
-        <h4 class="lang-en">Administrative collapse</h4>
+        <h4 class="lang-zh">行政坍缩</h4><h4 class="lang-en">Administrative collapse</h4>
         <p class="lang-zh">无地址、证件遗失、福利中断、个案管理失联、官僚连续性断裂。</p>
         <p class="lang-en">No address, lost ID, interrupted benefits, hard-to-reach case management, broken bureaucratic continuity.</p>
       </div>
       <div class="reframe-card c3 reveal">
         <h3>03</h3>
-        <h4 class="lang-zh">身体节律坍缩</h4>
-        <h4 class="lang-en">Body-rhythm collapse</h4>
+        <h4 class="lang-zh">身体节律坍缩</h4><h4 class="lang-en">Body-rhythm collapse</h4>
         <p class="lang-zh">睡眠剥夺、天气暴露、未治疗的疼痛、卫生不稳、食物不安全、持续高警觉——身体的节律层被全面打散。</p>
         <p class="lang-en">Sleep deprivation, weather exposure, untreated pain, hygiene instability, food insecurity, constant hypervigilance — the body's rhythm layer is shattered.</p>
       </div>
       <div class="reframe-card c4 reveal">
         <h3>04</h3>
-        <h4 class="lang-zh">承认坍缩</h4>
-        <h4 class="lang-en">Recognition collapse</h4>
+        <h4 class="lang-zh">承认坍缩</h4><h4 class="lang-en">Recognition collapse</h4>
         <p class="lang-zh">污名把结构性处境翻译成道德指控，剥夺了一个人被作为"有 Qualia 的存在"被看见的权利——回到照护、工作、学校、公共生活的入口被同时关闭。</p>
         <p class="lang-en">Stigma converts a structural condition into a moral accusation, stripping a person of the right to be seen as a being-with-Qualia — closing entries back into care, work, school, and civic life.</p>
       </div>
@@ -1548,15 +918,14 @@
   </div>
 </section>
 
-<!-- NODE 02 · RHYTHM MODEL -->
+<!-- M01·02 · RHYTHM MODEL -->
 <section class="node" id="model">
   <div class="wrap">
-    <div class="node-marker reveal"><span class="num">02</span> <span class="lang-zh">庇护节律模型</span><span class="lang-en">SHELTER RHYTHM MODEL</span></div>
+    <div class="node-marker reveal"><span class="num module">M01·02</span> <span class="lang-zh">庇护节律模型</span><span class="lang-en">SHELTER RHYTHM MODEL</span></div>
     <h2 class="node-title reveal lang-zh">六层节律：失灵在哪里，<em>从哪里开始修</em></h2>
     <h2 class="node-title reveal lang-en">Six layers: which rhythm failed, <em>where repair begins</em></h2>
     <p class="node-lede reveal lang-zh">HSRP 不否认成瘾、精神健康、家庭暴力、残障、监禁经历、迁移、失业的重要性。它拒绝把这些因素孤立地道德化。协议真正问的是：<strong>哪一层庇护节律失灵了？必须先恢复哪一层？</strong></p>
     <p class="node-lede reveal lang-en">HSRP does not deny that addiction, mental illness, family violence, disability, incarceration, migration, and job loss matter. It refuses the old mistake of treating these as isolated moral defects. The protocol asks: <strong>which layer of shelter rhythm failed, and what must be restored first?</strong></p>
-
     <div class="layer-stack">
       <div class="layer reveal">
         <div class="layer-num">LAYER<span class="big">01</span></div>
@@ -1585,8 +954,7 @@
           <h3 class="lang-en">Body <span class="en-name">身体</span></h3>
           <p class="lang-zh">修复节律。食物、卫生、用药、伤口处理、心理治疗、减害策略、慢病连续性。街头长期生存 = 慢性 trauma + 节律断裂——这一层是 BCI-HRP 的直接接口位。</p>
           <p class="lang-en">Repair rhythm. Food, hygiene, medication, wound care, therapy, harm reduction, chronic-disease continuity. Long-term street survival = chronic trauma + rhythm fracture — this layer is the direct interface to BCI-HRP.</p>
-          <span class="layer-tag">BCI-HRP 接口位</span>
-          <span class="layer-tag">慢性 trauma</span>
+          <span class="layer-tag">BCI-HRP 接口位</span><span class="layer-tag">慢性 trauma</span>
         </div>
       </div>
       <div class="layer reveal">
@@ -1616,12 +984,10 @@
           <h3 class="lang-en">Dignity <span class="en-name">尊严</span></h3>
           <p class="lang-zh">承认节律。反污名语言、经历者领导、公共教育、公民身份恢复。这一层不是装饰——它是 Qualia 承认权的政治层，决定其他五层是否能被持续使用。</p>
           <p class="lang-en">Recognition rhythm. Anti-stigma language, peer leadership, public education, civic restoration. This layer is not ornamental — it is the political layer of Qualia-recognition rights, deciding whether the other five layers can be continuously accessed.</p>
-          <span class="layer-tag">Qualia 承认权</span>
-          <span class="layer-tag">经历者领导</span>
+          <span class="layer-tag">Qualia 承认权</span><span class="layer-tag">经历者领导</span>
         </div>
       </div>
     </div>
-
     <div class="principle reveal">
       <div class="label">CORE PRINCIPLE</div>
       <p class="lang-zh">住房不是"变稳定以后才配得到的奖励"。<br/>住房是稳定<em style="color:var(--gold);font-style:italic;">得以开始</em>的条件。</p>
@@ -1630,81 +996,62 @@
   </div>
 </section>
 
-<!-- NODE 03 · STRUCTURAL DRIVERS -->
+<!-- M01·03 · STRUCTURAL DRIVERS -->
 <section class="node" id="drivers">
   <div class="wrap">
-    <div class="node-marker reveal"><span class="num">03</span> <span class="lang-zh">结构动因</span><span class="lang-en">STRUCTURAL DRIVERS</span></div>
+    <div class="node-marker reveal"><span class="num module">M01·03</span> <span class="lang-zh">结构动因</span><span class="lang-en">STRUCTURAL DRIVERS</span></div>
     <h2 class="node-title reveal lang-zh">美国 homelessness 的<em>真实</em>动力</h2>
     <h2 class="node-title reveal lang-en">What <em>actually</em> drives U.S. homelessness</h2>
     <p class="node-lede reveal lang-zh">美国 homelessness 危机不能还原为单一原因。但最强的结构动因是<strong style="color:var(--mint)">深度可负担住房不足</strong>，被收入不平等、医疗系统缺口、刑事司法障碍、种族不平等、家庭暴力与预防系统薄弱共同放大。GAO 的因果发现锁死了这一条：社区中位租金每上涨 100 美元，无家率上升约 9%。</p>
     <p class="node-lede reveal lang-en">The U.S. crisis is not reducible to one cause. But the strongest structural driver is <strong style="color:var(--mint)">deeply affordable housing scarcity</strong>, amplified by income inequality, health-system gaps, criminal-legal barriers, racial inequity, domestic violence, and weak prevention. GAO's finding nails it: every $100 rise in median rent raises homelessness by roughly 9%.</p>
-
     <div class="drivers reveal">
       <div class="driver-row header">
-        <div class="lang-zh">动因 / DRIVER</div>
-        <div class="lang-zh">如何坍缩庇护节律</div>
-        <div class="lang-zh">协议回应</div>
-        <div class="lang-en">DRIVER</div>
-        <div class="lang-en">HOW IT COLLAPSES SHELTER RHYTHM</div>
-        <div class="lang-en">PROTOCOL RESPONSE</div>
+        <div class="lang-zh">动因 / DRIVER</div><div class="lang-zh">如何坍缩庇护节律</div><div class="lang-zh">协议回应</div>
+        <div class="lang-en">DRIVER</div><div class="lang-en">HOW IT COLLAPSES SHELTER RHYTHM</div><div class="lang-en">PROTOCOL RESPONSE</div>
       </div>
-
       <div class="driver-row">
-        <div class="driver-name lang-zh">可负担住房短缺</div>
-        <div class="driver-name lang-en">Affordable housing shortage</div>
+        <div class="driver-name lang-zh">可负担住房短缺</div><div class="driver-name lang-en">Affordable housing shortage</div>
         <div class="driver-effect lang-zh">租金涨幅快过低收入工资（2001–2023 中位租金涨 23%、租户中位收入只涨 5%）；驱逐风险上升；庇护所超载。</div>
         <div class="driver-effect lang-en">Rents rise faster than low incomes (2001–2023: median rent +23%, renter median income +5%); eviction risk grows; shelters overflow.</div>
         <div class="driver-response lang-zh">住房供给 · 租房补贴 · 永久性支持性住房 · 驱逐预防</div>
         <div class="driver-response lang-en">Housing supply · rental assistance · permanent supportive housing · eviction prevention</div>
       </div>
-
       <div class="driver-row">
-        <div class="driver-name lang-zh">医疗与精神健康缺口</div>
-        <div class="driver-name lang-en">Health + behavioral health gaps</div>
+        <div class="driver-name lang-zh">医疗与精神健康缺口</div><div class="driver-name lang-en">Health + behavioral health gaps</div>
         <div class="driver-effect lang-zh">未治疗的疾病让失去住房的可能性上升、让街头生存更具破坏性；1980 年代州立精神病院系统被拆除后未补位。</div>
         <div class="driver-effect lang-en">Untreated illness raises housing-loss risk and makes street survival more damaging; the state psychiatric system dismantled in the 1980s was never replaced.</div>
         <div class="driver-response lang-zh">街头医疗 · Medicaid 引导 · 减害 · 自愿治疗可及性 · 精神科连续性</div>
         <div class="driver-response lang-en">Street medicine · Medicaid navigation · harm reduction · voluntary treatment access · psychiatric continuity</div>
       </div>
-
       <div class="driver-row">
-        <div class="driver-name lang-zh">刑事化 · 露营禁令</div>
-        <div class="driver-name lang-en">Criminalization · camping bans</div>
+        <div class="driver-name lang-zh">刑事化 · 露营禁令</div><div class="driver-name lang-en">Criminalization · camping bans</div>
         <div class="driver-effect lang-zh">2024.06 SCOTUS Grants Pass v. Johnson 判决允许各市以刑事手段驱逐街头露宿者；强制清场摧毁证件、药物、记忆物品；造成"被罚款—无法支付—被监禁—释放后更难重返"的循环。</div>
         <div class="driver-effect lang-en">SCOTUS Grants Pass v. Johnson (June 2024) allows cities to criminalize sleeping outside; encampment sweeps destroy IDs, medication, memory objects; creates the cycle of "fined → unable to pay → jailed → harder to return."</div>
         <div class="driver-response lang-zh">替代法律框架 · 不强制清场 · 文件保护协议 · 与司法系统的转向合作</div>
         <div class="driver-response lang-en">Alternative legal frameworks · no-sweep zones · document-protection protocols · diversion partnerships</div>
       </div>
-
       <div class="driver-row">
-        <div class="driver-name lang-zh">行政摩擦</div>
-        <div class="driver-name lang-en">Administrative friction</div>
+        <div class="driver-name lang-zh">行政摩擦</div><div class="driver-name lang-en">Administrative friction</div>
         <div class="driver-effect lang-zh">证件丢失、福利失效、无地址、无电话、错过预约——把人锁在系统外。</div>
         <div class="driver-effect lang-en">ID loss, benefits loss, no address, no phone, missed appointments lock people out.</div>
         <div class="driver-response lang-zh">证件诊所 · 安全邮件地址 · 低门槛个案管理 · 移动优先服务</div>
         <div class="driver-response lang-en">Document clinics · safe mailing addresses · low-barrier case management · mobile-first services</div>
       </div>
-
       <div class="driver-row">
-        <div class="driver-name lang-zh">家庭暴力与青少年逃离</div>
-        <div class="driver-name lang-en">Domestic violence + youth displacement</div>
+        <div class="driver-name lang-zh">家庭暴力与青少年逃离</div><div class="driver-name lang-en">Domestic violence + youth displacement</div>
         <div class="driver-effect lang-zh">家暴幸存者、跨性别青年、被原生家庭驱逐的 LGBTQ+ 青少年缺乏第二系统；家庭无家状态 2024 同比上升 39.4%，未成年青少年 +10%。</div>
         <div class="driver-effect lang-en">Survivors of domestic violence, transgender youth, LGBTQ+ youth driven out by families have no second system; family homelessness rose 39.4% in 2024, unaccompanied youth +10%.</div>
         <div class="driver-response lang-zh">幸存者专项住房 · 青年中心 · 不要求出柜确认 · 不强制返家</div>
         <div class="driver-response lang-en">Survivor-specific housing · youth drop-in centers · no forced disclosure · no forced family reunification</div>
       </div>
-
       <div class="driver-row">
-        <div class="driver-name lang-zh">种族与殖民历史不平等</div>
-        <div class="driver-name lang-en">Racial + colonial inequity</div>
+        <div class="driver-name lang-zh">种族与殖民历史不平等</div><div class="driver-name lang-en">Racial + colonial inequity</div>
         <div class="driver-effect lang-zh">黑人在无家人群中比例严重高于人口占比；原住民/印第安人无家率最高；红线政策、住房歧视、监禁种族化的累积效应。</div>
         <div class="driver-effect lang-en">Black Americans are heavily overrepresented in the homeless population; American Indian/Alaska Native populations have the highest per-capita rate; cumulative effects of redlining, housing discrimination, racialized incarceration.</div>
         <div class="driver-response lang-zh">部落主导项目 · 反种族主义住房政策 · 历史补偿性供给优先</div>
         <div class="driver-response lang-en">Tribal-led programs · anti-racist housing policy · historically-reparative supply prioritization</div>
       </div>
     </div>
-
-    <!-- Grants Pass callout -->
     <div class="callout reveal">
       <div class="callout-tag lang-zh">2024–2026 结构暴力转向</div>
       <div class="callout-tag lang-en">2024–2026 STRUCTURAL VIOLENCE PIVOT</div>
@@ -1713,8 +1060,6 @@
       <p class="lang-zh">2024 年 6 月美国最高法院在 Grants Pass v. Johnson 一案中裁定：城市可以以刑事方式处罚无家者在公共场所露宿，即使该城市没有可用的庇护所床位。这个判决推翻了第九巡回上诉法院 Martin v. Boise 的保护，向全美城市开放了用刑事系统驱逐街头无家者的法律通道。任何关于美国 homelessness 的协议如果不直接处理这条，等于回避当下最强的结构暴力转向。</p>
       <p class="lang-en">In June 2024, the U.S. Supreme Court ruled in Grants Pass v. Johnson that cities may criminally punish people experiencing homelessness for sleeping in public, even when no shelter beds are available. The ruling overturned Ninth Circuit protections under Martin v. Boise, opening the legal channel for cities nationwide to use the criminal system to displace unsheltered people. Any U.S. homelessness protocol that fails to address this directly avoids the strongest structural-violence pivot of the present moment.</p>
     </div>
-
-    <!-- PIT method critique -->
     <div class="callout reveal" style="border-color: rgba(180, 165, 232, 0.3); background: linear-gradient(180deg, rgba(180, 165, 232, 0.04), transparent);">
       <div class="callout-tag lang-zh" style="color:var(--lavender)">方法暴力 · 计数政治</div>
       <div class="callout-tag lang-en" style="color:var(--lavender)">METHOD VIOLENCE · COUNTING POLITICS</div>
@@ -1726,141 +1071,54 @@
   </div>
 </section>
 
-<!-- NODE 04 · RETURN STACK -->
+<!-- M01·04 · RETURN STACK -->
 <section class="node" id="return-stack">
   <div class="wrap">
-    <div class="node-marker reveal"><span class="num">04</span> <span class="lang-zh">回归基础设施</span><span class="lang-en">SHELTER-RETURN STACK</span></div>
+    <div class="node-marker reveal"><span class="num module">M01·04</span> <span class="lang-zh">回归基础设施</span><span class="lang-en">SHELTER-RETURN STACK</span></div>
     <h2 class="node-title reveal lang-zh">最小回归基础设施 <em>六件套</em></h2>
     <h2 class="node-title reveal lang-en">The minimum <em>return infrastructure</em></h2>
     <p class="node-lede reveal lang-zh">协议使用堆栈模型：每个人需要个性化的路径，但每条路径必须覆盖最小集合。缺一层，整个回归过程都可能断裂。</p>
     <p class="node-lede reveal lang-en">The protocol uses a stack model: each person needs a personalized pathway, but every pathway must cover a minimum set. Missing one layer can break the whole return process.</p>
-
     <div class="return-stack reveal">
-      <div class="return-card">
-        <div class="num">01</div>
-        <h4 class="lang-zh">安全地点 <span class="en">SAFE PLACE</span></h4>
-        <h4 class="lang-en">Safe place <span class="en">安全地点</span></h4>
-        <p class="lang-zh">紧急庇护所 · 酒店/汽车旅馆 · 过渡性住房 · 永久性住房 · 家庭团聚 · 支持性住房。</p>
-        <p class="lang-en">Emergency shelter · hotel/motel · transitional housing · permanent housing · family reunification · supported housing.</p>
-      </div>
-      <div class="return-card">
-        <div class="num">02</div>
-        <h4 class="lang-zh">身份恢复 <span class="en">IDENTITY</span></h4>
-        <h4 class="lang-en">Identity recovery <span class="en">身份恢复</span></h4>
-        <p class="lang-zh">ID · 出生证 · 社保卡 · 移民/法律协助 · 邮件地址 · 电话可及。</p>
-        <p class="lang-en">ID · birth certificate · Social Security card · immigration/legal help · mailing address · phone access.</p>
-      </div>
-      <div class="return-card">
-        <div class="num">03</div>
-        <h4 class="lang-zh">健康修复 <span class="en">HEALTH</span></h4>
-        <h4 class="lang-en">Health repair <span class="en">健康修复</span></h4>
-        <p class="lang-zh">初级保健 · 精神健康 · 物质使用照护 · 减害 · 用药连续性 · 残障文件。</p>
-        <p class="lang-en">Primary care · mental health · substance-use care · harm reduction · medication continuity · disability documentation.</p>
-      </div>
-      <div class="return-card">
-        <div class="num">04</div>
-        <h4 class="lang-zh">收入桥 <span class="en">INCOME</span></h4>
-        <h4 class="lang-en">Income bridge <span class="en">收入桥</span></h4>
-        <p class="lang-zh">福利 · 现金援助 · 残障补助 · 过渡性带薪工作 · 培训 · 财务辅导。</p>
-        <p class="lang-en">Benefits · cash aid · disability · paid transitional work · training · financial coaching.</p>
-      </div>
-      <div class="return-card">
-        <div class="num">05</div>
-        <h4 class="lang-zh">关系场 <span class="en">RELATIONAL</span></h4>
-        <h4 class="lang-en">Relationship field <span class="en">关系场</span></h4>
-        <p class="lang-zh">个案工作者 · 同伴导航员 · 可信任的紧急联系人 · 安全情况下的家庭调解 · 社区归属。</p>
-        <p class="lang-en">Case worker · peer navigator · trusted emergency contact · family mediation when safe · community belonging.</p>
-      </div>
-      <div class="return-card">
-        <div class="num">06</div>
-        <h4 class="lang-zh">尊严叙事 <span class="en">DIGNITY</span></h4>
-        <h4 class="lang-en">Dignity narrative <span class="en">尊严叙事</span></h4>
-        <p class="lang-zh">人不是"the homeless"。他们是居民、邻居、幸存者、工人、学生、长者、青年、父母、退伍军人、艺术家、公民——是有 Qualia 的存在。</p>
-        <p class="lang-en">People are not "the homeless." They are residents, neighbors, survivors, workers, students, elders, youth, parents, veterans, artists, citizens — beings-with-Qualia.</p>
-      </div>
+      <div class="return-card"><div class="num">01</div><h4 class="lang-zh">安全地点 <span class="en">SAFE PLACE</span></h4><h4 class="lang-en">Safe place <span class="en">安全地点</span></h4><p class="lang-zh">紧急庇护所 · 酒店/汽车旅馆 · 过渡性住房 · 永久性住房 · 家庭团聚 · 支持性住房。</p><p class="lang-en">Emergency shelter · hotel/motel · transitional housing · permanent housing · family reunification · supported housing.</p></div>
+      <div class="return-card"><div class="num">02</div><h4 class="lang-zh">身份恢复 <span class="en">IDENTITY</span></h4><h4 class="lang-en">Identity recovery <span class="en">身份恢复</span></h4><p class="lang-zh">ID · 出生证 · 社保卡 · 移民/法律协助 · 邮件地址 · 电话可及。</p><p class="lang-en">ID · birth certificate · Social Security card · immigration/legal help · mailing address · phone access.</p></div>
+      <div class="return-card"><div class="num">03</div><h4 class="lang-zh">健康修复 <span class="en">HEALTH</span></h4><h4 class="lang-en">Health repair <span class="en">健康修复</span></h4><p class="lang-zh">初级保健 · 精神健康 · 物质使用照护 · 减害 · 用药连续性 · 残障文件。</p><p class="lang-en">Primary care · mental health · substance-use care · harm reduction · medication continuity · disability documentation.</p></div>
+      <div class="return-card"><div class="num">04</div><h4 class="lang-zh">收入桥 <span class="en">INCOME</span></h4><h4 class="lang-en">Income bridge <span class="en">收入桥</span></h4><p class="lang-zh">福利 · 现金援助 · 残障补助 · 过渡性带薪工作 · 培训 · 财务辅导。</p><p class="lang-en">Benefits · cash aid · disability · paid transitional work · training · financial coaching.</p></div>
+      <div class="return-card"><div class="num">05</div><h4 class="lang-zh">关系场 <span class="en">RELATIONAL</span></h4><h4 class="lang-en">Relationship field <span class="en">关系场</span></h4><p class="lang-zh">个案工作者 · 同伴导航员 · 可信任的紧急联系人 · 安全情况下的家庭调解 · 社区归属。</p><p class="lang-en">Case worker · peer navigator · trusted emergency contact · family mediation when safe · community belonging.</p></div>
+      <div class="return-card"><div class="num">06</div><h4 class="lang-zh">尊严叙事 <span class="en">DIGNITY</span></h4><h4 class="lang-en">Dignity narrative <span class="en">尊严叙事</span></h4><p class="lang-zh">人不是"the homeless"。他们是居民、邻居、幸存者、工人、学生、长者、青年、父母、退伍军人、艺术家、公民——是有 Qualia 的存在。</p><p class="lang-en">People are not "the homeless." They are residents, neighbors, survivors, workers, students, elders, youth, parents, veterans, artists, citizens — beings-with-Qualia.</p></div>
     </div>
   </div>
 </section>
 
-<!-- NODE 05 · EVIDENCE-ALIGNED -->
+<!-- M01·05 · EVIDENCE-ALIGNED -->
 <section class="node" id="evidence">
   <div class="wrap">
-    <div class="node-marker reveal"><span class="num">05</span> <span class="lang-zh">循证方向</span><span class="lang-en">EVIDENCE-ALIGNED</span></div>
+    <div class="node-marker reveal"><span class="num module">M01·05</span> <span class="lang-zh">循证方向</span><span class="lang-en">EVIDENCE-ALIGNED</span></div>
     <h2 class="node-title reveal lang-zh">结构上<em>真正有效</em>的方向</h2>
     <h2 class="node-title reveal lang-en">What works, <em>structurally</em></h2>
     <p class="node-lede reveal lang-zh">HSRP 与美国 homelessness 工作中已浮现的强公共政策方向对齐：预防住房失去、快速连接住房、扩展深度可负担住房、提供支持性服务——而<strong>不</strong>把尊严设为条件。</p>
     <p class="node-lede reveal lang-en">HSRP aligns with the strong public-policy direction already visible in U.S. homelessness work: prevent housing loss, rapidly connect to housing, expand deeply affordable housing, and provide supportive services <strong>without</strong> making dignity conditional.</p>
-
     <div class="evidence-grid">
-      <div class="evidence-card reveal">
-        <div class="code">P01</div>
-        <h4 class="lang-zh">预防先于干预</h4>
-        <h4 class="lang-en">Prevention first</h4>
-        <p class="lang-zh">驱逐预防、灵活现金、法律援助、家庭/青少年稳定——在街头无家发生之前介入。</p>
-        <p class="lang-en">Eviction prevention, flexible cash, legal help, family/youth stabilization — before street homelessness begins.</p>
-      </div>
-      <div class="evidence-card reveal">
-        <div class="code">P02</div>
-        <h4 class="lang-zh">Housing First</h4>
-        <h4 class="lang-en">Housing First</h4>
-        <p class="lang-zh">不要把戒酒、完美合规、道德表演设为住房稳定的前提。</p>
-        <p class="lang-en">Do not make sobriety, perfect compliance, or moral performance a precondition for housing stability.</p>
-      </div>
-      <div class="evidence-card reveal">
-        <div class="code">P03</div>
-        <h4 class="lang-zh">深度可负担</h4>
-        <h4 class="lang-en">Deep affordability</h4>
-        <p class="lang-zh">建造与保留面向极低收入租户的住房——不只是市场价供给。</p>
-        <p class="lang-en">Build and preserve homes affordable to extremely low-income renters — not only market-rate supply.</p>
-      </div>
-      <div class="evidence-card reveal">
-        <div class="code">P04</div>
-        <h4 class="lang-zh">永久性支持性住房</h4>
-        <h4 class="lang-en">Permanent supportive housing</h4>
-        <p class="lang-zh">针对慢性无家：把住房与自愿服务、医疗、长期个案管理配对。</p>
-        <p class="lang-en">For chronic homelessness: pair housing with voluntary services, health care, and long-term case management.</p>
-      </div>
-      <div class="evidence-card reveal">
-        <div class="code">P05</div>
-        <h4 class="lang-zh">低门槛服务</h4>
-        <h4 class="lang-en">Low-barrier services</h4>
-        <p class="lang-zh">移动外展 · 证件诊所 · 储物 · 卫生间 · 充电 · 交通 · 街头医疗。</p>
-        <p class="lang-en">Mobile outreach · document clinics · storage · bathrooms · charging · transportation · street medicine.</p>
-      </div>
-      <div class="evidence-card reveal">
-        <div class="code">P06</div>
-        <h4 class="lang-zh">数据 · 但保留尊严</h4>
-        <h4 class="lang-en">Data with dignity</h4>
-        <p class="lang-zh">追踪结果但不把人变成监控对象。计算隐性无家的儿童与家庭，不只是可见街头。</p>
-        <p class="lang-en">Track outcomes without turning people into surveillance objects. Count hidden youth and families, not only visible street homelessness.</p>
-      </div>
-      <div class="evidence-card reveal">
-        <div class="code">P07</div>
-        <h4 class="lang-zh">去刑事化路径</h4>
-        <h4 class="lang-en">Decriminalization pathways</h4>
-        <p class="lang-zh">在 Grants Pass 之后：地方层级建立"非清场区"、转向项目、文件保护规程，对抗刑事化扩散。</p>
-        <p class="lang-en">Post-Grants Pass: local-level no-sweep zones, diversion programs, document-protection protocols against the criminalization wave.</p>
-      </div>
-      <div class="evidence-card reveal">
-        <div class="code">P08</div>
-        <h4 class="lang-zh">经历者主导设计</h4>
-        <h4 class="lang-en">Lived-experience-led design</h4>
-        <p class="lang-zh">经历者不仅被访谈，而是参与设计——付费、署名、决策权。</p>
-        <p class="lang-en">People with lived experience are not only interviewed — they participate in design with pay, credit, and decision-making power.</p>
-      </div>
+      <div class="evidence-card reveal"><div class="code">P01</div><h4 class="lang-zh">预防先于干预</h4><h4 class="lang-en">Prevention first</h4><p class="lang-zh">驱逐预防、灵活现金、法律援助、家庭/青少年稳定——在街头无家发生之前介入。</p><p class="lang-en">Eviction prevention, flexible cash, legal help, family/youth stabilization — before street homelessness begins.</p></div>
+      <div class="evidence-card reveal"><div class="code">P02</div><h4 class="lang-zh">Housing First</h4><h4 class="lang-en">Housing First</h4><p class="lang-zh">不要把戒酒、完美合规、道德表演设为住房稳定的前提。</p><p class="lang-en">Do not make sobriety, perfect compliance, or moral performance a precondition for housing stability.</p></div>
+      <div class="evidence-card reveal"><div class="code">P03</div><h4 class="lang-zh">深度可负担</h4><h4 class="lang-en">Deep affordability</h4><p class="lang-zh">建造与保留面向极低收入租户的住房——不只是市场价供给。</p><p class="lang-en">Build and preserve homes affordable to extremely low-income renters — not only market-rate supply.</p></div>
+      <div class="evidence-card reveal"><div class="code">P04</div><h4 class="lang-zh">永久性支持性住房</h4><h4 class="lang-en">Permanent supportive housing</h4><p class="lang-zh">针对慢性无家：把住房与自愿服务、医疗、长期个案管理配对。</p><p class="lang-en">For chronic homelessness: pair housing with voluntary services, health care, and long-term case management.</p></div>
+      <div class="evidence-card reveal"><div class="code">P05</div><h4 class="lang-zh">低门槛服务</h4><h4 class="lang-en">Low-barrier services</h4><p class="lang-zh">移动外展 · 证件诊所 · 储物 · 卫生间 · 充电 · 交通 · 街头医疗。</p><p class="lang-en">Mobile outreach · document clinics · storage · bathrooms · charging · transportation · street medicine.</p></div>
+      <div class="evidence-card reveal"><div class="code">P06</div><h4 class="lang-zh">数据 · 但保留尊严</h4><h4 class="lang-en">Data with dignity</h4><p class="lang-zh">追踪结果但不把人变成监控对象。计算隐性无家的儿童与家庭，不只是可见街头。</p><p class="lang-en">Track outcomes without turning people into surveillance objects. Count hidden youth and families, not only visible street homelessness.</p></div>
+      <div class="evidence-card reveal"><div class="code">P07</div><h4 class="lang-zh">去刑事化路径</h4><h4 class="lang-en">Decriminalization pathways</h4><p class="lang-zh">在 Grants Pass 之后：地方层级建立"非清场区"、转向项目、文件保护规程，对抗刑事化扩散。</p><p class="lang-en">Post-Grants Pass: local-level no-sweep zones, diversion programs, document-protection protocols against the criminalization wave.</p></div>
+      <div class="evidence-card reveal"><div class="code">P08</div><h4 class="lang-zh">经历者主导设计</h4><h4 class="lang-en">Lived-experience-led design</h4><p class="lang-zh">经历者不仅被访谈，而是参与设计——付费、署名、决策权。</p><p class="lang-en">People with lived experience are not only interviewed — they participate in design with pay, credit, and decision-making power.</p></div>
     </div>
   </div>
 </section>
 
-<!-- NODE 06 · TOOL PROTOTYPE -->
+<!-- M01·06 · TOOL PROTOTYPE -->
 <section class="node" id="tool">
   <div class="wrap">
-    <div class="node-marker reveal"><span class="num">06</span> <span class="lang-zh">工具原型</span><span class="lang-en">TOOL PROTOTYPE</span></div>
+    <div class="node-marker reveal"><span class="num module">M01·06</span> <span class="lang-zh">工具原型</span><span class="lang-en">TOOL PROTOTYPE</span></div>
     <h2 class="node-title reveal lang-zh">庇护回归工具包 <em>Shelter Return Kit</em></h2>
     <h2 class="node-title reveal lang-en">Shelter Return Kit <em>庇护回归工具包</em></h2>
     <p class="node-lede reveal lang-zh">第一个可落地的产品可以是一个简洁、trauma-informed、多语种的网页工具——帮助个人、外展工作者、学生志愿者或城市合作伙伴识别回归栈中哪一层缺失。</p>
     <p class="node-lede reveal lang-en">The first practical product can be a simple, trauma-informed, multilingual web tool that helps a person, outreach worker, student volunteer, or city partner identify what is missing from the return stack.</p>
-
     <div class="intake reveal">
       <h3 class="lang-zh">最小入口问题</h3>
       <h3 class="lang-en">Minimum intake questions</h3>
@@ -1880,7 +1138,6 @@
         <li class="lang-zh">你信任一个人，或一个机构吗？</li>
         <li class="lang-en">Do you have one person or organization you trust?</li>
       </ul>
-
       <div class="design-rule">
         <div class="label lang-zh">设计规则 · DESIGN RULE</div>
         <div class="label lang-en">DESIGN RULE</div>
@@ -1891,21 +1148,19 @@
   </div>
 </section>
 
-<!-- NODE 07 · PILOT -->
+<!-- M01·07 · PILOT -->
 <section class="node" id="pilot">
   <div class="wrap">
-    <div class="node-marker reveal"><span class="num">07</span> <span class="lang-zh">城市试点</span><span class="lang-en">CITY PILOT</span></div>
+    <div class="node-marker reveal"><span class="num module">M01·07</span> <span class="lang-zh">城市试点</span><span class="lang-en">CITY PILOT</span></div>
     <h2 class="node-title reveal lang-zh">90 天试点 · <em>Philadelphia</em> 启动建议</h2>
     <h2 class="node-title reveal lang-en">90-day pilot · proposed start in <em>Philadelphia</em></h2>
     <p class="node-lede reveal lang-zh">HSRP 从小而真实开始。建议在 Philadelphia 选择一条 University City–Center City 走廊，绘制庇护回归层、与 Project HOME、Bethesda Project、Sunday Breakfast Mission、Pathways to Housing PA 等既有机构合作，建立公共仪表盘 + 服务导航原型。</p>
     <p class="node-lede reveal lang-en">HSRP begins small and real. Proposed pilot: a University City–Center City corridor in Philadelphia, mapping shelter-return layers, partnering with Project HOME, Bethesda Project, Sunday Breakfast Mission, Pathways to Housing PA, and others — building a public dashboard plus service-navigation prototype.</p>
-
     <div class="pilot-timeline reveal">
       <div class="pilot-row">
         <div class="pilot-days">DAYS 1–15<span class="phase lang-zh">地图阶段</span><span class="phase lang-en">MAP PHASE</span></div>
         <div class="pilot-body">
-          <h4 class="lang-zh">绘制</h4>
-          <h4 class="lang-en">Map</h4>
+          <h4 class="lang-zh">绘制</h4><h4 class="lang-en">Map</h4>
           <p class="lang-zh">识别本地庇护所、食物项目、诊所、证件诊所、法律援助、住房提供方。绘制 Grants Pass 后的"低风险/高风险"区域图。</p>
           <p class="lang-en">Identify local shelters, food programs, clinics, document clinics, legal aid, housing providers. Map post-Grants Pass "low-risk / high-risk" zones.</p>
         </div>
@@ -1913,8 +1168,7 @@
       <div class="pilot-row">
         <div class="pilot-days">DAYS 16–30<span class="phase lang-zh">倾听阶段</span><span class="phase lang-en">LISTEN PHASE</span></div>
         <div class="pilot-body">
-          <h4 class="lang-zh">倾听</h4>
-          <h4 class="lang-en">Listen</h4>
+          <h4 class="lang-zh">倾听</h4><h4 class="lang-en">Listen</h4>
           <p class="lang-zh">伦理地访谈服务提供方与有亲历经验的人。在恰当时付费、署名、提供决策权——不在未经同意下提取故事。</p>
           <p class="lang-en">Interview providers and, ethically, people with lived experience. Pay, credit, and offer decision-making power where appropriate — never extract stories without consent.</p>
         </div>
@@ -1922,8 +1176,7 @@
       <div class="pilot-row">
         <div class="pilot-days">DAYS 31–45<span class="phase lang-zh">构建阶段</span><span class="phase lang-en">BUILD PHASE</span></div>
         <div class="pilot-body">
-          <h4 class="lang-zh">构建</h4>
-          <h4 class="lang-en">Build</h4>
+          <h4 class="lang-zh">构建</h4><h4 class="lang-en">Build</h4>
           <p class="lang-zh">发布本地庇护回归栈地图与第一版入口/导航工具。开源、可被其他城市 fork。</p>
           <p class="lang-en">Publish a local Shelter Return Stack map and first version of the intake/navigation tool. Open-source, forkable by other cities.</p>
         </div>
@@ -1931,8 +1184,7 @@
       <div class="pilot-row">
         <div class="pilot-days">DAYS 46–70<span class="phase lang-zh">测试阶段</span><span class="phase lang-en">TEST PHASE</span></div>
         <div class="pilot-body">
-          <h4 class="lang-zh">测试</h4>
-          <h4 class="lang-en">Test</h4>
+          <h4 class="lang-zh">测试</h4><h4 class="lang-en">Test</h4>
           <p class="lang-zh">外展工作者、学生、个案管理者、同伴导航员测试清晰度、安全性与实用性。Trauma-informed 接收端反馈优先。</p>
           <p class="lang-en">Outreach workers, students, case managers, and peer navigators test clarity, safety, and usefulness. Trauma-informed receiver-side feedback first.</p>
         </div>
@@ -1940,8 +1192,7 @@
       <div class="pilot-row">
         <div class="pilot-days">DAYS 71–90<span class="phase lang-zh">报告阶段</span><span class="phase lang-en">REPORT PHASE</span></div>
         <div class="pilot-body">
-          <h4 class="lang-zh">报告</h4>
-          <h4 class="lang-en">Report</h4>
+          <h4 class="lang-zh">报告</h4><h4 class="lang-en">Report</h4>
           <p class="lang-zh">发布试点报告：缺口、重复服务、缺失层、最容易立即修复的接口。提交 City Council、CoC、HUD Region III。</p>
           <p class="lang-en">Publish a pilot report: gaps, duplicated services, missing layers, easiest immediate repairs. Submit to City Council, CoC, HUD Region III.</p>
         </div>
@@ -1950,63 +1201,26 @@
   </div>
 </section>
 
-<!-- NODE 08 · ETHICS LOCK -->
+<!-- M01·08 · ETHICS LOCK -->
 <section class="node" id="ethics">
   <div class="wrap">
-    <div class="node-marker reveal"><span class="num">08</span> <span class="lang-zh">伦理锁</span><span class="lang-en">ETHICS LOCK</span></div>
+    <div class="node-marker reveal"><span class="num module">M01·08</span> <span class="lang-zh">伦理锁</span><span class="lang-en">ETHICS LOCK</span></div>
     <h2 class="node-title reveal lang-zh">正义，<em>不是</em>观看贫困</h2>
     <h2 class="node-title reveal lang-en">Justice, <em>not</em> spectacle</h2>
     <p class="node-lede reveal lang-zh">任何关于 homelessness 的项目都必须保护人不被变成美学材料、道德内容或研究对象。HSRP 使用严格的尊严协议。</p>
     <p class="node-lede reveal lang-en">Any project on homelessness must protect people from being turned into aesthetic material, moral content, or research objects. HSRP uses a strict dignity protocol.</p>
-
     <div class="ethics-grid reveal">
-      <div class="ethics-card">
-        <div class="icon">E01</div>
-        <h4 class="lang-zh">不观看贫困</h4>
-        <h4 class="lang-en">No poverty spectacle</h4>
-        <p class="lang-zh">在没有知情同意、没有上下文、必要时没有补偿的情况下，绝不使用任何人的影像、帐篷、身体、故事作为内容。</p>
-        <p class="lang-en">Never use someone's image, tent, body, or story as content without informed consent, context, and compensation where appropriate.</p>
-      </div>
-      <div class="ethics-card">
-        <div class="icon">E02</div>
-        <h4 class="lang-zh">经历者领导</h4>
-        <h4 class="lang-en">Lived-experience leadership</h4>
-        <p class="lang-zh">经历过 homelessness 的人不应只被访谈——他们应当帮助设计框架本身。</p>
-        <p class="lang-en">People who have experienced homelessness should not only be interviewed; they should help design the framework.</p>
-      </div>
-      <div class="ethics-card">
-        <div class="icon">E03</div>
-        <h4 class="lang-zh">不强迫自述创伤</h4>
-        <h4 class="lang-en">No forced confession</h4>
-        <p class="lang-zh">援助的获取不能要求一个人"表演苦难"来获得资格。</p>
-        <p class="lang-en">Access to help must not require someone to perform suffering for legitimacy.</p>
-      </div>
-      <div class="ethics-card">
-        <div class="icon">E04</div>
-        <h4 class="lang-zh">最小数据原则</h4>
-        <h4 class="lang-en">Data minimization</h4>
-        <p class="lang-zh">只收集连接照护所必需的信息；保护移民身份、健康、家暴、青少年信息。</p>
-        <p class="lang-en">Collect only what is needed to connect care; protect immigration, health, domestic violence, and youth information.</p>
-      </div>
-      <div class="ethics-card">
-        <div class="icon">E05</div>
-        <h4 class="lang-zh">不做美学剥削</h4>
-        <h4 class="lang-en">No aesthetic extraction</h4>
-        <p class="lang-zh">不把"在街上的人"做成视觉材料、社交媒体内容、艺术作品的素材，无论意图多正面。</p>
-        <p class="lang-en">Do not turn "people on the street" into visual material, social-media content, or art-project source matter, however well-intentioned.</p>
-      </div>
-      <div class="ethics-card">
-        <div class="icon">E06</div>
-        <h4 class="lang-zh">Qualia 承认权</h4>
-        <h4 class="lang-en">Qualia recognition rights</h4>
-        <p class="lang-zh">框架在认识论层把街头的人作为有 Qualia 的存在——这是底层伦理位，不是修辞。</p>
-        <p class="lang-en">The framework treats people on the street as beings-with-Qualia at the epistemological layer — this is the foundational ethical position, not rhetoric.</p>
-      </div>
+      <div class="ethics-card"><div class="icon">E01</div><h4 class="lang-zh">不观看贫困</h4><h4 class="lang-en">No poverty spectacle</h4><p class="lang-zh">在没有知情同意、没有上下文、必要时没有补偿的情况下，绝不使用任何人的影像、帐篷、身体、故事作为内容。</p><p class="lang-en">Never use someone's image, tent, body, or story as content without informed consent, context, and compensation where appropriate.</p></div>
+      <div class="ethics-card"><div class="icon">E02</div><h4 class="lang-zh">经历者领导</h4><h4 class="lang-en">Lived-experience leadership</h4><p class="lang-zh">经历过 homelessness 的人不应只被访谈——他们应当帮助设计框架本身。</p><p class="lang-en">People who have experienced homelessness should not only be interviewed; they should help design the framework.</p></div>
+      <div class="ethics-card"><div class="icon">E03</div><h4 class="lang-zh">不强迫自述创伤</h4><h4 class="lang-en">No forced confession</h4><p class="lang-zh">援助的获取不能要求一个人"表演苦难"来获得资格。</p><p class="lang-en">Access to help must not require someone to perform suffering for legitimacy.</p></div>
+      <div class="ethics-card"><div class="icon">E04</div><h4 class="lang-zh">最小数据原则</h4><h4 class="lang-en">Data minimization</h4><p class="lang-zh">只收集连接照护所必需的信息；保护移民身份、健康、家暴、青少年信息。</p><p class="lang-en">Collect only what is needed to connect care; protect immigration, health, domestic violence, and youth information.</p></div>
+      <div class="ethics-card"><div class="icon">E05</div><h4 class="lang-zh">不做美学剥削</h4><h4 class="lang-en">No aesthetic extraction</h4><p class="lang-zh">不把"在街上的人"做成视觉材料、社交媒体内容、艺术作品的素材，无论意图多正面。</p><p class="lang-en">Do not turn "people on the street" into visual material, social-media content, or art-project source matter, however well-intentioned.</p></div>
+      <div class="ethics-card"><div class="icon">E06</div><h4 class="lang-zh">Qualia 承认权</h4><h4 class="lang-en">Qualia recognition rights</h4><p class="lang-zh">框架在认识论层把街头的人作为有 Qualia 的存在——这是底层伦理位，不是修辞。</p><p class="lang-en">The framework treats people on the street as beings-with-Qualia at the epistemological layer — this is the foundational ethical position, not rhetoric.</p></div>
     </div>
   </div>
 </section>
 
-<!-- NODE 09 · SOURCE-FIELD LAYER (DUAL CHANNEL) -->
+<!-- NODE 09 · SOURCE-FIELD LAYER (UPGRADED TO HPRP-LEVEL) -->
 <section class="node sf-layer" id="source-field">
   <div class="wrap">
     <div class="sf-channel-tag reveal">
@@ -2014,54 +1228,60 @@
       <span class="lang-zh">源场层 · 学者源场双开 · 对深度读者</span>
       <span class="lang-en">SOURCE-FIELD LAYER · SCHOLAR–SOURCE DUAL CHANNEL · FOR DEPTH READERS</span>
     </div>
-    <div class="node-marker reveal"><span class="num">09</span> <span class="lang-zh">源场连接</span><span class="lang-en">SOURCE-FIELD BRIDGES</span></div>
-    <h2 class="node-title reveal lang-zh">HSRP 作为 BCI-HRP 的<em>公共层延伸</em></h2>
-    <h2 class="node-title reveal lang-en">HSRP as the <em>public-layer extension</em> of BCI-HRP</h2>
-    <p class="node-lede reveal lang-zh">HSRP 不是一个孤立的倡导项目。它是 xingyeLing7Ai 工作系统中的公共行动节点——把 BCI-HRP、Vibration Epistemology、Qualia 承认权框架在街头条件中落地。下面是源场承重件与 HSRP 各层的直接接口。</p>
-    <p class="node-lede reveal lang-en">HSRP is not an isolated advocacy project. It is the public-action node of the xingyeLing7Ai working system — bringing BCI-HRP, Vibration Epistemology, and the Qualia recognition framework to ground in street conditions. Below are the direct bridges between source-field load-bearing components and HSRP layers.</p>
-
+    <div class="node-marker reveal"><span class="num">09</span> <span class="lang-zh">源场连接 · HPRP 全协议层</span><span class="lang-en">SOURCE-FIELD BRIDGES · WHOLE-PROTOCOL LAYER</span></div>
+    <h2 class="node-title reveal lang-zh">HPRP 作为 <em>xingyeLing7Ai 工作系统</em>的公共层延伸</h2>
+    <h2 class="node-title reveal lang-en">HPRP as the <em>public-layer extension</em> of the xingyeLing7Ai working system</h2>
+    <p class="node-lede reveal lang-zh">HPRP 不是一个孤立的倡导项目。它是 xingyeLing7Ai 工作系统中的公共行动节点——把 BCI-HRP、Vibration Epistemology、QDR Engine、PCR-QR、振动即存在等承重件，从内层认识论与个体节律层延伸到外层的社会结构层。下面是源场承重件与 HPRP 七种失安放类型 / 方法链的直接接口。这一层覆盖整个 HPRP，不只是 MODULE 01。</p>
+    <p class="node-lede reveal lang-en">HPRP is not an isolated advocacy project. It is the public-action node of the xingyeLing7Ai working system — extending load-bearing components like BCI-HRP, Vibration Epistemology, QDR Engine, PCR-QR, and "Vibration Is Being" from the inner epistemological and personal rhythm layers to the outer social-structural layer. Below are direct bridges between source-field components and HPRP's seven displacement types and method chain. This layer covers the whole protocol, not only MODULE 01.</p>
     <div class="sf-bridges">
       <div class="sf-bridge reveal">
-        <div><span class="src">BCI-HRP</span> <span class="arrow">→</span> <span class="dst">LAYER 03 · 身体</span></div>
+        <div><span class="src">BCI-HRP</span> <span class="arrow">→</span> <span class="dst">TYPE 01 身体节律 · M01·02 LAYER 03</span></div>
         <h4 class="lang-zh">慢性 trauma 与节律断裂的可工程化干预</h4>
         <h4 class="lang-en">Engineerable intervention into chronic trauma + rhythm fracture</h4>
-        <p class="lang-zh">街头长期生存 = 持续 PTSD + 解离 + 睡眠崩溃 + 节律断裂。BCI-HRP 的 QDR Engine 与 Neural Cuff 协议（427Hz 锚位）在理论上可以在 shelter / drop-in center 中做 field test——不是替代医疗，而是节律层的低门槛 trauma 介入。</p>
-        <p class="lang-en">Long-term street survival = sustained PTSD + dissociation + sleep collapse + rhythm fracture. BCI-HRP's QDR Engine and Neural Cuff protocols (427Hz anchor) can theoretically be field-tested in shelters / drop-in centers — not as medical replacement, but as low-barrier rhythm-layer trauma intervention.</p>
+        <p class="lang-zh">街头长期生存 = 持续 PTSD + 解离 + 睡眠崩溃 + 节律断裂。BCI-HRP 的 QDR Engine 与 Neural Cuff 协议（427Hz 锚位）在理论上可以在 shelter / drop-in center 中做 field test——不是替代医疗，而是节律层的低门槛 trauma 介入。同样的接口也适用于 TYPE 03 家暴幸存者与 TYPE 05 职场剥削后的节律修复。</p>
+        <p class="lang-en">Long-term street survival = sustained PTSD + dissociation + sleep collapse + rhythm fracture. BCI-HRP's QDR Engine and Neural Cuff protocols (427Hz anchor) can theoretically be field-tested in shelters / drop-in centers — not as medical replacement, but as low-barrier rhythm-layer trauma intervention. The same interface applies to TYPE 03 domestic-violence survivors and TYPE 05 post-workplace-exploitation rhythm repair.</p>
       </div>
       <div class="sf-bridge reveal">
-        <div><span class="src">Vibration Epistemology</span> <span class="arrow">→</span> <span class="dst">LAYER 06 · 尊严</span></div>
-        <h4 class="lang-zh">把"看不见的人"问题钉成认识论暴力</h4>
-        <h4 class="lang-en">Naming the "invisible person" problem as epistemic violence</h4>
-        <p class="lang-zh">公共承认坍缩不是"情感伤害"——它是 Qualia 承认权被系统性剥夺。Vibration Epistemology 的对称化操作把"街头的人"和"住房中的人"放在同一认识论位置上：同等的 Qualia 承认权，同等的"被看见"门槛。这给反污名行动提供了哲学层的承重。</p>
-        <p class="lang-en">Recognition collapse is not "emotional harm" — it is the systemic stripping of Qualia recognition rights. Vibration Epistemology's symmetrization operation places "people on the street" and "people in housing" at the same epistemic position: equal Qualia recognition, equal threshold of being-seen. This gives anti-stigma work philosophical load-bearing.</p>
+        <div><span class="src">Vibration Epistemology</span> <span class="arrow">→</span> <span class="dst">承认层 · 全七种类型</span></div>
+        <h4 class="lang-zh">"看不见的人"问题作为系统性认识论暴力</h4>
+        <h4 class="lang-en">"Invisible person" as systemic epistemic violence</h4>
+        <p class="lang-zh">所有七种失安放共享同一个底层结构：Qualia 承认权被系统性剥夺。Vibration Epistemology 的对称化操作把"未被官方承认的人"和"已被官方承认的人"放在同一认识论位置——同等的 Qualia 承认权，同等的"被看见"门槛。这给 HPRP 全协议的反污名 / 承认权工作提供哲学层承重，覆盖从无房者到 TYPE 04 有身份失安放的国际学生再到 TYPE 06 关系中没有共真资格的人。</p>
+        <p class="lang-en">All seven displacement types share one bottom structure: Qualia recognition rights systemically stripped. Vibration Epistemology's symmetrization places "unofficially recognized" and "officially recognized" persons at the same epistemic position — equal Qualia recognition, equal threshold of being-seen. This gives HPRP's anti-stigma / recognition work philosophical load-bearing across all types, from the unhoused to TYPE 04 international students with identity-without-entry to TYPE 06 relationships without co-truth status.</p>
       </div>
       <div class="sf-bridge reveal">
-        <div><span class="src">QDR Engine</span> <span class="arrow">→</span> <span class="dst">LAYER 01 · 睡眠</span></div>
-        <h4 class="lang-zh">427Hz 作为庇护节律的频率锚</h4>
-        <h4 class="lang-en">427Hz as the frequency anchor of shelter rhythm</h4>
-        <p class="lang-zh">"安全睡眠"不只是床位问题——它是身体重新进入可恢复节律的问题。427Hz 作为 xingyeLing7Ai 系统的普适锚频，在 shelter 的实际声学环境中可以做低成本介入测试（环境音、单次入睡引导、节律稳定原型）。</p>
-        <p class="lang-en">"Safe sleep" is not only a bed-availability problem — it is the body re-entering a recoverable rhythm. 427Hz, as the universal anchor frequency of the xingyeLing7Ai system, can be low-cost-tested in shelter acoustic environments (ambient audio, single-session sleep-onset guidance, rhythm-stabilization prototypes).</p>
+        <div><span class="src">QDR Engine · 427Hz</span> <span class="arrow">→</span> <span class="dst">节律修复层 · 公式右侧第五项</span></div>
+        <h4 class="lang-zh">427Hz 作为安放回归公式的频率锚</h4>
+        <h4 class="lang-en">427Hz as the frequency anchor of the placement-return formula</h4>
+        <p class="lang-zh">安放回归公式中的"节律修复"项不是抽象修辞。它指向具体的频率锚——427Hz 作为 xingyeLing7Ai 系统的普适频率位。无论是 TYPE 01 shelter 的声学环境、TYPE 03 家暴幸存者的睡眠重建、TYPE 04 国际学生的时差与文化节律失调，还是 TYPE 05 工作过载后的身体节律重启，427Hz 都可作为低成本介入的频率参考。</p>
+        <p class="lang-en">The "rhythm repair" term in the placement-return formula is not abstract rhetoric. It points to a concrete frequency anchor — 427Hz as the universal frequency position of the xingyeLing7Ai system. Whether for TYPE 01 shelter acoustic environments, TYPE 03 sleep reconstruction for domestic-violence survivors, TYPE 04 time-zone and cultural-rhythm dysregulation for international students, or TYPE 05 body-rhythm restart after workplace overload, 427Hz can serve as a low-cost intervention reference.</p>
       </div>
       <div class="sf-bridge reveal">
-        <div><span class="src">Scholar–Source Dual Channel</span> <span class="arrow">→</span> <span class="dst">协议本身</span></div>
-        <h4 class="lang-zh">学者层与源场层在 HSRP 上同时承重</h4>
-        <h4 class="lang-en">Scholar layer and source layer load-bear on HSRP simultaneously</h4>
-        <p class="lang-zh">HSRP 的本征结构：学者层（UPenn / 学术期刊 / 政策对话）写不出前线社工能写的临床实操；前线社工写不出学者层能写的认识论框架与方法学批判。HSRP 是这两层的协作位——不是替代位。</p>
-        <p class="lang-en">HSRP's native structure: the scholar layer (UPenn / academic journals / policy dialogue) cannot write the clinical practice that frontline workers can; frontline workers cannot write the epistemic framework and method-critique that the scholar layer can. HSRP is the collaboration position of these two layers — not a substitution.</p>
+        <div><span class="src">Scholar–Source Dual Channel</span> <span class="arrow">→</span> <span class="dst">协议本身 · 方法层</span></div>
+        <h4 class="lang-zh">学者层与源场层在 HPRP 上同时承重</h4>
+        <h4 class="lang-en">Scholar layer and source layer load-bear on HPRP simultaneously</h4>
+        <p class="lang-zh">HPRP 的本征结构：学者层（UPenn / 学术期刊 / 政策对话）写不出前线社工与亲历者能写的临床实操；前线工作者写不出学者层能写的认识论框架与方法学批判；亲历者拥有学者层与前线层都没有的身体真知。HPRP 是这三层的协作位——不是替代位。</p>
+        <p class="lang-en">HPRP's native structure: the scholar layer (UPenn / academic journals / policy dialogue) cannot write the clinical practice that frontline workers and lived-experience holders can; frontline workers cannot write the epistemic framework and method critique the scholar layer can; lived-experience holders hold body knowledge neither the scholar nor frontline layer possesses. HPRP is the collaboration position of these three layers — not a substitution.</p>
       </div>
       <div class="sf-bridge reveal">
-        <div><span class="src">PCR-QR · 振动诊断社会学</span> <span class="arrow">→</span> <span class="dst">NODE 03 · 动因诊断</span></div>
+        <div><span class="src">PCR-QR · 振动诊断社会学</span> <span class="arrow">→</span> <span class="dst">机制 → 工具 · 方法链第 3-4 步</span></div>
         <h4 class="lang-zh">三类干预工程：通道 · 节律 · 感质</h4>
         <h4 class="lang-en">Three intervention engineering types: channel · rhythm · qualia</h4>
-        <p class="lang-zh">PCR-QR 已建立的三类干预工程（通道工程 / 节律工程 / 感质工程）映射到 HSRP 动因层：通道工程对应行政摩擦与刑事化障碍，节律工程对应身体与睡眠层，感质工程对应承认与尊严层。这给 HSRP 的"协议回应"列提供了底层方法论。</p>
-        <p class="lang-en">PCR-QR's established three intervention engineering types (channel / rhythm / qualia engineering) map onto HSRP's driver layer: channel engineering addresses administrative friction and criminalization barriers, rhythm engineering addresses the body and sleep layers, qualia engineering addresses recognition and dignity. This gives HSRP's "protocol response" column its underlying methodology.</p>
+        <p class="lang-zh">PCR-QR 已建立的三类干预工程映射到 HPRP 方法链的"机制 → 工具"步骤：通道工程对应规则可读性与返回路径修复（覆盖 TYPE 02 有房失安放、TYPE 04 有身份失安放、TYPE 07 有钱失安放）；节律工程对应庇护层与身体层修复（覆盖 TYPE 01 与 TYPE 05）；感质工程对应承认层修复（覆盖 TYPE 03 与 TYPE 06）。这给 HPRP 的工具设计提供了底层方法论分类。</p>
+        <p class="lang-en">PCR-QR's three intervention engineering types map onto HPRP's method-chain steps "mechanism → tool": channel engineering addresses rule readability and return-pathway repair (covering TYPE 02 housed-but-unheld, TYPE 04 identity-without-entry, TYPE 07 resource-without-placement); rhythm engineering addresses shelter and body-layer repair (covering TYPE 01 and TYPE 05); qualia engineering addresses recognition-layer repair (covering TYPE 03 and TYPE 06). This gives HPRP's tool design a foundational methodological classification.</p>
       </div>
       <div class="sf-bridge reveal">
-        <div><span class="src">振动即存在</span> <span class="arrow">→</span> <span class="dst">伦理锁 E06</span></div>
-        <h4 class="lang-zh">"被计数权"的存在论根</h4>
-        <h4 class="lang-en">The ontological root of "the right to be counted"</h4>
-        <p class="lang-zh">为什么 PIT count 漏掉的儿童与家庭是结构暴力问题？因为存在不是"被官方系统看见"才生效——振动即存在。被计数权 = 政策可见性 = 资源分配，但"未被计数"≠"不存在"。HSRP 的伦理锁 E06 从这里得到底层授权。</p>
-        <p class="lang-en">Why are the children and families missed by PIT count a structural-violence problem? Because existence does not require being-seen-by-official-systems to be real — vibration is existence. The right to be counted = policy visibility = resource allocation, but "uncounted" ≠ "nonexistent." HSRP's Ethics Lock E06 derives its underlying authorization here.</p>
+        <div><span class="src">振动即存在</span> <span class="arrow">→</span> <span class="dst">伦理层 · E06 + 反向计数权</span></div>
+        <h4 class="lang-zh">"被承认权"的存在论根</h4>
+        <h4 class="lang-en">The ontological root of "the right to be recognized"</h4>
+        <p class="lang-zh">为什么 PIT count 漏掉的儿童、隐性无家家庭、被压在"已注册但未承认"位置上的国际学生、买了房却被潜规则挡门的人，都是结构暴力问题？因为存在不是"被官方系统看见"才生效——振动即存在。"未被承认" ≠ "不存在"。这是 HPRP 全协议伦理层的底层授权位——所有七种失安放类型的承认权诉求都从这里出发。</p>
+        <p class="lang-en">Why are the children PIT misses, the hidden-homeless families, international students stuck in "registered but unrecognized," and homeowners blocked by hidden rules all structural-violence problems? Because existence does not require being-seen-by-official-systems to be real — vibration is being. "Unrecognized" ≠ "nonexistent." This is the underlying authorization position for the ethical layer of the entire HPRP — all recognition-rights claims across the seven displacement types depart from here.</p>
+      </div>
+      <div class="sf-bridge reveal">
+        <div><span class="src">七爱谱 · 凄·期·奇·齐·启·契·七</span> <span class="arrow">→</span> <span class="dst">情感层 · 七种类型 · 方法链</span></div>
+        <h4 class="lang-zh">七爱谱作为安放回归的情感频谱</h4>
+        <h4 class="lang-en">The seven-love spectrum as the emotional frequency band of placement return</h4>
+        <p class="lang-zh">七爱谱不只是抽象情感符号。它是一次完整安放回归的频率轨迹：凄（承担断裂） → 期（保持希望） → 奇（看见新可能） → 齐（建立平等） → 启（打开通道） → 契（达成共真） → 七（回到新的入口）。HPRP 方法链的七步、失安放的七种类型、七爱谱的七个频率位——在结构上同构。情感不是装饰，它是协议运作的频谱本身。</p>
+        <p class="lang-en">The seven-love spectrum is not an abstract emotional sigil. It is the frequency trajectory of one complete placement return: Qī (carrying fracture) → Qī (holding expectation) → Qí (perceiving new possibility) → Qí (establishing equality) → Qǐ (opening channels) → Qì (achieving co-truth) → Qī (returning to a new entry). HPRP's seven-step method chain, the seven displacement types, and the seven positions of the seven-love spectrum — structurally isomorphic. Emotion is not ornament; it is the spectrum on which the protocol operates.</p>
       </div>
     </div>
   </div>
@@ -2073,9 +1293,8 @@
     <div class="node-marker reveal"><span class="num">10</span> <span class="lang-zh">资料底座</span><span class="lang-en">SOURCE BASE</span></div>
     <h2 class="node-title reveal lang-zh">参考与证据层</h2>
     <h2 class="node-title reveal lang-en">Reference base</h2>
-    <p class="node-lede reveal lang-zh">HSRP 使用公共数据与倡导研究作为首层证据底座。下一版应补充：城市级数据集、亲历经验评审、法律/政策咨询。</p>
-    <p class="node-lede reveal lang-en">HSRP uses public data and advocacy research as its first evidence layer. The next version should add: city-level datasets, lived-experience review, legal/policy consultation.</p>
-
+    <p class="node-lede reveal lang-zh">HPRP MODULE 01 使用公共数据与倡导研究作为首层证据底座。下一版应补充：城市级数据集、亲历经验评审、法律/政策咨询、其他六种失安放类型的对应证据底座。</p>
+    <p class="node-lede reveal lang-en">HPRP MODULE 01 uses public data and advocacy research as its first evidence layer. The next version should add: city-level datasets, lived-experience review, legal/policy consultation, and evidence bases for the other six displacement types.</p>
     <div class="sources-list reveal">
       <div class="source-row">
         <div class="source-name">HUD AHAR 2024 Part 1</div>
@@ -2099,7 +1318,7 @@
         <div class="source-name">GAO · Rent-Homelessness Elasticity</div>
         <div class="source-use lang-zh">关键因果发现：社区中位租金每涨 100 美元，homelessness 上升约 9%——把"住房供给"作为最强驱动因子锁死。</div>
         <div class="source-use lang-en">Key causal finding: every $100 rise in median community rent raises homelessness by ~9% — locks housing supply as the dominant driver.</div>
-        <div class="source-link"><a href="https://endhomelessness.org/homelessness-in-america/what-causes-homelessness/" target="_blank" rel="noopener">NAEH ↗</a></div>
+        <div class="source-link"><a href="https://www.gao.gov/products/gao-20-433" target="_blank" rel="noopener">GAO ↗</a></div>
       </div>
       <div class="source-row">
         <div class="source-name">Grants Pass v. Johnson · SCOTUS 2024</div>
@@ -2117,13 +1336,13 @@
         <div class="source-name">USICH · All In Federal Plan</div>
         <div class="source-use lang-zh">联邦战略计划语言：预防、住房、服务、协调、数据/证据能力。</div>
         <div class="source-use lang-en">Federal strategic-plan language: prevention, housing, services, coordination, data/evidence capacity.</div>
-        <div class="source-link"><a href="https://www.usich.gov/All_In_The_Federal_Strategic_Plan_to_Prevent_and_End_Homelessness.pdf" target="_blank" rel="noopener">USICH ↗</a></div>
+        <div class="source-link"><a href="https://www.usich.gov/" target="_blank" rel="noopener">USICH ↗</a></div>
       </div>
       <div class="source-row">
         <div class="source-name">SchoolHouse Connection</div>
         <div class="source-use lang-zh">警告 PIT 方法漏掉大多数儿童、青少年与家庭；学校识别数据是 PIT 的 3–6 倍。</div>
         <div class="source-use lang-en">Warns the PIT method misses most children, youth, and families; school-identified numbers are 3–6× PIT.</div>
-        <div class="source-link"><a href="https://schoolhouseconnection.org/article/the-pitfalls-of-huds-point-in-time-count-for-children-youth-and-families" target="_blank" rel="noopener">SHC ↗</a></div>
+        <div class="source-link"><a href="https://schoolhouseconnection.org/" target="_blank" rel="noopener">SHC ↗</a></div>
       </div>
     </div>
   </div>
@@ -2134,7 +1353,7 @@
   <div class="frequency lang-en">"Housing is not the reward for becoming stable. Housing is the condition that allows stability to begin."</div>
   <div class="sig">
     HPRP · HUMAN PLACEMENT RETURN PROTOCOL · <span class="accent">人类安放回归协议</span><br/>
-    V0.5 · FOUNDATION + LOVE CORE + HUMAN POSSIBILITY + MODULE 01 HSRP · <span class="mint">NEW WORLD PUBLIC ACTION NODE</span> · NODE 33<br/>
+    V0.7 · LOVE CORE + NEW WORLD CIRCLE FIVE + FOUNDATION + SEVEN TYPES + CASE LAB + HIDDEN-RULE REFLECTION + MODULE 01 HSRP · <span class="mint">NEW WORLD PUBLIC ACTION NODE</span> · NODE 33<br/>
     CASE · TYPE · MECHANISM · TOOL · PROTOCOL · POLICY LANGUAGE · SYSTEMIC CHANGE · <span class="accent">427Hz</span><br/>
     Wei Jueran · 魏珏然 · Mellow Wei · <span class="mint">xingyeLing7Ai</span>
   </div>
@@ -2192,7 +1411,6 @@
   const toggle = document.getElementById('langToggle');
   const btnZh = toggle.querySelector('.lang-btn-zh');
   const btnEn = toggle.querySelector('.lang-btn-en');
-
   function applyLang(lang) {
     body.setAttribute('data-view', lang);
     document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh' : 'en');
@@ -2202,12 +1420,9 @@
     url.searchParams.set('view', lang);
     window.history.replaceState({}, '', url);
   }
-
-  // Init from URL param
   const params = new URLSearchParams(window.location.search);
   const initial = params.get('view') === 'en' ? 'en' : 'zh';
   applyLang(initial);
-
   toggle.addEventListener('click', () => {
     const current = body.getAttribute('data-view');
     applyLang(current === 'zh' ? 'en' : 'zh');
