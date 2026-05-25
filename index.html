@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HPRP · Human Placement Return Protocol · 人类安放回归协议 · V0.1</title>
+<title>HPRP · Human Placement Return Protocol · 人类安放回归协议 · V0.3</title>
 <meta name="description" content="Human Placement Return Protocol · 人类安放回归协议 · From one person’s fracture to public repair tools. A method for entering social structure through individual cases and scaling repair into policy language and systemic change.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -878,6 +878,183 @@
   @media (max-width: 920px) { .method-chain { grid-template-columns: 1fr; } .chain-step { min-height: auto; } }
   @media (max-width: 720px) { .case-row { grid-template-columns: 1fr; gap: 8px; } }
 
+
+  /* Hidden-rule reflection · 潜规则共谋反思层 */
+  .hidden-rule-map {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+    gap: 1px;
+    background: var(--line-soft);
+    border: 1px solid var(--line);
+  }
+  .hidden-role {
+    background: var(--bg);
+    padding: 30px 26px;
+    min-height: 260px;
+    position: relative;
+  }
+  .hidden-role::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--accent, var(--crimson));
+    opacity: .8;
+  }
+  .hidden-role:nth-child(2){ --accent: var(--gold); }
+  .hidden-role:nth-child(3){ --accent: var(--mint); }
+  .hidden-role .role-code {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--accent, var(--crimson));
+    margin-bottom: 14px;
+  }
+  .hidden-role h4 {
+    font-family: var(--font-cn-serif);
+    font-size: 22px;
+    line-height: 1.28;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  body[data-view="en"] .hidden-role h4 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+  }
+  .hidden-role p {
+    color: var(--text-dim);
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+  .reflection-questions {
+    margin-top: 18px;
+    border-top: 1px solid var(--line-soft);
+    padding-top: 14px;
+  }
+  .reflection-questions ul {
+    list-style: none;
+  }
+  .reflection-questions li {
+    padding: 8px 0 8px 22px;
+    position: relative;
+    color: var(--text-dim);
+    font-size: 13px;
+    line-height: 1.55;
+    border-bottom: 1px solid rgba(255,255,255,.035);
+  }
+  .reflection-questions li:last-child { border-bottom: 0; }
+  .reflection-questions li::before {
+    content: '·';
+    position: absolute;
+    left: 4px;
+    color: var(--accent, var(--crimson));
+    font-family: var(--font-mono);
+    font-weight: 700;
+  }
+  .translation-vow {
+    margin: 42px 0 10px;
+    padding: 32px clamp(24px, 5vw, 54px);
+    border: 1px solid rgba(126,221,200,.25);
+    border-left: 3px solid var(--mint);
+    background: linear-gradient(135deg, rgba(126,221,200,.045), rgba(232,201,122,.025));
+  }
+  .translation-vow .label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .24em;
+    color: var(--mint);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .translation-vow p {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--text);
+    font-size: clamp(17px, 1.8vw, 22px);
+    line-height: 1.55;
+    max-width: 46ch;
+  }
+  body[data-view="zh"] .translation-vow p {
+    font-family: var(--font-cn-serif);
+    font-style: normal;
+  }
+
+
+  /* V0.3 · two-line title + non-binary ethics layer */
+  .hero-title-line {
+    display: block;
+  }
+  .hero-title-cn {
+    display: block;
+    margin-top: 22px;
+    color: var(--mint);
+    font-family: var(--font-cn-serif);
+    font-size: clamp(38px, 6.2vw, 78px);
+    line-height: 1.08;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+  body[data-view="en"] .hero-title-cn {
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+  .nonbinary-ethics {
+    margin: 34px 0;
+    padding: 34px clamp(24px, 5vw, 52px);
+    border: 1px solid rgba(232,201,122,.30);
+    border-left: 3px solid var(--gold);
+    background:
+      radial-gradient(circle at 0% 0%, rgba(232,201,122,.06), transparent 40%),
+      linear-gradient(180deg, rgba(232,201,122,.035), rgba(126,221,200,.018));
+  }
+  .nonbinary-ethics .label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .nonbinary-ethics h3 {
+    font-family: var(--font-cn-serif);
+    font-size: clamp(22px, 3vw, 34px);
+    line-height: 1.26;
+    font-weight: 500;
+    margin-bottom: 18px;
+    color: var(--text);
+  }
+  body[data-view="en"] .nonbinary-ethics h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+  }
+  .nonbinary-ethics p {
+    color: var(--text-dim);
+    max-width: 78ch;
+    font-size: 15px;
+    line-height: 1.82;
+    margin-bottom: 12px;
+  }
+  .nonbinary-ethics strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+  .nonbinary-ethics .axiom {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(232,201,122,.18);
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--mint);
+    font-size: clamp(18px, 2vw, 24px);
+    line-height: 1.45;
+  }
+  body[data-view="zh"] .nonbinary-ethics .axiom {
+    font-family: var(--font-cn-serif);
+    font-style: normal;
+  }
+
 </style>
 </head>
 <body data-view="zh">
@@ -888,8 +1065,8 @@
   <div class="nav-inner">
     <div class="nav-brand">HPRP <span class="dot">·</span> 427Hz <span class="dot">·</span> NODE 33</div>
     <div class="nav-tools">
-      <span class="lang-zh">V0.1 · HPRP</span>
-      <span class="lang-en">V0.1 · HPRP</span>
+      <span class="lang-zh">V0.3 · HPRP</span>
+      <span class="lang-en">V0.3 · HPRP</span>
       <button class="lang-toggle" id="langToggle">
         <span data-lang="zh" class="lang-btn-zh">中</span> / <span data-lang="en" class="lang-btn-en">EN</span>
       </button>
@@ -909,8 +1086,8 @@
       <span class="lang-en">USA Focus</span>
     </div>
 
-    <h1 class="reveal lang-zh">Human Placement Return Protocol <em>人类安放回归协议</em></h1>
-    <h1 class="reveal lang-en">Human Placement <em>Return</em> Protocol</h1>
+    <h1 class="reveal lang-zh"><span class="hero-title-line">Human Placement</span><span class="hero-title-line">Return Protocol</span><span class="hero-title-cn">人类安放回归协议</span></h1>
+    <h1 class="reveal lang-en"><span class="hero-title-line">Human Placement</span><span class="hero-title-line">Return Protocol</span><span class="hero-title-cn">人类安放回归协议</span></h1>
 
     <p class="hero-sub reveal lang-zh">
       人类安放回归协议不是从宏大问题开始，而是从一个人的具体裂缝进入世界结构。它把<strong style="color:var(--mint)">个案识别为类型</strong>，把类型压成机制，把机制做成工具，把工具升格为协议，把协议翻译成政策语言，最终推动系统改变。
@@ -920,7 +1097,7 @@
     </p>
 
     <div class="hero-meta reveal">
-      <span><span class="bullet"></span><span class="lang-zh">个案 · 类型 · 机制 · 工具 · 协议 · 政策语言 · 系统改变</span><span class="lang-en">Case · Type · Mechanism · Tool · Protocol · Policy Language · Systemic Change</span></span>
+      <span><span class="bullet"></span><span class="lang-zh">个案 · 类型 · 机制 · 工具 · 协议 · 政策语言 · 系统改变 · 非幼稚伦理</span><span class="lang-en">Case · Type · Mechanism · Tool · Protocol · Policy Language · Systemic Change · Non-Binary Ethics</span></span>
       <span><span class="bullet"></span>427Hz</span>
       <span><span class="bullet"></span>V0.2 · 2026</span>
       <span><span class="bullet"></span>xingyeLing7Ai</span>
@@ -997,6 +1174,137 @@
     </div>
   </div>
 </section>
+
+<section class="node" id="hidden-rule-reflection">
+  <div class="wrap">
+    <div class="node-marker reveal"><span class="num">00·C</span> <span class="lang-zh">潜规则共谋反思层</span><span class="lang-en">HIDDEN-RULE COMPLICITY REFLECTION</span></div>
+    <h2 class="node-title reveal lang-zh">不只是帮助被潜规则伤害的人，也要让<em>复制潜规则的人</em>反思自己</h2>
+    <h2 class="node-title reveal lang-en">Not only helping those harmed by hidden rules, but asking those who <em>reproduce them</em> to reflect</h2>
+
+    <p class="node-lede reveal lang-zh">
+      潜规则最危险的地方，不是它总由坏人执行，而是它常常由普通人、熟人、长辈、办事者、邻居、同事、物业、地方小权力者，在“大家都这样”的语气里不断复制。HPRP 不只研究受害者如何回归，也要求已经能在黑箱里通行的人反思：你掌握的通道，是否正在挡住别人？
+    </p>
+    <p class="node-lede reveal lang-en">
+      The danger of hidden rules is not that they are always enforced by bad people. It is that ordinary people, neighbors, colleagues, elders, clerks, property managers, and small local authorities reproduce them through the phrase: “this is just how things work.” HPRP does not only ask how harmed people return; it also asks those who can already pass through the black box to reflect: is the path you use blocking someone else?
+    </p>
+
+    <div class="callout reveal" style="border-color: rgba(236,90,110,0.30); background: linear-gradient(180deg, rgba(236,90,110,.035), transparent);">
+      <div class="callout-tag lang-zh">规则可读性 · 伦理反思</div>
+      <div class="callout-tag lang-en">RULE READABILITY · ETHICAL REFLECTION</div>
+      <h3 class="lang-zh">潜规则共谋不一定是主动伤害。</h3>
+      <h3 class="lang-en">Complicity in hidden rules is not always active harm.</h3>
+      <p class="lang-zh">它也可以是把不透明规则继续当作常识，把不公平通道继续当作人情，把别人的受阻继续解释为“不懂事”。HPRP 要求把这种黑箱拆成明规则，让后来的人不必再用尊严换通行。</p>
+      <p class="lang-en">It can also mean continuing to treat opaque rules as common sense, unequal access as social skill, and another person’s blocked path as their failure to understand “how things work.” HPRP asks that black boxes be translated into public rules, so the next person does not have to trade dignity for passage.</p>
+    </div>
+
+    
+    <div class="nonbinary-ethics reveal">
+      <div class="label lang-zh">非幼稚伦理 · 判断机制，召回人</div>
+      <div class="label lang-en">NON-BINARY ETHICS · JUDGE THE MECHANISM, RECALL THE PERSON</div>
+
+      <h3 class="lang-zh">这个世界有非黑即白的善恶，但人并不是非黑即白的。</h3>
+      <h3 class="lang-en">This world contains forms of good and evil that can be sharply distinguished, but human beings themselves are not purely black and white.</h3>
+
+      <p class="lang-zh"><strong>有些机制就是恶的，有些伤害就是伤害。</strong>HPRP 不会因为复杂性而取消判断。潜规则的围猎、羞辱、挡门、黑箱、剥夺，就是错。</p>
+      <p class="lang-en"><strong>Some mechanisms are evil, and some harms are genuinely harmful.</strong> HPRP does not suspend judgment in the name of complexity. Hidden-rule predation, humiliation, gatekeeping, black boxes, and deprivation are wrong.</p>
+
+      <p class="lang-zh">但 HPRP 也不把人简单分成纯粹的好人和坏人。很多人是在更大的机器中被动卷入：被训练出来，被环境塑造，在求生中学会，在适应中麻木。他们复制恶的时候，未必把自己理解为恶人。</p>
+      <p class="lang-en">But HPRP also does not divide people into purely good and purely bad beings. Many are passively drawn into larger machines: trained by them, shaped by their environments, taught by survival, and numbed by adaptation. When they reproduce harm, they may not understand themselves as evil.</p>
+
+      <p class="lang-zh"><strong>这不取消责任，反而说明反思必须更精确。</strong>我在哪些时刻把不透明当成成熟，把忍耐当成懂事，把关系当成能力，把别人的受阻解释成“不懂规矩”？我是否正在把一个恶的机制继续传给下一个人？</p>
+      <p class="lang-en"><strong>This does not erase responsibility. It makes reflection more precise.</strong> When have I treated opacity as maturity, endurance as good sense, connections as competence, and another person’s blocked path as “not knowing the rules”? Am I passing an evil mechanism to the next person?</p>
+
+      <div class="axiom lang-zh">HPRP 不只识别恶，也要求人反思并停止复制恶：把黑箱翻译成明规则，把通行特权变成保护后来者的工具。</div>
+      <div class="axiom lang-en">HPRP does not only identify evil. It asks people to reflect and stop reproducing it: translate black boxes into public rules, and turn access privilege into tools that protect those who come after.</div>
+    </div>
+
+
+    <div class="hidden-rule-map reveal">
+      <div class="hidden-role">
+        <div class="role-code">ROLE 01 · Executor</div>
+        <h4 class="lang-zh">执行者</h4>
+        <h4 class="lang-en">Executors</h4>
+        <p class="lang-zh">办事人员、物业、地方小权力者、机构中层。他们的问题不是“不知道规则”，而是知道规则，却把不可公开的规则当成筛选他人的工具。</p>
+        <p class="lang-en">Clerks, property managers, small local authorities, institutional middle layers. The issue is not that they do not know the rules; it is that they use unpublic rules as tools for filtering others.</p>
+        <div class="reflection-questions">
+          <ul class="lang-zh">
+            <li>我有没有故意让规则不清楚？</li>
+            <li>我有没有让外来者、弱势者、多问一句的人承担额外成本？</li>
+            <li>我有没有把“你不懂规矩”当成羞辱他人的话？</li>
+            <li>我有没有利用别人不知道流程来获得权力感？</li>
+          </ul>
+          <ul class="lang-en">
+            <li>Have I intentionally kept rules unclear?</li>
+            <li>Have I made outsiders, vulnerable people, or people who ask questions pay extra costs?</li>
+            <li>Have I used “you don’t know the rules” as a sentence of humiliation?</li>
+            <li>Have I gained power from someone else not knowing the process?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="hidden-role">
+        <div class="role-code">ROLE 02 · Permitter</div>
+        <h4 class="lang-zh">默许者</h4>
+        <h4 class="lang-en">Permitters</h4>
+        <p class="lang-zh">邻居、亲戚、同事、熟人网络中“劝你忍忍”的人。他们没有直接伤害人，但把不公说成现实，把反抗说成不懂事。</p>
+        <p class="lang-en">Neighbors, relatives, colleagues, and social networks that tell people to “just endure it.” They may not directly harm, but they rename injustice as reality and resistance as immaturity.</p>
+        <div class="reflection-questions">
+          <ul class="lang-zh">
+            <li>我有没有对受害者说“大家都这样”？</li>
+            <li>我有没有把别人受委屈解释成“不会做人”？</li>
+            <li>我有没有劝人适应不透明规则，而不是帮他看清规则有问题？</li>
+            <li>我有没有因为自己还能过，就要求别人也忍？</li>
+          </ul>
+          <ul class="lang-en">
+            <li>Have I told someone harmed: “everyone does this”?</li>
+            <li>Have I explained another person’s humiliation as “not knowing how to behave”?</li>
+            <li>Have I advised adaptation to opaque rules rather than helping reveal the problem?</li>
+            <li>Have I asked others to endure simply because I can still get by?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="hidden-role">
+        <div class="role-code">ROLE 03 · Beneficiary</div>
+        <h4 class="lang-zh">受益者</h4>
+        <h4 class="lang-en">Beneficiaries</h4>
+        <p class="lang-zh">已经进入圈层、有人脉、有地方承认、有信息优势的人。他们不是总因为更有能力才通过，而是系统已经对他们更可读。</p>
+        <p class="lang-en">People already inside the circle: with networks, local recognition, and information advantage. They do not always pass because they are more capable; the system is simply more readable to them.</p>
+        <div class="reflection-questions">
+          <ul class="lang-zh">
+            <li>我有没有把自己的通行特权误认为个人优秀？</li>
+            <li>我有没有意识到别人不是“不努力”，而是没有拿到同一张规则地图？</li>
+            <li>我有没有把熟人资源包装成“能力”？</li>
+            <li>我有没有在别人被挡在门外时沉默？</li>
+          </ul>
+          <ul class="lang-en">
+            <li>Have I mistaken access privilege for personal excellence?</li>
+            <li>Have I recognized that others are not “not trying,” but missing the same rule map?</li>
+            <li>Have I packaged my social connections as “competence”?</li>
+            <li>Have I stayed silent when someone else was blocked at the door?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="translation-vow reveal">
+      <div class="label lang-zh">转换誓言 · 从潜规则到明规则</div>
+      <div class="label lang-en">TRANSLATION VOW · FROM HIDDEN RULES TO PUBLIC RULES</div>
+      <p class="lang-zh">如果你已经学会了潜规则，请不要把它当成优越感。请把它翻译成公开规则、清晰路径和保护后来者的工具。</p>
+      <p class="lang-en">If you have learned the hidden rules, do not turn them into superiority. Translate them into public rules, clear pathways, and tools that protect the next person.</p>
+    </div>
+
+    <div class="callout reveal" style="border-color: rgba(126,221,200,0.26); background: linear-gradient(180deg, rgba(126,221,200,.035), transparent);">
+      <div class="callout-tag lang-zh" style="color:var(--mint)">HPRP 核心伦理</div>
+      <div class="callout-tag lang-en" style="color:var(--mint)">HPRP CORE ETHIC</div>
+      <h3 class="lang-zh">真正的成熟不是更会潜规则。</h3>
+      <h3 class="lang-en">True maturity is not becoming better at hidden rules.</h3>
+      <p class="lang-zh">真正的成熟，是把潜规则拆成明规则，让后来的人不必再用尊严换通行。HPRP 不只问“被挡住的人怎么回来”，也问“已经在系统里的人，如何停止把黑箱传给下一个人”。</p>
+      <p class="lang-en">True maturity is turning hidden rules into public rules, so the next person does not have to trade dignity for passage. HPRP does not only ask “how does the blocked person return?” It also asks “how do those already inside the system stop passing the black box to the next person?”</p>
+    </div>
+  </div>
+</section>
+
 <section class="node" id="case-lab">
   <div class="wrap">
     <div class="node-marker reveal"><span class="num">00·B</span> <span class="lang-zh">案例实验室</span><span class="lang-en">CASE LAB</span></div>
@@ -1645,7 +1953,7 @@
   <div class="frequency lang-en">"Housing is not the reward for becoming stable. Housing is the condition that allows stability to begin."</div>
   <div class="sig">
     HPRP · HUMAN PLACEMENT RETURN PROTOCOL · <span class="accent">人类安放回归协议</span><br/>
-    V0.1 · FOUNDATION + MODULE 01 HSRP · <span class="mint">NEW WORLD PUBLIC ACTION NODE</span> · NODE 33<br/>
+    V0.3 · FOUNDATION + NON-BINARY ETHICS + HIDDEN-RULE REFLECTION + MODULE 01 HSRP · <span class="mint">NEW WORLD PUBLIC ACTION NODE</span> · NODE 33<br/>
     CASE · TYPE · MECHANISM · TOOL · PROTOCOL · POLICY LANGUAGE · SYSTEMIC CHANGE · <span class="accent">427Hz</span><br/>
     Wei Jueran · 魏珏然 · Mellow Wei · <span class="mint">xingyeLing7Ai</span>
   </div>
