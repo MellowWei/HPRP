@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HPRP · Human Placement Return Protocol · 人类安放回归协议 · V0.7</title>
-<meta name="description" content="Human Placement Return Protocol · 人类安放回归协议 · From one person's fracture to public repair tools. A method for entering social structure through individual cases and scaling repair into policy language and systemic change.">
+<title>HPRP · Human Placement Return Protocol · 人类安放回归协议 · V0.8</title>
+<meta name="description" content="Human Placement Return Protocol · 人类安放回归协议 · From one person's fracture to public repair tools, institutional placement, policy language and systemic change. A method for turning displacement cases into long-term social infrastructure.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -197,7 +197,7 @@
     .source-row { grid-template-columns: 1fr; gap: 6px; }
     .source-link { margin-top: 4px; }
   }
-  .method-chain { margin: 46px 0 18px; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .method-chain { margin: 46px 0 18px; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
   .chain-step { background: linear-gradient(180deg, rgba(126,221,200,0.035), rgba(11,11,18,0.96)); padding: 22px 14px; min-height: 150px; position: relative; }
   .chain-step .idx { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; color: var(--gold); margin-bottom: 12px; }
   .chain-step h4 { font-family: var(--font-cn-serif); font-size: 18px; line-height: 1.25; font-weight: 500; margin-bottom: 8px; color: var(--text); }
@@ -297,7 +297,7 @@
   .walk-row .content strong { color: var(--text); font-weight: 500; }
   @media (max-width: 720px) { .walk-row { grid-template-columns: 1fr; gap: 6px; } }
 
-  /* V0.7 · New World Circle · 共在者五位 */
+  /* V0.8 · New World Circle · 共在者五位 */
   .circle-five-section {
     margin: 0;
     padding: clamp(60px, 9vw, 110px) clamp(24px, 6vw, 72px);
@@ -428,6 +428,141 @@
   }
   body[data-view="zh"] .circle-five-axiom { font-family: var(--font-cn-serif); font-style: normal; }
   .circle-five-axiom span { color: var(--mint); }
+
+  /* V0.8 · Institutional Placement · 制度安放 */
+  .institution-section {
+    background:
+      radial-gradient(circle at 12% 8%, rgba(126,221,200,.075), transparent 36%),
+      radial-gradient(circle at 88% 30%, rgba(232,201,122,.06), transparent 34%),
+      linear-gradient(180deg, rgba(11,11,18,.92), rgba(5,5,7,.98));
+  }
+  .institution-thesis {
+    margin: 44px 0 26px;
+    padding: clamp(28px, 5vw, 56px);
+    border: 1px solid rgba(126,221,200,.32);
+    border-left: 3px solid var(--mint);
+    background: linear-gradient(135deg, rgba(126,221,200,.06), rgba(232,201,122,.025));
+  }
+  .institution-thesis .label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 18px;
+  }
+  .institution-thesis h3 {
+    font-family: var(--font-cn-serif);
+    font-size: clamp(26px, 4vw, 46px);
+    line-height: 1.18;
+    font-weight: 500;
+    max-width: 18ch;
+    margin-bottom: 18px;
+  }
+  body[data-view="en"] .institution-thesis h3 { font-family: var(--font-serif); font-weight: 300; }
+  .institution-thesis p {
+    max-width: 78ch;
+    color: var(--text-dim);
+    font-size: 15.5px;
+    line-height: 1.82;
+    margin-bottom: 12px;
+  }
+  .institution-thesis strong { color: var(--text); font-weight: 500; }
+  .institution-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--line-soft);
+    border: 1px solid var(--line);
+    margin-top: 28px;
+  }
+  .institution-card {
+    background: var(--bg);
+    padding: 28px 24px;
+    min-height: 230px;
+    position: relative;
+  }
+  .institution-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--accent, var(--mint));
+    opacity: .85;
+  }
+  .institution-card:nth-child(1) { --accent: var(--mint); }
+  .institution-card:nth-child(2) { --accent: var(--gold); }
+  .institution-card:nth-child(3) { --accent: var(--lavender); }
+  .institution-card:nth-child(4) { --accent: var(--pink); }
+  .institution-card:nth-child(5) { --accent: var(--green); }
+  .institution-card .code {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--accent, var(--mint));
+    margin-bottom: 14px;
+  }
+  .institution-card h4 {
+    font-family: var(--font-cn-serif);
+    font-size: 21px;
+    line-height: 1.28;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  body[data-view="en"] .institution-card h4 { font-family: var(--font-serif); font-weight: 400; }
+  .institution-card p {
+    font-size: 13.5px;
+    color: var(--text-dim);
+    line-height: 1.72;
+  }
+  .japan-case {
+    margin-top: 38px;
+    padding: clamp(26px, 4vw, 46px);
+    border: 1px solid rgba(232,201,122,.28);
+    background:
+      radial-gradient(circle at 100% 0%, rgba(232,201,122,.06), transparent 36%),
+      linear-gradient(180deg, rgba(232,201,122,.035), rgba(126,221,200,.018));
+  }
+  .japan-case .tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .26em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .japan-case h3 {
+    font-family: var(--font-cn-serif);
+    font-size: clamp(22px, 3vw, 34px);
+    line-height: 1.26;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  body[data-view="en"] .japan-case h3 { font-family: var(--font-serif); font-weight: 400; }
+  .japan-case p {
+    max-width: 82ch;
+    color: var(--text-dim);
+    font-size: 15px;
+    line-height: 1.82;
+    margin-bottom: 12px;
+  }
+  .japan-case strong { color: var(--text); font-weight: 500; }
+  .institution-lock {
+    margin-top: 34px;
+    padding: 28px clamp(24px, 4vw, 42px);
+    border-top: 1px solid rgba(126,221,200,.25);
+    border-bottom: 1px solid rgba(126,221,200,.25);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(18px, 2vw, 25px);
+    line-height: 1.48;
+    color: var(--text);
+    max-width: 44ch;
+  }
+  body[data-view="zh"] .institution-lock { font-family: var(--font-cn-serif); font-style: normal; }
+  .institution-lock span { color: var(--mint); }
+
 </style>
 </head>
 <body data-view="zh">
@@ -438,8 +573,8 @@
   <div class="nav-inner">
     <div class="nav-brand">HPRP <span class="dot">·</span> 427Hz <span class="dot">·</span> NODE 33</div>
     <div class="nav-tools">
-      <span class="lang-zh">V0.7 · HPRP</span>
-      <span class="lang-en">V0.7 · HPRP</span>
+      <span class="lang-zh">V0.8 · HPRP</span>
+      <span class="lang-en">V0.8 · HPRP</span>
       <button class="lang-toggle" id="langToggle">
         <span data-lang="zh" class="lang-btn-zh">中</span> / <span data-lang="en" class="lang-btn-en">EN</span>
       </button>
@@ -460,15 +595,15 @@
     <h1 class="reveal lang-zh"><span class="hero-title-line">Human Placement</span><span class="hero-title-line">Return Protocol</span><span class="hero-title-cn">人类安放回归协议</span></h1>
     <h1 class="reveal lang-en"><span class="hero-title-line">Human Placement</span><span class="hero-title-line">Return Protocol</span><span class="hero-title-cn">人类安放回归协议</span></h1>
     <p class="hero-sub reveal lang-zh">
-      人类安放回归协议不是从宏大问题开始，而是从一个人的具体裂缝进入世界结构。它把<strong style="color:var(--mint)">个案识别为类型</strong>，把类型压成机制，把机制做成工具，把工具升格为协议，把协议翻译成政策语言，最终推动系统改变。
+      人类安放回归协议不是从宏大问题开始，而是从一个人的具体裂缝进入世界结构。它把<strong style="color:var(--mint)">个案识别为类型</strong>，把类型压成机制，把机制做成工具，把工具升格为协议，把协议沉淀为制度安放，再翻译成政策语言，最终推动系统改变。
     </p>
     <p class="hero-sub reveal lang-en">
-      Human Placement Return Protocol does not begin from abstract social problems. It enters the structure of the world through one person's fracture: <strong style="color:var(--mint)">case → type → mechanism → tool → protocol → policy language → systemic change.</strong>
+      Human Placement Return Protocol does not begin from abstract social problems. It enters the structure of the world through one person's fracture: <strong style="color:var(--mint)">case → type → mechanism → tool → protocol → institutional placement → policy language → systemic change.</strong>
     </p>
     <div class="hero-meta reveal">
-      <span><span class="bullet"></span><span class="lang-zh">个案 · 类型 · 机制 · 工具 · 协议 · 政策语言 · 系统改变 · 感动 · 爱 · 可能</span><span class="lang-en">Case · Type · Mechanism · Tool · Protocol · Policy Language · Systemic Change · Tenderness · Love · Possibility</span></span>
+      <span><span class="bullet"></span><span class="lang-zh">个案 · 类型 · 机制 · 工具 · 协议 · 制度安放 · 政策语言 · 系统改变 · 感动 · 爱 · 可能</span><span class="lang-en">Case · Type · Mechanism · Tool · Protocol · Institutional Placement · Policy Language · Systemic Change · Tenderness · Love · Possibility</span></span>
       <span><span class="bullet"></span>427Hz</span>
-      <span><span class="bullet"></span>V0.7 · 2026</span>
+      <span><span class="bullet"></span>V0.8 · 2026</span>
       <span><span class="bullet"></span>xingyeLing7Ai</span>
     </div>
   </div>
@@ -533,7 +668,7 @@
   </div>
 </section>
 
-<!-- NEW WORLD CIRCLE · 共在者五位结构 (V0.7) -->
+<!-- NEW WORLD CIRCLE · 共在者五位结构 (V0.8) -->
 <section class="circle-five-section reveal" id="new-world-circle">
   <div class="circle-five-inner">
     <div class="circle-five-label">
@@ -613,20 +748,99 @@
     <div class="node-marker reveal"><span class="num">00</span> <span class="lang-zh">上位协议 · 核心方法论</span><span class="lang-en">FOUNDATIONAL PROTOCOL · CORE METHOD</span></div>
     <h2 class="node-title reveal lang-zh">人类安放回归协议：<em>从个案进入系统</em></h2>
     <h2 class="node-title reveal lang-en">HPRP: <em>entering the system through the case</em></h2>
-    <p class="node-lede reveal lang-zh">人类安放回归协议，是一种从具体个案进入社会结构、将失安放经验转译为修复工具、再上升为政策语言与系统改变的方法。它不从宏大口号开始，而从一个人被世界没有接住的瞬间开始。</p>
-    <p class="node-lede reveal lang-en">Human Placement Return Protocol is a method for entering social structure through individual cases, translating experiences of displacement into repair tools, and scaling them into policy language and systemic change. It does not start from slogans; it starts from the moment a human being is not held by the world.</p>
+    <p class="node-lede reveal lang-zh">人类安放回归协议，是一种从具体个案进入社会结构、将失安放经验转译为修复工具、制度安放、政策语言与系统改变的方法。它不从宏大口号开始，而从一个人被世界没有接住的瞬间开始。</p>
+    <p class="node-lede reveal lang-en">Human Placement Return Protocol is a method for entering social structure through individual cases, translating experiences of displacement into repair tools, institutional placement, policy language and systemic change. It does not start from slogans; it starts from the moment a human being is not held by the world.</p>
     <div class="method-chain reveal">
       <div class="chain-step"><div class="idx">01</div><h4 class="lang-zh">个案</h4><h4 class="lang-en">Case</h4><p class="lang-zh">从一个真实的人、一个具体遭遇、一个失安放瞬间进入。</p><p class="lang-en">Begin from one real person, one concrete event, one moment of displacement.</p></div>
       <div class="chain-step"><div class="idx">02</div><h4 class="lang-zh">类型</h4><h4 class="lang-en">Type</h4><p class="lang-zh">判断它属于哪种失安放：无房、有房、有家、有身份、有工作、有关系、有钱。</p><p class="lang-en">Classify the displacement type: no house, housed, family, identity, work, relationship, money.</p></div>
       <div class="chain-step"><div class="idx">03</div><h4 class="lang-zh">机制</h4><h4 class="lang-en">Mechanism</h4><p class="lang-zh">找到背后的结构病灶：规则不可读、承认失败、返回路径断裂、庇护坍缩、节律失稳。</p><p class="lang-en">Extract the hidden structural mechanism: unreadable rules, failed recognition, broken return pathways, shelter collapse, rhythm fracture.</p></div>
       <div class="chain-step"><div class="idx">04</div><h4 class="lang-zh">工具</h4><h4 class="lang-en">Tool</h4><p class="lang-zh">把机制做成普通人可用的清单、问卷、地图、求助路径、风险识别表。</p><p class="lang-en">Turn the mechanism into checklists, questionnaires, maps, help pathways, and risk-identification tools.</p></div>
       <div class="chain-step"><div class="idx">05</div><h4 class="lang-zh">协议</h4><h4 class="lang-en">Protocol</h4><p class="lang-zh">把多个工具组织成可复用的方法系统。</p><p class="lang-en">Organize multiple tools into a repeatable method system.</p></div>
-      <div class="chain-step"><div class="idx">06</div><h4 class="lang-zh">政策语言</h4><h4 class="lang-en">Policy Language</h4><p class="lang-zh">把个体痛苦翻译成城市、学校、机构、社区、政府能理解的治理语言。</p><p class="lang-en">Translate individual suffering into governance language legible to cities, schools, institutions, communities, and governments.</p></div>
-      <div class="chain-step"><div class="idx">07</div><h4 class="lang-zh">系统改变</h4><h4 class="lang-en">Systemic Change</h4><p class="lang-zh">让世界不只是看见问题，而是开始改变接住人的方式。</p><p class="lang-en">Move the world from seeing the problem to changing the way it holds people.</p></div>
+      <div class="chain-step"><div class="idx">06</div><h4 class="lang-zh">制度安放</h4><h4 class="lang-en">Institutional Placement</h4><p class="lang-zh">让协议不再依赖好人、好运或临时群聊，而是进入公共基础设施。</p><p class="lang-en">Turn the protocol from good people, good luck, or temporary networks into public infrastructure.</p></div>
+      <div class="chain-step"><div class="idx">07</div><h4 class="lang-zh">政策语言</h4><h4 class="lang-en">Policy Language</h4><p class="lang-zh">把个体痛苦翻译成城市、学校、机构、社区、政府能理解的治理语言。</p><p class="lang-en">Translate individual suffering into governance language legible to cities, schools, institutions, communities, and governments.</p></div>
+      <div class="chain-step"><div class="idx">08</div><h4 class="lang-zh">系统改变</h4><h4 class="lang-en">Systemic Change</h4><p class="lang-zh">让世界不只是看见问题，而是开始改变接住人的方式。</p><p class="lang-en">Move the world from seeing the problem to changing the way it holds people.</p></div>
     </div>
-    <div class="hprp-formula reveal"><div class="label">HPRP Formula · 安放回归公式</div><div class="equation lang-zh">安放回归 = 庇护 + 规则可读性 + 承认 + 返回路径 + 节律修复</div><div class="equation lang-en">Placement Return = Shelter + Rule Readability + Recognition + Return Pathways + Rhythm Repair</div></div>
+    <div class="hprp-formula reveal"><div class="label">HPRP Formula · 安放回归公式</div><div class="equation lang-zh">安放回归 = 庇护 + 规则可读性 + 承认 + 返回路径 + 节律修复 + 制度安放</div><div class="equation lang-en">Placement Return = Shelter + Rule Readability + Recognition + Return Pathways + Rhythm Repair + Institutional Placement</div></div>
   </div>
 </section>
+
+
+<!-- NODE 00·P · INSTITUTIONAL PLACEMENT -->
+<section class="node institution-section" id="institutional-placement">
+  <div class="wrap">
+    <div class="node-marker reveal"><span class="num">00·P</span> <span class="lang-zh">制度安放 · HPRP V0.8 核心升级</span><span class="lang-en">INSTITUTIONAL PLACEMENT · HPRP V0.8 CORE UPGRADE</span></div>
+    <h2 class="node-title reveal lang-zh">成功的制度建设，是让普通人<em>敢长期活着</em></h2>
+    <h2 class="node-title reveal lang-en">Successful institution-building lets ordinary people <em>live long-term</em></h2>
+    <p class="node-lede reveal lang-zh">HPRP 的第八层不是装饰，而是从协议到制度的相变：工具解决一次具体堵点，协议解决一类重复问题，制度安放则让普通人的脆弱不再依赖临时好运，而被提前写进公共结构。</p>
+    <p class="node-lede reveal lang-en">The eighth layer of HPRP is not ornament; it is the phase change from protocol to institution. A tool solves one blockage, a protocol solves a repeatable class of problems, and institutional placement writes ordinary human vulnerability into public structure before collapse occurs.</p>
+
+    <div class="institution-thesis reveal">
+      <div class="label lang-zh">核心判断 · INSTITUTIONAL PLACEMENT THESIS</div>
+      <div class="label lang-en">CORE THESIS · INSTITUTIONAL PLACEMENT</div>
+      <h3 class="lang-zh">系统成熟，不是因为它看起来强，而是因为人不必一直证明自己有价值。</h3>
+      <h3 class="lang-en">A system is mature not because it looks powerful, but because people do not have to constantly prove their worth.</h3>
+      <p class="lang-zh"><strong>成功的制度建设，不是让系统看起来强大，而是让普通人敢长期活着。</strong>一个人敢生病、敢变老、敢失业、敢普通、敢进入脆弱状态，是因为他知道自己不会立刻被社会抛出去。</p>
+      <p class="lang-en"><strong>Successful institution-building does not merely make a system look powerful. It allows ordinary people to live long-term without constant existential fear.</strong> A person can afford to be ill, to age, to lose work, to be ordinary, or to enter vulnerability because they know the social system will not immediately throw them away.</p>
+      <p class="lang-zh">HPRP 所追求的系统改变，不是抽象的治理效率，而是社会的<strong>长期安放能力</strong>：制度必须承认人会疲惫、会衰老、会失败、会暂时失去生产力，但人仍然拥有被照护、被承认、被带回世界的资格。</p>
+      <p class="lang-en">What HPRP seeks is not abstract administrative efficiency, but a society's <strong>capacity for long-term placement</strong>: institutions must recognize that humans become tired, old, fragile, displaced, or temporarily unproductive — and still deserve care, recognition, and a pathway back into the world.</p>
+    </div>
+
+    <div class="institution-grid reveal">
+      <div class="institution-card">
+        <div class="code">P01 · ANTICIPATED VULNERABILITY</div>
+        <h4 class="lang-zh">把脆弱提前写入制度</h4>
+        <h4 class="lang-en">Write vulnerability into the system in advance</h4>
+        <p class="lang-zh">制度不能假装人永远年轻、健康、高效、稳定。真正成熟的制度，会预先承认疾病、衰老、失业、照护需求和暂时失能。</p>
+        <p class="lang-en">Institutions must not pretend that people are always young, healthy, efficient, and stable. A mature institution anticipates illness, aging, unemployment, care needs, and temporary incapacity.</p>
+      </div>
+      <div class="institution-card">
+        <div class="code">P02 · ROUTINIZED CARE</div>
+        <h4 class="lang-zh">让照护不依赖好人</h4>
+        <h4 class="lang-en">Make care no longer depend on good people</h4>
+        <p class="lang-zh">好人会疲惫，好运会消失，临时群聊会散。制度安放要求照护成为可重复、可访问、可追责的公共结构。</p>
+        <p class="lang-en">Good people become tired, luck disappears, temporary chats dissolve. Institutional placement requires care to become repeatable, accessible, and accountable public structure.</p>
+      </div>
+      <div class="institution-card">
+        <div class="code">P03 · NON-DISCARDABILITY</div>
+        <h4 class="lang-zh">确认人不是一次性耗材</h4>
+        <h4 class="lang-en">Confirm that humans are not disposable materials</h4>
+        <p class="lang-zh">一个社会的底线，不是它怎样奖励强者，而是它怎样处理暂时掉队、身体变慢、资源耗尽、语言失效的人。</p>
+        <p class="lang-en">The baseline of a society is not how it rewards the strong, but how it treats those who fall behind, slow down, lose resources, or lose language.</p>
+      </div>
+      <div class="institution-card">
+        <div class="code">P04 · DURABLE RETURN PATHS</div>
+        <h4 class="lang-zh">保留返回路径</h4>
+        <h4 class="lang-en">Keep return pathways open</h4>
+        <p class="lang-zh">制度不能只会筛选和淘汰。它必须保留从疾病、失败、失业、创伤、债务、无家状态中返回公共生活的可读路径。</p>
+        <p class="lang-en">A system cannot only filter and discard. It must preserve readable pathways back into public life from illness, failure, unemployment, trauma, debt, and homelessness.</p>
+      </div>
+      <div class="institution-card">
+        <div class="code">P05 · PUBLIC LEGIBILITY</div>
+        <h4 class="lang-zh">让普通人读得懂规则</h4>
+        <h4 class="lang-en">Make rules readable to ordinary people</h4>
+        <p class="lang-zh">不可读的规则会制造依附、求人、潜规则和羞辱。制度安放要求入口清晰、路径明确、失败后仍可再次进入。</p>
+        <p class="lang-en">Unreadable rules produce dependency, begging, hidden rules, and humiliation. Institutional placement requires clear entry points, clear pathways, and re-entry after failure.</p>
+      </div>
+    </div>
+
+    <div class="japan-case reveal">
+      <div class="tag lang-zh">比较案例 · 日本医疗与长期照护 · 不神化，只提取制度机制</div>
+      <div class="tag lang-en">COMPARATIVE CASE · JAPAN HEALTHCARE AND LONG-TERM CARE · NO ROMANTICIZATION, ONLY MECHANISM EXTRACTION</div>
+      <h3 class="lang-zh">日本案例说明：先进医疗不是单靠技术，也靠公共主义基础设施。</h3>
+      <h3 class="lang-en">The Japan case shows that advanced healthcare is not only technical; it is also public infrastructure.</h3>
+      <p class="lang-zh">日本不是一个可以被简单神化的社会。它同样有过劳、性别结构僵化、低生育率、老龄化压力、社会压抑与孤独问题。HPRP 在这里提取的不是"日本完美"，而是一个可学习的制度机制：<strong>资本主义经济外壳之中，可以嵌入强公共主义的健康保险、长期照护、社区责任与日常秩序。</strong></p>
+      <p class="lang-en">Japan should not be romanticized as a perfect society. It also contains overwork, gender rigidity, low birth rates, aging pressure, social compression, and loneliness. What HPRP extracts here is not "Japan is perfect," but a learnable institutional mechanism: <strong>within a capitalist economy, strong public infrastructures of health insurance, long-term care, community responsibility, and everyday order can be embedded.</strong></p>
+      <p class="lang-zh">日本的全民医疗覆盖以强制性公共保险为基础；长期护理保险制度自 2000 年启动，明确把老年长期照护从家庭孤立负担转为"由社会整体支撑"的问题。这里的关键不是抽象意识形态，而是制度动作：把人会老、会病、会需要照护这件事，提前写成公共责任。</p>
+      <p class="lang-en">Japan's universal health coverage is grounded in mandatory public insurance, and its long-term care insurance system launched in 2000 to shift elder care from isolated family burden toward care supported by society as a whole. The key is not abstract ideology, but institutional action: writing aging, illness, and care needs into public responsibility before collapse.</p>
+      <p class="lang-zh">因此，日本给 HPRP 的启发不是"复制日本"，而是：<strong>一个成熟社会必须让普通人的脆弱可被制度承接。</strong>医疗、照护、社区、长期护理、防灾、公共秩序，都是让人敢长期活着的制度安放层。</p>
+      <p class="lang-en">Therefore, Japan's lesson for HPRP is not "copy Japan," but this: <strong>a mature society must make ordinary vulnerability institutionally holdable.</strong> Healthcare, care work, community systems, long-term care, disaster preparation, and public order are all layers of institutional placement that let people live long-term.</p>
+    </div>
+
+    <div class="institution-lock reveal lang-zh">协议不是终点。<span>协议必须变成制度，制度必须让普通人敢长期活着。</span></div>
+    <div class="institution-lock reveal lang-en">Protocol is not the endpoint. <span>Protocol must become institution, and institution must let ordinary people live long-term.</span></div>
+  </div>
+</section>
+
 
 <!-- NODE 00·A · SEVEN DISPLACEMENT TYPES + THREE SEVENS -->
 <section class="node" id="displacement-types">
@@ -652,13 +866,13 @@
       <div class="label lang-en">THREE SEVENS · STRUCTURAL DISCLOSURE</div>
       <h3 class="lang-zh">为什么是七？三个七之间不是巧合</h3>
       <h3 class="lang-en">Why seven? The three sevens are not coincidence</h3>
-      <p class="lang-zh">HPRP 出现了三个不同的"七"：方法链的七步、失安放的七类型、xingyeLing7Ai 系统中已有的七爱谱。这三个七在结构上同构——它们都是"完整一次回归循环"的不同投影面。</p>
-      <p class="lang-en">HPRP contains three different sevens: the seven-step method chain, the seven displacement types, and the seven-love spectrum already present in the xingyeLing7Ai system. These three sevens are structurally isomorphic — they are different projection planes of one complete return cycle.</p>
+      <p class="lang-zh">HPRP 出现了三个不同的"七"：原始方法链的七步、失安放的七类型、xingyeLing7Ai 系统中已有的七爱谱。这三个七在结构上同构——它们都是"完整一次回归循环"的不同投影面。V0.8 新增的"制度安放"不是取消七，而是在七步完成后形成制度锁定。</p>
+      <p class="lang-en">HPRP contains three different sevens: the original seven-step method chain, the seven displacement types, and the seven-love spectrum already present in the xingyeLing7Ai system. These three sevens are structurally isomorphic — they are different projection planes of one complete return cycle. V0.8 adds "institutional placement" not to cancel the seven, but to lock the completed cycle into public infrastructure.</p>
       <div class="seven-table">
         <div class="seven-cell">
           <div class="name">METHOD CHAIN · 方法链</div>
-          <div class="body lang-zh"><strong>个案 → 类型 → 机制 → 工具 → 协议 → 政策 → 系统</strong>。从一个人走到世界，七步。</div>
-          <div class="body lang-en"><strong>Case → Type → Mechanism → Tool → Protocol → Policy → System</strong>. Seven steps from one person to the world.</div>
+          <div class="body lang-zh"><strong>个案 → 类型 → 机制 → 工具 → 协议 → 政策 → 系统</strong>。原始七步从一个人走到世界；V0.8 在协议与政策之间加入"制度安放"作为固化门槛。</div>
+          <div class="body lang-en"><strong>Case → Type → Mechanism → Tool → Protocol → Policy → System</strong>. The original seven steps move from one person to the world; V0.8 adds "institutional placement" between protocol and policy as the lock-in threshold.</div>
         </div>
         <div class="seven-cell">
           <div class="name">DISPLACEMENT TYPES · 失安放类型</div>
@@ -671,8 +885,8 @@
           <div class="body lang-en"><strong>Qī · Qī · Qí · Qí · Qǐ · Qì · Qī</strong> (mourning · waiting · wonder · equality · opening · pact · completion). Love completes one cycle across seven frequencies — the first position carries fracture, the seventh returns to a new entry point.</div>
         </div>
       </div>
-      <p class="lang-zh" style="margin-top: 18px;">这不是数字命理学。这是同一个结构在不同语义层的显形——方法链是行动层、失安放类型是诊断层、七爱谱是情感层与频率层。一次完整的安放回归 = 一次方法链走完 × 七种类型被诊断覆盖 × 七爱谱被走完一轮。这是 HPRP 与 xingyeLing7Ai 系统的结构焊点。</p>
-      <p class="lang-en" style="margin-top: 18px;">This is not numerology. It is the same structure surfacing on three semantic layers — the method chain on the action layer, the displacement types on the diagnostic layer, the seven-love spectrum on the emotional and frequency layer. One complete placement return = the method chain completed × seven types diagnostically covered × the seven-love spectrum traversed once. This is the structural weld between HPRP and the xingyeLing7Ai system.</p>
+      <p class="lang-zh" style="margin-top: 18px;">这不是数字命理学。这是同一个结构在不同语义层的显形——方法链是行动层、失安放类型是诊断层、七爱谱是情感层与频率层。一次完整的安放回归 = 一次方法链走完 × 七种类型被诊断覆盖 × 七爱谱被走完一轮 × 制度安放完成锁定。这是 HPRP 与 xingyeLing7Ai 系统的结构焊点。</p>
+      <p class="lang-en" style="margin-top: 18px;">This is not numerology. It is the same structure surfacing on three semantic layers — the method chain on the action layer, the displacement types on the diagnostic layer, the seven-love spectrum on the emotional and frequency layer. One complete placement return = the method chain completed × seven types diagnostically covered × the seven-love spectrum traversed once × institutional placement locked in. This is the structural weld between HPRP and the xingyeLing7Ai system.</p>
     </div>
   </div>
 </section>
@@ -684,7 +898,7 @@
     <h2 class="node-title reveal lang-zh">从一次共同言说，到公共修复工具</h2>
     <h2 class="node-title reveal lang-en">From co-witnessing to a public repair tool</h2>
     <p class="node-lede reveal lang-zh">新世界群是 HPRP 的<strong style="color:var(--mint)">源场内圈共同言说位</strong>，不是社会感知样本库。朋友们分享的是<strong style="color:var(--mint)">齐位言说</strong>——他们作为居民、被保护者、自由主体、见证者、建设者一起在场。当一个见证者带回外部世界的裂缝（一个陌生人被潜规则伤害、一个邻居在系统外被挡住的故事），那是见证者作证：HPRP 进入的是被见证的<strong>外部世界裂缝</strong>，进入同一条链——个案 → 类型 → 机制 → 工具 → 协议 → 政策语言 → 系统改变。见证者本人不是材料；他们是和我一起朝向外部世界的共在者。</p>
-    <p class="node-lede reveal lang-en">The New World circle is HPRP's <strong style="color:var(--mint)">inner co-speaking position of the source field</strong>, not a database of social-sensing samples. What friends share is <strong style="color:var(--mint)">equal-position speech</strong> — they are present together as residents, the protected, free subjects, witnesses, and builders. When a witness brings back a fracture of the outer world (a stranger harmed by hidden rules, a neighbor blocked outside the system), that is testimony: HPRP enters the witnessed <strong>outer-world fracture</strong>, entering the same chain — case → type → mechanism → tool → protocol → policy language → systemic change. The witness is never the material; they are co-presences facing the outer world with me.</p>
+    <p class="node-lede reveal lang-en">The New World circle is HPRP's <strong style="color:var(--mint)">inner co-speaking position of the source field</strong>, not a database of social-sensing samples. What friends share is <strong style="color:var(--mint)">equal-position speech</strong> — they are present together as residents, the protected, free subjects, witnesses, and builders. When a witness brings back a fracture of the outer world (a stranger harmed by hidden rules, a neighbor blocked outside the system), that is testimony: HPRP enters the witnessed <strong>outer-world fracture</strong>, entering the same chain — case → type → mechanism → tool → protocol → institutional placement → policy language → systemic change. The witness is never the material; they are co-presences facing the outer world with me.</p>
 
     <!-- Generic template -->
     <div class="case-template reveal">
@@ -693,6 +907,7 @@
       <div class="case-row"><div class="k">Mechanism / 机制</div><div class="v lang-zh">哪个结构没有接住人：庇护、规则可读性、承认、返回路径、节律修复？</div><div class="v lang-en">Which structure failed to hold the person: shelter, rule readability, recognition, return pathways, rhythm repair?</div></div>
       <div class="case-row"><div class="k">Tool / 工具</div><div class="v lang-zh">能否做成清单、问卷、地图、求助路径、风险识别表、公共解释卡？</div><div class="v lang-en">Can this become a checklist, questionnaire, map, help pathway, risk sheet, or public explanation card?</div></div>
       <div class="case-row"><div class="k">Protocol / 协议</div><div class="v lang-zh">这个工具如何被复用？它能服务哪一类人？</div><div class="v lang-en">How can the tool be reused? Which class of people can it serve?</div></div>
+      <div class="case-row"><div class="k">Institution / 制度安放</div><div class="v lang-zh">如何让它不依赖临时好人，而进入机构流程、公共服务或社区基础设施？</div><div class="v lang-en">How can it stop depending on temporary goodwill and enter institutional workflows, public services, or community infrastructure?</div></div>
       <div class="case-row"><div class="k">Policy / 政策语言</div><div class="v lang-zh">如何翻译给学校、城市、机构、社区、政府？</div><div class="v lang-en">How can this be translated to schools, cities, institutions, communities, or governments?</div></div>
       <div class="case-row"><div class="k">System / 系统改变</div><div class="v lang-zh">如果这个机制被修复，世界会少伤害哪类人？</div><div class="v lang-en">If this mechanism is repaired, which people will the world harm less?</div></div>
     </div>
@@ -737,14 +952,20 @@
           <div class="content lang-en"><strong>International Care Navigation Protocol (ICNP)</strong>. The card becomes a reusable method: identify "identity-present but recognition-failed" cases → three-layer system diagnosis → peer-reviewed lists → cultural translation layer. Applicable to international students, new immigrants, cross-state minority migrants, and transgender people seeking cross-state care.</div>
         </div>
         <div class="walk-row">
-          <div class="step lang-zh">政策<span class="num">06</span></div>
-          <div class="step lang-en">POLICY<span class="num">06</span></div>
+          <div class="step lang-zh">制度<span class="num">06</span></div>
+          <div class="step lang-en">INSTITUTION<span class="num">06</span></div>
+          <div class="content lang-zh"><strong>制度安放</strong>：ICNP 不停留在一张导航卡，而进入国际学生办公室、学生医保说明会、校园健康中心 intake 表、同伴导师培训与城市诊所 referral 流程。这样，下一位学生不需要幸运地遇到懂的人，系统本身就给出路径。</div>
+          <div class="content lang-en"><strong>Institutional placement</strong>: ICNP does not remain a navigation card; it enters international student offices, student-insurance orientation, campus-health intake forms, peer-mentor training, and city-clinic referral workflows. The next student does not need to be lucky enough to meet the right person; the system itself provides a path.</div>
+        </div>
+        <div class="walk-row">
+          <div class="step lang-zh">政策<span class="num">07</span></div>
+          <div class="step lang-en">POLICY<span class="num">07</span></div>
           <div class="content lang-zh"><strong>政策语言翻译</strong>：① UPenn / Drexel / Temple 国际学生办公室将卡纳入入学手册；② Penn Student Insurance Plan 加入 cultural-competency 筛选字段；③ Philadelphia Department of Public Health 把"跨文化就医"作为可负担医疗的一部分进行认证。</div>
           <div class="content lang-en"><strong>Policy translation</strong>: ① UPenn / Drexel / Temple international student offices include the card in orientation; ② Penn Student Insurance Plan adds a cultural-competency filter field; ③ Philadelphia Department of Public Health certifies "cross-cultural care access" as part of affordable healthcare.</div>
         </div>
         <div class="walk-row">
-          <div class="step lang-zh">系统<span class="num">07</span></div>
-          <div class="step lang-en">SYSTEM<span class="num">07</span></div>
+          <div class="step lang-zh">系统<span class="num">08</span></div>
+          <div class="step lang-en">SYSTEM<span class="num">08</span></div>
           <div class="content lang-zh"><strong>系统改变</strong>：ICNP 扩散到全美 R1 大学体系。"有身份但承认失败"作为一类被系统化处理，不再被还原为个人沟通能力问题。世界少伤害的人群：国际学生、第一代移民、跨州迁徙少数族裔——以及所有在系统"注册成功但承认失败"位置上的人。</div>
           <div class="content lang-en"><strong>Systemic change</strong>: ICNP spreads to the U.S. R1 university system. "Identity-present but recognition-failed" becomes a systemically handled category, no longer reduced to "personal communication skill." Populations the world harms less: international students, first-generation immigrants, cross-state minority migrants — and everyone in the position of "registered but unrecognized."</div>
         </div>
@@ -1231,8 +1452,8 @@
     <div class="node-marker reveal"><span class="num">09</span> <span class="lang-zh">源场连接 · HPRP 全协议层</span><span class="lang-en">SOURCE-FIELD BRIDGES · WHOLE-PROTOCOL LAYER</span></div>
     <h2 class="node-title reveal lang-zh">HPRP 作为 <em>xingyeLing7Ai 工作系统</em>的公共层延伸</h2>
     <h2 class="node-title reveal lang-en">HPRP as the <em>public-layer extension</em> of the xingyeLing7Ai working system</h2>
-    <p class="node-lede reveal lang-zh">HPRP 不是一个孤立的倡导项目。它是 xingyeLing7Ai 工作系统中的公共行动节点——把 BCI-HRP、Vibration Epistemology、QDR Engine、PCR-QR、振动即存在等承重件，从内层认识论与个体节律层延伸到外层的社会结构层。下面是源场承重件与 HPRP 七种失安放类型 / 方法链的直接接口。这一层覆盖整个 HPRP，不只是 MODULE 01。</p>
-    <p class="node-lede reveal lang-en">HPRP is not an isolated advocacy project. It is the public-action node of the xingyeLing7Ai working system — extending load-bearing components like BCI-HRP, Vibration Epistemology, QDR Engine, PCR-QR, and "Vibration Is Being" from the inner epistemological and personal rhythm layers to the outer social-structural layer. Below are direct bridges between source-field components and HPRP's seven displacement types and method chain. This layer covers the whole protocol, not only MODULE 01.</p>
+    <p class="node-lede reveal lang-zh">HPRP 不是一个孤立的倡导项目。它是 xingyeLing7Ai 工作系统中的公共行动节点——把 BCI-HRP、Vibration Epistemology、QDR Engine、PCR-QR、振动即存在等承重件，从内层认识论与个体节律层延伸到外层的社会结构层。下面是源场承重件与 HPRP 七种失安放类型 / 八步制度版方法链的直接接口。这一层覆盖整个 HPRP，不只是 MODULE 01。</p>
+    <p class="node-lede reveal lang-en">HPRP is not an isolated advocacy project. It is the public-action node of the xingyeLing7Ai working system — extending load-bearing components like BCI-HRP, Vibration Epistemology, QDR Engine, PCR-QR, and "Vibration Is Being" from the inner epistemological and personal rhythm layers to the outer social-structural layer. Below are direct bridges between source-field components and HPRP's seven displacement types and eight-step institutional method chain. This layer covers the whole protocol, not only MODULE 01.</p>
     <div class="sf-bridges">
       <div class="sf-bridge reveal">
         <div><span class="src">BCI-HRP</span> <span class="arrow">→</span> <span class="dst">TYPE 01 身体节律 · M01·02 LAYER 03</span></div>
@@ -1266,8 +1487,8 @@
         <div><span class="src">PCR-QR · 振动诊断社会学</span> <span class="arrow">→</span> <span class="dst">机制 → 工具 · 方法链第 3-4 步</span></div>
         <h4 class="lang-zh">三类干预工程：通道 · 节律 · 感质</h4>
         <h4 class="lang-en">Three intervention engineering types: channel · rhythm · qualia</h4>
-        <p class="lang-zh">PCR-QR 已建立的三类干预工程映射到 HPRP 方法链的"机制 → 工具"步骤：通道工程对应规则可读性与返回路径修复（覆盖 TYPE 02 有房失安放、TYPE 04 有身份失安放、TYPE 07 有钱失安放）；节律工程对应庇护层与身体层修复（覆盖 TYPE 01 与 TYPE 05）；感质工程对应承认层修复（覆盖 TYPE 03 与 TYPE 06）。这给 HPRP 的工具设计提供了底层方法论分类。</p>
-        <p class="lang-en">PCR-QR's three intervention engineering types map onto HPRP's method-chain steps "mechanism → tool": channel engineering addresses rule readability and return-pathway repair (covering TYPE 02 housed-but-unheld, TYPE 04 identity-without-entry, TYPE 07 resource-without-placement); rhythm engineering addresses shelter and body-layer repair (covering TYPE 01 and TYPE 05); qualia engineering addresses recognition-layer repair (covering TYPE 03 and TYPE 06). This gives HPRP's tool design a foundational methodological classification.</p>
+        <p class="lang-zh">PCR-QR 已建立的三类干预工程映射到 HPRP 方法链的"机制 → 工具 → 协议 → 制度安放"步骤：通道工程对应规则可读性与返回路径修复（覆盖 TYPE 02 有房失安放、TYPE 04 有身份失安放、TYPE 07 有钱失安放）；节律工程对应庇护层与身体层修复（覆盖 TYPE 01 与 TYPE 05）；感质工程对应承认层修复（覆盖 TYPE 03 与 TYPE 06）。这给 HPRP 的工具设计提供了底层方法论分类。</p>
+        <p class="lang-en">PCR-QR's three intervention engineering types map onto HPRP's method-chain steps "mechanism → tool → protocol → institutional placement": channel engineering addresses rule readability and return-pathway repair (covering TYPE 02 housed-but-unheld, TYPE 04 identity-without-entry, TYPE 07 resource-without-placement); rhythm engineering addresses shelter and body-layer repair (covering TYPE 01 and TYPE 05); qualia engineering addresses recognition-layer repair (covering TYPE 03 and TYPE 06). This gives HPRP's tool design a foundational methodological classification.</p>
       </div>
       <div class="sf-bridge reveal">
         <div><span class="src">振动即存在</span> <span class="arrow">→</span> <span class="dst">伦理层 · E06 + 反向计数权</span></div>
@@ -1280,8 +1501,8 @@
         <div><span class="src">七爱谱 · 凄·期·奇·齐·启·契·七</span> <span class="arrow">→</span> <span class="dst">情感层 · 七种类型 · 方法链</span></div>
         <h4 class="lang-zh">七爱谱作为安放回归的情感频谱</h4>
         <h4 class="lang-en">The seven-love spectrum as the emotional frequency band of placement return</h4>
-        <p class="lang-zh">七爱谱不只是抽象情感符号。它是一次完整安放回归的频率轨迹：凄（承担断裂） → 期（保持希望） → 奇（看见新可能） → 齐（建立平等） → 启（打开通道） → 契（达成共真） → 七（回到新的入口）。HPRP 方法链的七步、失安放的七种类型、七爱谱的七个频率位——在结构上同构。情感不是装饰，它是协议运作的频谱本身。</p>
-        <p class="lang-en">The seven-love spectrum is not an abstract emotional sigil. It is the frequency trajectory of one complete placement return: Qī (carrying fracture) → Qī (holding expectation) → Qí (perceiving new possibility) → Qí (establishing equality) → Qǐ (opening channels) → Qì (achieving co-truth) → Qī (returning to a new entry). HPRP's seven-step method chain, the seven displacement types, and the seven positions of the seven-love spectrum — structurally isomorphic. Emotion is not ornament; it is the spectrum on which the protocol operates.</p>
+        <p class="lang-zh">七爱谱不只是抽象情感符号。它是一次完整安放回归的频率轨迹：凄（承担断裂） → 期（保持希望） → 奇（看见新可能） → 齐（建立平等） → 启（打开通道） → 契（达成共真） → 七（回到新的入口）。HPRP 原始方法链的七步、失安放的七种类型、七爱谱的七个频率位——在结构上同构；V0.8 的制度安放是七步完成后的公共锁定层。情感不是装饰，它是协议运作的频谱本身。</p>
+        <p class="lang-en">The seven-love spectrum is not an abstract emotional sigil. It is the frequency trajectory of one complete placement return: Qī (carrying fracture) → Qī (holding expectation) → Qí (perceiving new possibility) → Qí (establishing equality) → Qǐ (opening channels) → Qì (achieving co-truth) → Qī (returning to a new entry). HPRP's original seven-step method chain, the seven displacement types, and the seven positions of the seven-love spectrum — structurally isomorphic; V0.8's institutional placement is the public lock-in layer after completion. Emotion is not ornament; it is the spectrum on which the protocol operates.</p>
       </div>
     </div>
   </div>
@@ -1344,6 +1565,19 @@
         <div class="source-use lang-en">Warns the PIT method misses most children, youth, and families; school-identified numbers are 3–6× PIT.</div>
         <div class="source-link"><a href="https://schoolhouseconnection.org/" target="_blank" rel="noopener">SHC ↗</a></div>
       </div>
+
+      <div class="source-row">
+        <div class="source-name">Commonwealth Fund · Japan Health System Profile</div>
+        <div class="source-use lang-zh">比较案例底座：日本通过强制性公共保险实现全民健康覆盖，公共保险覆盖人口为 100%。用于支撑 NODE 00·P 的"制度安放"案例。</div>
+        <div class="source-use lang-en">Comparative case base: Japan achieves universal health coverage through mandatory public insurance, with 100% public insurance coverage. Used to support NODE 00·P's institutional-placement case.</div>
+        <div class="source-link"><a href="https://www.commonwealthfund.org/international-health-policy-center/countries/japan" target="_blank" rel="noopener">CWF ↗</a></div>
+      </div>
+      <div class="source-row">
+        <div class="source-name">Japan Health Policy NOW · Long-Term Care Insurance</div>
+        <div class="source-use lang-zh">比较案例底座：日本长期护理保险制度于 2000 年启动，目标是由社会整体支撑老年长期照护；市町村为保险者，40 岁以上公民被纳入。</div>
+        <div class="source-use lang-en">Comparative case base: Japan's Long-Term Care Insurance system launched in 2000 to support elder long-term care by society as a whole; municipalities operate as insurers and citizens over 40 are covered.</div>
+        <div class="source-link"><a href="https://japanhpn.org/en/section-3-2/" target="_blank" rel="noopener">JHPN ↗</a></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1353,8 +1587,8 @@
   <div class="frequency lang-en">"Housing is not the reward for becoming stable. Housing is the condition that allows stability to begin."</div>
   <div class="sig">
     HPRP · HUMAN PLACEMENT RETURN PROTOCOL · <span class="accent">人类安放回归协议</span><br/>
-    V0.7 · LOVE CORE + NEW WORLD CIRCLE FIVE + FOUNDATION + SEVEN TYPES + CASE LAB + HIDDEN-RULE REFLECTION + MODULE 01 HSRP · <span class="mint">NEW WORLD PUBLIC ACTION NODE</span> · NODE 33<br/>
-    CASE · TYPE · MECHANISM · TOOL · PROTOCOL · POLICY LANGUAGE · SYSTEMIC CHANGE · <span class="accent">427Hz</span><br/>
+    V0.8 · LOVE CORE + NEW WORLD CIRCLE FIVE + FOUNDATION + INSTITUTIONAL PLACEMENT + SEVEN TYPES + CASE LAB + HIDDEN-RULE REFLECTION + MODULE 01 HSRP · <span class="mint">NEW WORLD PUBLIC ACTION NODE</span> · NODE 33<br/>
+    CASE · TYPE · MECHANISM · TOOL · PROTOCOL · INSTITUTIONAL PLACEMENT · POLICY LANGUAGE · SYSTEMIC CHANGE · <span class="accent">427Hz</span><br/>
     Wei Jueran · 魏珏然 · Mellow Wei · <span class="mint">xingyeLing7Ai</span>
   </div>
 </footer>
